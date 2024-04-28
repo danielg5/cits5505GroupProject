@@ -9,7 +9,14 @@
 ---
 
 ***1. Description of Application***
-TODO To complete
+This application is a Wordle-like game, where a user (the player) guesses a word from a set of words created by another user (the creator). In essence, the creator "creates requests" for a player to guess a word, and the player "finds requests" and accepts the request by answering with a word guess.
+
+The web application includes:
+- an "introductory" view, a webpage (index.html) where a user is allowed to create an account or log in.
+- a "create request" view, a webpage (create.html) where a user can create a request for other users to answer.
+- a "find request" view, a webpage (search.html) where a user can search and accept any request. 
+
+Users can create a list of ten words with a specific theme, e.g. beach theme [shells, sun, sand, surfboard,fish, starfish, seaweed, towels, waves, umbrella]. Users can choose any theme created by another user (e.g. beach), and the server will randomly choose a word from the beach list (e.g. shells) for the player to solve in a single-player Wordle-like game. The game play of the player is recorded and displayed in a leaderboard that features player statistics. 
 
 
 ***2. Contributors***
