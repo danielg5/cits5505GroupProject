@@ -32,21 +32,23 @@
 
     <div id="printGuess"><p>Guess goes here!</p></div>
 
+    <div id="printTable"><p>Table goes here!</p></div>
+
     <script>
       function wordle (word1, word2) {
         // Find all matches of word2 letters in word1.
         // Repeated letters in word2 cannot be matched more times than it
         // appears in word1. For example: word1 = "craze" and word2 = "trees",
-        // the second 'e' in word2 is ignore as 'e' only appears once in word1.
+        // the second 'e' in word2 is ignored as 'e' only appears once in word1.
         
         const word1Arr = word1.split("");
         
         // create an array to store matches in word2
         const word2MatchArr = [];
 
-        // step 1, find all matches in same position
-        // cannot combined boths steps in a nested for loop
-        // because step 1 needs to complete before step 2
+        // Step 1, find all matches in same position.
+        // Cannot combined boths steps in a nested 'for' loop
+        // because step 1 needs to complete before step 2.
         for (let i = 0; i < word2.length; i++) {
           if (word2.at(i) == word1.at(i)) {
               word2MatchArr[i] = 2;
@@ -57,7 +59,7 @@
           }
         }
 
-        // Second step, find all matches in different position.
+        // Step 2, find all matches in different position.
         // Separate loop to account for wordle treatment of duplicate letters,
         // where duplicated matches from letters repeated in word2 are ignored
         for (let i = 0; i < word2.length; i++) {
@@ -72,7 +74,9 @@
         console.log(word2MatchArr.toString());
         $("#printGuess").html('<p>' + 'Your word guess: ' + word2 + '; The secret word was: ' + word1 + '; Wordle function output: ' + word2MatchArr.toString() + '<p>');
         }
-      
+      function drawTable() {
+
+      }
 
       function wordInput() {
         let wordGuess = document.getElementById("wordGuess").value.toLowerCase();
