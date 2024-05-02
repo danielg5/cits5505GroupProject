@@ -37,7 +37,8 @@
                 <label for="emailSignUp" class="col-sm-2" style="z-index: 5; white-space: nowrap">
                     <span class="small bg-white text-muted pt-1 pl-2 pr-2">Email:</span>
                 </label>
-                <input type="text" class="form-control mt-n3 inputstyle" id="email" name="user_email" required>
+                <input type="text" class="form-control mt-n3 inputstyle" id="email" name="user_email" onchange="checkEmail" required>
+                <span id="emailWarning" style="color: red;"></span>
             </div>
     
             <div class="form-group" style="margin-bottom: 30px;">
@@ -58,8 +59,10 @@
                 <label for="userName" style="z-index: 5; white-space: nowrap">
                     <span class="small bg-white pt-1 pl-2 pr-2">User Name:</span>
                 </label>
-                <input type="text" class="form-control mt-n3 inputstyle" id="username" name="user_name" required>
+                <input type="text" id="username" name="username" onchange="checkUsername()">
+                <span id="usernameWarning" style="color: red;"></span>
             </div>
+            <button type="submit" style="margin-top: 40px;">SIGN UP</button>
         </form>
     </div>
     

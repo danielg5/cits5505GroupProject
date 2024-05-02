@@ -23,6 +23,19 @@
     color: #6145c6;
 }
 
+button{
+    border-radius: 20px;
+    border: 1px solid #FF4B2B;
+    background-color:#FF4B2B;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    margin-left: 90px;
+
+
+}
+
 /* svg setup */ 
 .svg_pos {
     display: flex;
@@ -80,10 +93,8 @@
 }
 
 .signPos {
- /*   display: flex;
-    justify-content: center; */
     margin-inline: auto;
-    width: 21rem;
+    width: 20rem;
 }
 
 .inputstyle {
