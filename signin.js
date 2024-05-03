@@ -17,7 +17,7 @@ function checkEmail() {
     });
 }
 
-
+// check if user name available
 function checkUsername() {
     var username = document.getElementById('username').value;
     var usernameWarning = document.getElementById('usernameWarning');
@@ -35,4 +35,19 @@ function checkUsername() {
         console.error('Request failed:', error);
         usernameWarning.textContent = 'Request error, please try again later.';
     });
+}
+
+// check if password match previous one
+function checkPasswordsMatch() {
+    var password = document.getElementById('password').value;
+    var confirmPassword = document.getElementById('confirmPassword').value;
+    var message = document.getElementById('matchMessage');
+
+    if (password === confirmPassword) {
+        message.textContent = 'Passwords match.';
+        message.style.color = 'green';
+    } else {
+        message.textContent = 'Passwords do not match.';
+        message.style.color = 'red';
+    }
 }
