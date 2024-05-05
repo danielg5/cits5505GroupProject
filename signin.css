@@ -1,0 +1,114 @@
+/* Index page */ 
+
+.form-signin {
+    max-width: 330px;
+    padding: 1rem;
+}
+
+.title_position{
+    padding: 80px;
+    text-align: center;
+}
+
+.other-page {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 0;
+    font-size: 14px;
+    width: 320px;
+}
+
+.link {
+    font-weight: 400;
+    color: #6145c6;
+}
+
+button{
+    border-radius: 20px;
+    border: 1px solid #FF4B2B;
+    background-color:#FF4B2B;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    margin-left: 90px;
+
+
+}
+
+/* svg setup */ 
+.svg_pos {
+    display: flex;
+    justify-content: center;
+}
+
+.rotate-svg {
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+
+
+  /* Sign in page */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.hr_pos {
+    padding: 50px;
+    margin-left: 60px;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.mt-n3, .my-n3 {
+    margin-top: -1rem !important;
+}
+
+.form-group > input {
+    border: 1px solid #63666a !important;
+}
+
+.small, small {
+    font-size: 100%;
+    font-weight: 400;
+}
+
+.bg-white {
+    background-color: #fff !important;
+}
+
+.pl-2, .px-2 {
+    padding-left: .5rem !important;
+}
+
+.pr-2, .px-2 {
+    padding-right: .5rem !important;
+}
+
+.signPos {
+    margin-inline: auto;
+    width: 20rem;
+}
+
+.inputstyle {
+    line-height: 3;
+}
+
+.navstyle {
+    display: flex;
+    list-style: none;
+}
+
+.listyle{
+    margin-right: 40px;
+    text-decoration: none;
+    font-size: 21px;
+    color: #FF4B2B;
+}
