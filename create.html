@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logout Button</title>
+    <title>Super Wordle Game</title>
     <style>
         body {
             margin: 0;
@@ -11,7 +11,7 @@
             font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
-            height: 35vh;
+            height: 35vh; /* Corrected for full page height */
         }
         .header-container {
             position: relative;
@@ -50,42 +50,44 @@
         .welcome-text, .username {
             margin: 5px 0;
         }
-        .search-container {
+        .create-theme-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%;
             padding: 20px 0;
         }
-        .search-bar {
-            display: flex;
+        .theme-form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 10px;
-            align-items: center;
+            width: 50%; /* Adjust width as necessary */
+            padding: 20px;
+            box-sizing: border-box;
         }
-        input[type="radio"] {
-            margin: 0 5px;
-        }
-        input[type="text"] {
-            padding: 5px;
+        .theme-form input[type="text"] {
+            padding: 8px;
             border: 1px solid #ccc;
-            border-radius: 3px;
+            border-radius: 4px;
         }
-        .search-filter-label {
-            margin-left: 30px;
+        .theme-name {
+            grid-column: 1 / 3; /* Makes the theme name input span two columns */
         }
-        .search-results {
+        .form-buttons {
             display: flex;
-            justify-content: space-evenly;
-            width: 100%;
-            padding: 10px 0;
-            background-color: #f0f0f0;
-            border-top: 1px solid #ccc;
+            justify-content: center; /* Centers the buttons horizontally */
+            width: 100%; /* Full width of the form */
+            padding: 10px 0; /* Adds vertical padding for spacing */
+        }
+        .form-button {
+            padding: 10px 20px;
+            margin: 0 10px; /* Adds spacing between buttons */
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
             font-size: 16px;
-        }
-        .result-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
         }
     </style>
 </head>
@@ -102,18 +104,25 @@
             <div class="username">Username: JohnDoe</div>
         </div>
     </div>
-    <div class="search-container">
-        <h2>Search Themes</h2> <!-- Subtitle above search bar -->
-        <div class="search-bar">
-            <label><input type="radio" name="searchOption" value="user"> User</label>
-            <label><input type="radio" name="searchOption" value="theme"> Theme</label>
-            <span class="search-filter-label">Search filter:</span> <input type="text" placeholder="Enter search terms">
-        </div>
+    <div class="create-theme-container">
+        <h2>Create New Theme</h2>
+        <form class="theme-form">
+            <input type="text" placeholder="New Theme Name" class="theme-name">
+            <input type="text" placeholder="Word 1">
+            <input type="text" placeholder="Word 6">
+            <input type="text" placeholder="Word 2">
+            <input type="text" placeholder="Word 7">
+            <input type="text" placeholder="Word 3">
+            <input type="text" placeholder="Word 8">
+            <input type="text" placeholder="Word 4">
+            <input type="text" placeholder="Word 9">
+            <input type="text" placeholder="Word 5">
+            <input type="text" placeholder="Word 10">
+        </form>
     </div>
-    <div class="search-results">
-        <div class="result-item"><strong>Theme:</strong> 5</div>
-        <div class="result-item"><strong>User:</strong> 3</div>
-        <div class="result-item"><strong>Remaining unguessed words:</strong> 12</div>
+    <div class="form-buttons">
+        <button type="button" class="form-button">Create Theme</button>
+        <button type="submit" class="form-button">Submit Theme</button>
     </div>
 </body>
 </html>
