@@ -9,18 +9,21 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            height: 35vh;
         }
         .header-container {
             position: relative;
             width: 100%;
-            height: 100%;
+            min-height: 50%;
+            flex: 1;
         }
         .container1 {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            position: absolute; /* Keeps container1 in the upper-left corner */
+            position: absolute;
             top: 10px;
             left: 10px;
         }
@@ -31,7 +34,7 @@
             padding: 10px 20px;
             cursor: pointer;
             border-radius: 5px;
-            width: 120px; 
+            width: 120px;
             margin-bottom: 10px;
         }
         .back-btn {
@@ -42,12 +45,47 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            position: absolute;
-            top: 0;
             width: 100%;
         }
         .welcome-text, .username {
             margin: 5px 0;
+        }
+        .search-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 20px 0;
+        }
+        .search-bar {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        input[type="radio"] {
+            margin: 0 5px;
+        }
+        input[type="text"] {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        .search-filter-label {
+            margin-left: 30px;
+        }
+        .search-results {
+            display: flex;
+            justify-content: space-evenly;
+            width: 100%;
+            padding: 10px 0;
+            background-color: #f0f0f0;
+            border-top: 1px solid #ccc;
+            font-size: 16px;
+        }
+        .result-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
     </style>
 </head>
@@ -58,10 +96,24 @@
             <button class="back-btn">Back</button>
         </div>
         <div class="container2">
-            <h1>Super Wordle Game</h1><br>
+            <h1>Super Wordle Game</h1>
+            <br>
             <div class="welcome-text">Welcome to the word guessing game!</div>
             <div class="username">Username: JohnDoe</div>
         </div>
+    </div>
+    <div class="search-container">
+        <h2>Search Themes</h2> <!-- Subtitle above search bar -->
+        <div class="search-bar">
+            <label><input type="radio" name="searchOption" value="user"> User</label>
+            <label><input type="radio" name="searchOption" value="theme"> Theme</label>
+            <span class="search-filter-label">Search filter:</span> <input type="text" placeholder="Enter search terms">
+        </div>
+    </div>
+    <div class="search-results">
+        <div class="result-item"><strong>Theme:</strong> 5</div>
+        <div class="result-item"><strong>User:</strong> 3</div>
+        <div class="result-item"><strong>Remaining unguessed words:</strong> 12</div>
     </div>
 </body>
 </html>
