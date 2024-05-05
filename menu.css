@@ -122,3 +122,60 @@ nav {
     background-color: #d3d6da;
     border-color: #d3d6da;
 }
+
+
+/* CSS for information modal */
+.modal-content {
+    transition: transform 0.5s ease-in-out;
+    transform: scale(1);
+}
+
+.modal-content.show {
+    transform: scale(1);
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-subheading{
+    text-align:center;
+    font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+    font-size: 1.3rem;
+    display: block;
+    align-items: center;
+    padding: 10px;
+    animation: modalFadeIn 0.5s ease-out forwards;
+    color: #000000; /* Black */
+    background-color: #ffffff;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+}
+
+.modal-body {
+    display: block;
+    align-items: center;
+    padding: 20px;
+    animation: modalFadeIn 0.5s ease-out forwards;
+    font-size: 1rem;
+    color: #000000; /* Black */
+    background-color: #ffffff;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+}
+.custom-modal-size {
+    max-width: 600px; /* Custom width */
+    max-height: 900px;
+    width: 100%; /* Using 100% to make it responsive */
+}
