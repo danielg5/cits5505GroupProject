@@ -103,3 +103,22 @@ nav {
     align-items: center; /* Centers buttons horizontally */
     width: 100%; /* Full width to contain the buttons */
 }
+
+/* Adding tile and empty for Super Wordle Animation */
+.tile {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #787c7e;
+    font-size: 32px;
+    font-weight: bold;
+    color: white;
+    background-color: #6aaa64;
+    transition: background-color 0.5s, border-color 0.5s;
+}
+.empty {
+    background-color: #d3d6da;
+    border-color: #d3d6da;
+}
