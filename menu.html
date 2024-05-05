@@ -3,26 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Super Wordle - Menu</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="menu.css">
 </head>
 <body>
     <div class="main-container">
         <header>
-            <button class="logout-button">Logout</button>
-            <h1>Super Wordle</h1>
-            <p>Welcome to the word guessing game</p>
+            <div class="header-content">
+                <h1>Super Wordle</h1>
+            </div>
+            <div class ="header-body">
+                <h4>Welcome to the word guessing game</h4>
+            </div>
+            <button class="logout-button btn btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-door-closed-fill" viewBox="0 0 16 16">
+                    <path d="M12 1a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2a1 1 0 0 1 1-1zm-2 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+                </svg>
+                Logout
+            </button>            
         </header>
         <div class="user-info">
             <p>User: <a href="profile.html" id="username">Username</a></p>
         </div>
         <nav>
-            <a href="random_game.html">Play a Random Game</a> <!-- TO DO: need to create random_game.html-->
-            <a href="leaderboard.html">High Scores</a> 
-            <a href="search.html">Search Themes</a>
-            <a href="create_theme.html">Create a Theme</a>
-        </nav>
+            <button class="btn btn-primary nav-button" onclick="location.href='random_game.html'">Play a Random Game</button>
+            <button class="btn btn-primary nav-button" onclick="location.href='leaderboard.html'">High Scores</button>
+            <button class="btn btn-primary nav-button" onclick="location.href='search.html'">Search Themes</button>
+            <button class="btn btn-primary nav-button" onclick="location.href='create_theme.html'">Create a Theme</button>
+        </nav>        
         <div class="info-icon" onclick="showInfoModal()">
-            <img src="info_icon.png" alt="Info">
+            <button class="info-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2"/>
+                  </svg>
+            </button>
         </div>
     </div>
     <script src="menu.js"></script>
