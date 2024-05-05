@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Super Wordle - Menu</title>
+    <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+    <div class="main-container">
+        <header>
+            <button class="logout-button">Logout</button>
+            <h1>Super Wordle</h1>
+            <p>Welcome to the word guessing game</p>
+        </header>
+        <div class="user-info">
+            <p>User: <a href="profile.html" id="username">Username</a></p>
+        </div>
+        <nav>
+            <a href="random_game.html">Play a Random Game</a> <!-- TO DO: need to create random_game.html-->
+            <a href="leaderboard.html">High Scores</a> 
+            <a href="search.html">Search Themes</a>
+            <a href="create_theme.html">Create a Theme</a>
+        </nav>
+        <div class="info-icon" onclick="showInfoModal()">
+            <img src="info_icon.png" alt="Info">
+        </div>
+    </div>
+    <script src="menu.js"></script>
+</body>
+</html>
