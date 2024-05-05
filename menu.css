@@ -1,4 +1,8 @@
 /* menu.css */
+/* 
+Used for CSS for menu.html, profile.html and leaderboard.html
+TO DO: split into styles.css, profile.css, leaderboard.css
+*/
 body, html {
     margin: 0;
     padding: 0;
@@ -32,10 +36,28 @@ header .header-body {
     font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; /* Font for header */
     color: #000000; /* Color for header/*/
 }
+/* User and Email styling*/
 
 .user-info{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
     font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; /* Font for User information */
+    font-size: 20px; /* Set font size for User: and Email:*/
+
 }
+
+.user-info a {
+    color: #007bff; /* Bootstrap primary color for consistency */
+    text-decoration: none; /* Removes underline */
+}
+
+.user-info a:hover {
+    text-decoration: underline; /* Adds underline on hover for better user interaction feedback */
+}
+
 .logout-button {
     padding: 8px 16px;
     background-color: #007bff; /* Blue color */
