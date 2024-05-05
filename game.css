@@ -1,3 +1,33 @@
+/* Moving this file to 'app/static/' directory 
+ * to utilise flask app features */
+
 /* GAME STYLES for games.html
  *------------------------------*/
 
+.correctTag {
+  background-color: lightgreen;
+  text-align: center;
+  width: 10%;  
+}
+
+.misplacedTag {
+  background-color: yellow;
+  text-align: center;
+  width: 10%; 
+}
+
+.incorrectTag {
+  background-color: lightgray;
+  text-align: center;
+  width: 10%; 
+}
+
+.guessTag {
+  background-color: white;
+   width: 20%;
+   text-align: center; 
+}
+
+.guessTableNode {
+   width: 40%; 
+}

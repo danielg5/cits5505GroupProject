@@ -1,3 +1,5 @@
+<!-- Moving this file to 'app/template/' directory 
+  to utilise flask app features -->
 <!DOCTYPE html>
 <html lang="en">
     <title>Super Wordle Game</title>
@@ -17,16 +19,16 @@
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.js" 
       integrity="sha384-jYoAmFjufJZfBzwTARyz2gk7Jj9mQb2cLeP9n5PcgLCVVd+8QfjY1+qFj+rBkViV" 
       crossorigin="anonymous"></script>
-      <script src="game.js"></script>
+    <script type="text/javascript" src="game.js"></script>
 </head>
 <body>
     <h1>Super Wordle Game</h1><br>
     <div id="wordleTableNode"><p>Wordle table goes here!</p></div>
     <form>
-        <label for="wordGuess">Word Guess:</label><br>
-        <input type="text" id="wordGuess" name="wordGuess">
-        <button type="button" onclick="wordInput()">Submit</button>
-    </form>
+        <label for="guessWord">Guess the word:</label><br>
+        <input type="text" id="guessWord" name="guessWord">
+        <button type="button" onclick="initialiseGame()">Submit</button>
+    </form>                            
     <p>Do not use 'enter' key. Please use &lt;submit&gt; button.</p><br>
 
     <!-- TODO: remove this div when gameplay troubleshooting complete -->
