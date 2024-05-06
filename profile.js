@@ -85,14 +85,28 @@ const setupEmailForm = () => {
 const setupPasswordForm = () => {
     const passwordModalButton = document.querySelector("[title='Change your password']");
     const passwordForm = document.getElementById('changePasswordForm');
+    const newPasswordInput = document.getElementById('newPassword');
+    const confirmNewPasswordInput = document.getElementById('confirmNewPassword');
 
     passwordModalButton.addEventListener('click', () => $('#passwordModal').modal('show'));
 
     passwordForm.addEventListener('submit', event => {
         event.preventDefault();
         const currentPassword = document.getElementById('currentPassword').value;
-        const newPassword = document.getElementById('newPassword').value;
+        const newPassword = newPasswordInput.value;
+        const confirmNewPassword = confirmNewPasswordInput.value;
 
+        // Check if new password and confirm new password match
+        if (newPassword !== confirmNewPassword) {
+            alert('The new passwords do not match. Please try again.');
+            confirmNewPasswordInput.classList.add('is-invalid');
+            return; // Stop the form submission
+        }
+
+        // Remove the invalid class if it was added previously
+        confirmNewPasswordInput.classList.remove('is-invalid');
+
+        // Proceed with submitting the password update request
         fetch('/update-password', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},

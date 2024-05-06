@@ -218,3 +218,7 @@ nav {
 .invalid-shake {
     animation: shake 2s;
 }
+
+.is-invalid {
+    border-color: red;
+}

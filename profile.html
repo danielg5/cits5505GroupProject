@@ -34,9 +34,7 @@
             <p>Email: <a id="useremail" title="Email">email@example.com</a></p>
         </div>
         <nav>
-            <!-- TO DO: create modals for changing password -->
-            <!-- TO DO: change classes to profile-button and create CSS-->
-            <!-- Created buttons to make changes-->
+            <!-- Menu buttons -->
             <button class="btn btn-primary nav-button" title="Change your email" data-bs-toggle="modal" data-bs-target="#emailModal">Change Email</button>
             <button class="btn btn-primary nav-button" title="Change your password" data-bs-toggle="modal" data-bs-target="#passwordModal">Change Password</button>
             <button class="btn btn-primary nav-button" title="See all your themes">My Themes</button>
@@ -91,6 +89,13 @@
                                 <label for="newPassword" class="form-label">New Password</label>
                                 <input type="password" class="form-control" id="newPassword" required>
                             </div>
+
+                            <div class="mb-3">
+                                <label for="confirmNewPassword" class="form-label">Confirm New Password</label>
+                                <input type="password" class="form-control" id="confirmNewPassword" required>
+                            </div>
+                            
+
                             <button type="submit" class="btn btn-primary">Update Password</button>
                         </form>
                     </div>
