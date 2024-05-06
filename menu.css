@@ -140,9 +140,10 @@ nav {
     background-color: #6aaa64;
     transition: background-color 0.5s, border-color 0.5s;
 }
+/* "SUPERWORDLE" animation colors */
 .empty {
     background-color: #d3d6da;
-    border-color: #d3d6da;
+    border-color: #534c4c;
 }
 
 
