@@ -1,0 +1,220 @@
+/* menu.css */
+/* 
+Used for CSS for menu.html, profile.html and leaderboard.html
+TO DO: split into styles.css, profile.css, leaderboard.css
+*/
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff; /* White background */
+    color: #000000; /* Black text */
+}
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+header {
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* Stacks children vertically */
+    align-items: center; /* Centers children horizontally */
+    justify-content: center; /* Centers children vertically */
+    padding: 20px 0; /* Add vertical padding for spacing */
+}
+header .header-content {
+    text-align: center;
+    flex-grow: 1; /* Takes available space, pushes logout button to end */
+    font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; /* Font for header */
+    color: #24c0a1; /* Color for header*/
+}
+header .header-body {
+    text-align: center;
+    flex-grow: 1; /* Takes available space, pushes logout button to end */
+    font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; /* Font for header */
+    color: #000000; /* Color for header/*/
+}
+/* User and Email styling*/
+
+.user-info{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; /* Font for User information */
+    font-size: 20px; /* Set font size for User: and Email:*/
+
+}
+
+.user-info a {
+    color: #007bff; /* Bootstrap primary color for consistency */
+    text-decoration: none; /* Removes underline */
+}
+
+.user-info a:hover {
+    text-decoration: underline; /* Adds underline on hover for better user interaction feedback */
+}
+
+.logout-button {
+    padding: 8px 16px;
+    background-color: #007bff; /* Blue color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute; /* Absolute position on page */
+    top: 10px; /* Distance from top of viewport */
+    left: 10px; /* Distance from left of viewport */
+    display: flex; /* Align SVG and text horizontally */
+    align-items: center; /* Align SVG and text vertically */
+}
+
+.info-button {
+    padding: 8px 8px; /* Matches logout button padding */
+    background-color: #53b200; /* Green color */
+    border: none;
+    border-radius: 100%; /* Fully rounded button */
+    cursor: pointer;
+    position: absolute; /* Absolute placement */
+    top: 10px; /* Distance from  top of viewport */
+    right: 10px; /* Distance from right of viewport */
+    display: flex; /* Button content alignment */
+    align-items: center; /* Icon center alignment */
+    justify-content: center; /* Icon center horizontal alignment */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition for hover effects */
+}
+
+.info-button:hover, .info-button:focus {
+    background-color: #6bd100; /* Lighter green on hover for interaction feedback */
+    transform: scale(1.1); /* Slightly enlarges the button to indicate interactivity */
+}
+
+.info-button svg {
+    fill: #fff; /* White color fill for icon */
+    width: 32px; /* Sizing for button */
+    height: 32px; /* Sizing for button */
+}
+
+.nav-button {
+    margin: 10px;
+    width: 20%; /* Adjusts to a slightly less than full width for aesthetics */
+    text-align: center;
+    font-size: 1.1rem; /* Increases the font size for better readability */
+    padding: 10px 0; /* More padding for a better touch area */
+    background-color: #760abe; /* Consistent purple color */
+    color: white; /* Ensures text is visible */
+    border: none; /* Removes any default browser styling */
+    border-radius: 5px; /* Rounds the corners */
+    cursor: pointer; /* Indicates an actionable item */
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2); /* Subtle shadow for depth */
+    transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+}
+
+.nav-button:hover, .nav-button:focus {
+    background-color: #0056b3; /* Darker shade on hover for user feedback */
+    box-shadow: 0 0 8px rgba(0,0,0,0.3); /* Shadow on hover */
+}
+
+/* Additional CSS for positioning and responsive design */
+nav {
+    display: flex;
+    flex-direction: column; /* Stacks buttons vertically */
+    align-items: center; /* Centers buttons horizontally */
+    width: 100%; /* Full width to contain the buttons */
+}
+
+/* Adding tile and empty for Super Wordle Animation */
+.tile {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #787c7e;
+    font-size: 32px;
+    font-weight: bold;
+    color: white;
+    background-color: #6aaa64;
+    transition: background-color 0.5s, border-color 0.5s;
+}
+.empty {
+    background-color: #d3d6da;
+    border-color: #d3d6da;
+}
+
+
+/* CSS for information modal */
+.modal-content {
+    transition: transform 0.5s ease-in-out;
+    transform: scale(1);
+}
+
+.modal-content.show {
+    transform: scale(1);
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-subheading{
+    text-align:center;
+    font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+    font-size: 1.3rem;
+    display: block;
+    align-items: center;
+    padding: 10px;
+    animation: modalFadeIn 0.5s ease-out forwards;
+    color: #000000; /* Black */
+    background-color: #ffffff;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+}
+
+.modal-body {
+    display: block;
+    align-items: center;
+    padding: 20px;
+    animation: modalFadeIn 0.5s ease-out forwards;
+    font-size: 1rem;
+    color: #000000; /* Black */
+    background-color: #ffffff;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+}
+.custom-modal-size {
+    max-width: 600px; /* Custom width */
+    max-height: 900px;
+    width: 100%; /* Using 100% to make it responsive */
+}
+
+/* Styling for profile.html email change modal */
+.modal-dialog {
+    max-width: 500px; /* Set the maximum width of the modal for better readability */
+}
+
+/* Styling for profile.html email change modal invalid email animation */
+@keyframes shake {
+    0% { margin-left: 0rem; }
+    25% { margin-left: 1rem; }
+    50% { margin-left: -1rem; }
+    75% { margin-left: 1rem; }
+    100% { margin-left: 0; }
+}
+.invalid-shake {
+    animation: shake 2s;
+}

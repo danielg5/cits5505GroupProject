@@ -1,7 +1,7 @@
 // menu.js
 /* 
-Used for JavaScript functionality for menu.html, profile.html and leaderboard.html
-TO DO: split into profile.js, leaderboard.js
+Used for JavaScript functionality for menu.html
+TO DO: Create a styles.css after completing menu.html, profile.html and leaderboard.html
 */
 
 // Initialise tooltips for all elements with titles
