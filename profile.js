@@ -1,6 +1,8 @@
-// profile.js
 /* 
+profile.js
+
 Used for JavaScript functionality for profile.html
+
 */
 
 // Initialize tooltips for all elements with titles

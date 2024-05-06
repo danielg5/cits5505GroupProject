@@ -1,39 +1,44 @@
-// menu.js
+
 /* 
-Used for JavaScript functionality for menu.html
-TO DO: Create a styles.css after completing menu.html, profile.html and leaderboard.html
+menu.js
+
+JavaScript functionality for menu.html
+
 */
 
 // Initialise tooltips for all elements with titles
-var tooltipTriggerList = [].slice.call(document.querySelectorAll('[title]'));
-var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-    return new bootstrap.Tooltip(tooltipTriggerEl);
-});
+const initTooltips = () => {
+    const tooltipTriggerList = Array.from(document.querySelectorAll('[title]'));
+    tooltipTriggerList.forEach(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+};
 
-function logout() {
-    // TODO - Add necessary cleanup operations before logout
-    // TODO - Redirect to index.html page after logout
-    window.location.href = 'index.html';
-}
+// Handle user logout
+const logout = () => {
+    // TO DO: Add cleanup operations before logout - clear cookies
+    window.location.href = 'index.html';  // Redirect to index.html page after logout
+};
 
-
-document.getElementById('username').textContent = 'YourUsername'; // TODO - Replace 'YourUsername' with dynamic data if available
-document.querySelector('.logout-button').addEventListener('click', logout); // TODO - logout
-
-
+// Set username
+const setUsername = () => {
+    const usernameElement = document.getElementById('username');
+    if (usernameElement) {
+        usernameElement.textContent = 'YourUsername'; // TODO: Replace 'YourUsername' from database
+    }
+};
 
 // SuperWordle animation
-document.addEventListener("DOMContentLoaded", function() {
+const setupSuperWordleAnimation = () => {
     const gridContainer = document.getElementById('wordle-grid');
+    if (!gridContainer) return;
+
     const word = 'SUPERWORDLE';
     const rows = 1;  // Display word in one row
-    const cols = word.length;
 
     // Create grid
     for (let i = 0; i < rows; i++) {
         const row = document.createElement('div');
         row.className = 'd-flex justify-content-center';
-        for (let j = 0; j < cols; j++) {
+        for (let j = 0; j < word.length; j++) {
             const tile = document.createElement('div');
             tile.className = 'tile empty';
             row.appendChild(tile);
@@ -42,16 +47,18 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Animate tiles to reveal word
-    function animateWord() {
-        const tiles = document.querySelectorAll('.tile');
-        tiles.forEach((tile, index) => {
-            setTimeout(() => {
-                tile.classList.remove('empty');
-                tile.textContent = word[index];
-            }, 200 * index);  //Animation delay
-        });
-    }
+    document.querySelectorAll('.tile').forEach((tile, index) => {
+        setTimeout(() => {
+            tile.classList.remove('empty');
+            tile.textContent = word[index];
+        }, 200 * index);  // Animation delay
+    });
+};
 
-    // Start animation
-    animateWord();
+// Event listeners when DOM is loaded
+document.addEventListener("DOMContentLoaded", () => {
+    initTooltips();
+    setUsername();
+    setupSuperWordleAnimation();
+    document.querySelector('.logout-button')?.addEventListener('click', logout);
 });
