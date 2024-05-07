@@ -23,6 +23,8 @@ header {
     align-items: center; /* Centers children horizontally */
     justify-content: center; /* Centers children vertically */
     padding: 20px 0; /* Add vertical padding for spacing */
+    font-size: 1.60em;
+    
 }
 header .header-content {
     text-align: center;
@@ -45,7 +47,7 @@ header .header-body {
     align-items: center;
     text-align: center;
     font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; /* Font for User information */
-    font-size: 20px; /* Set font size for User: and Email:*/
+    font-size: 1.5em; /* Set font size for User: and Email:*/
 
 }
 
@@ -134,7 +136,7 @@ nav {
     align-items: center;
     justify-content: center;
     border: 2px solid #787c7e;
-    font-size: 32px;
+    font-size: 2em;
     font-weight: bold;
     color: white;
     background-color: #6aaa64;
