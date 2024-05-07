@@ -47,7 +47,7 @@ header .header-body {
     align-items: center;
     text-align: center;
     font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; /* Font for User information */
-    font-size: 1.5em; /* Set font size for User: and Email:*/
+    font-size: 1.2em; /* Set font size for User: and Email:*/
 
 }
 
@@ -224,4 +224,13 @@ nav {
 
 .is-invalid {
     border-color: red;
+}
+
+/* Styling for diceIcon, trophy-icon icons */
+.changeEmail-icon, .wordsCompleted-icon, .myThemes-icon, .changePassword-icon {
+    vertical-align: auto;
+    margin-left: 0px; /* Space between icon and text */
+    width: 2em; /* Width of menu icons */
+    height: 2em; /* Height of menu icons */
+
 }

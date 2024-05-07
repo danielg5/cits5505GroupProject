@@ -121,6 +121,59 @@ const setupPasswordForm = () => {
     });
 };
 
+// TO DO - Setup function for the My Themes button
+function setupMyThemesButton() {
+    const myThemesButton = document.getElementById('myThemesButton');
+    myThemesButton.addEventListener('click', function() {
+        try {
+            const username = sessionStorage.getItem('username'); // TO DO: Retrieve username from session storage
+            if (username) {
+                window.location.href = `search.html?username=${encodeURIComponent(username)}`;
+            } else {
+                alert('You must be logged in to see your themes.');
+            }
+        } catch (error) {
+            console.error("Failed to redirect:", error);
+        }
+
+
+
+    });
+}
+
+
+// TO DO: Word Completed Button functions
+function setupWordsCompletedButton() {
+    const wordsCompletedButton = document.getElementById("wordsCompletedButton");
+    if (wordsCompletedButton) {
+        wordsCompletedButton.addEventListener('click', function() {
+            fetchWordsCompleted();
+            new bootstrap.Modal(document.getElementById('wordsCompletedModal')).show();
+        });
+    }
+}
+
+function fetchWordsCompleted() {
+    fetch('/path/to/your/flask/endpoint')
+    .then(response => response.json())
+    .then(data => {
+        populateWordsList(data);
+    })
+    .catch(error => console.error('Error fetching words:', error));
+}
+
+function populateWordsList(words) {
+    const wordsList = document.getElementById("wordsList");
+    wordsList.innerHTML = ''; // Clear previous entries
+    words.forEach(word => {
+        const item = document.createElement("div");
+        item.classList.add("p-2"); // Bootstrap padding class for spacing
+        item.textContent = word;
+        wordsList.appendChild(item);
+    });
+}
+
+
 // Event listeners for DOMContentLoaded
 document.addEventListener("DOMContentLoaded", function() {
     initTooltips();
@@ -128,5 +181,7 @@ document.addEventListener("DOMContentLoaded", function() {
     setupEmailForm();
     setupPasswordForm();
     document.querySelector('.logout-button').addEventListener('click', logout);
+    setupMyThemesButton(); // TO DO
+    setupWordsCompletedButton(); // TO DO
     document.getElementById('username').textContent = 'YourUsername'; // TODO Placeholder: Replace 'YourUsername' with database data
 });

@@ -47,7 +47,7 @@ header .header-body {
     align-items: center;
     text-align: center;
     font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; /* Font for User information */
-    font-size: 1.5em; /* Set font size for User: and Email:*/
+    font-size: 1.2em; /* Set font size for User: and Email:*/
 
 }
 
@@ -208,11 +208,11 @@ nav {
     width: 100%; /* Using 100% to make it responsive */
 }
 
-
-/* Icon alignments for diceIcon, trophy-icon icon */
-#diceIcon, .trophy-icon, .search-icon, .createTheme-icon {
+/* Styling for diceIcon, trophy-icon icons */
+#diceIcon, .trophy-icon, .search-icon, .createTheme-icon, .changeEmail-icon, .wordsCompleted-icon, .myThemes-icon, .changePassword-icon {
+    vertical-align: auto;
     margin-left: 0px; /* Space between icon and text */
-    width: 30px; /* Width of menu icons */
-    height: 30px; /* height of menu icons */
+    width: 2em; /* Width of menu icons */
+    height: 2em; /* Height of menu icons */
 
 }
