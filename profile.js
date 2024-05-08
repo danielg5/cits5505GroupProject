@@ -173,6 +173,10 @@ function populateWordsList(words) {
     });
 }
 
+// Back button function
+function goBack() {
+    window.history.back(); // Browser's history stack to go back
+}
 
 // Event listeners for DOMContentLoaded
 document.addEventListener("DOMContentLoaded", function() {

@@ -1,7 +1,6 @@
-/* menu.css */
+/* leaderboard.css */
 /* 
-Used for CSS for menu.html, profile.html and leaderboard.html
-TO DO: split into styles.css, profile.css, leaderboard.css
+TO DO: create Master CSS
 */
 body, html {
     margin: 0;
@@ -24,7 +23,6 @@ header {
     justify-content: center; /* Centers children vertically */
     padding: 20px 0; /* Add vertical padding for spacing */
     font-size: 1.60em;
-    
 }
 header .header-content {
     text-align: center;
@@ -38,8 +36,8 @@ header .header-body {
     font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; /* Font for header */
     color: #000000; /* Color for header/*/
 }
-/* User and Email styling*/
 
+/* User and Email styling*/
 .user-info{
     width: 100%;
     display: flex;
@@ -50,16 +48,15 @@ header .header-body {
     font-size: 1.2em; /* Set font size for User: and Email:*/
 
 }
-
 .user-info a {
     color: #007bff; /* Bootstrap primary color for consistency */
     text-decoration: none; /* Removes underline */
 }
-
 .user-info a:hover {
     text-decoration: underline; /* Adds underline on hover for better user interaction feedback */
 }
 
+/* Logout button styling */
 .logout-button {
     padding: 8px 16px;
     background-color: #007bff; /* Blue color */
@@ -72,7 +69,10 @@ header .header-body {
     left: 10px; /* Distance from left of viewport */
     display: flex; /* Align SVG and text horizontally */
     align-items: center; /* Align SVG and text vertically */
+    transition: all 0.3s ease; /* Transition for smooth effects */
 }
+
+
 
 .info-button {
     padding: 8px 8px; /* Matches logout button padding */
@@ -88,17 +88,16 @@ header .header-body {
     justify-content: center; /* Icon center horizontal alignment */
     transition: background-color 0.3s, transform 0.3s; /* Smooth transition for hover effects */
 }
-
 .info-button:hover, .info-button:focus {
     background-color: #6bd100; /* Lighter green on hover for interaction feedback */
     transform: scale(1.1); /* Slightly enlarges the button to indicate interactivity */
 }
-
 .info-button svg {
     fill: #fff; /* White color fill for icon */
     width: 32px; /* Sizing for button */
     height: 32px; /* Sizing for button */
 }
+
 
 .nav-button {
     display: flex;
@@ -117,12 +116,10 @@ header .header-body {
     box-shadow: 2px 2px 5px rgba(0,0,0,0.2); /* Subtle shadow for depth */
     transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
 }
-
 .nav-button:hover, .nav-button:focus {
     background-color: #0056b3; /* Darker shade on hover for user feedback */
     box-shadow: 0 0 8px rgba(0,0,0,0.3); /* Shadow on hover */
 }
-
 /* Additional CSS for positioning and responsive design */
 nav {
     display: flex;
@@ -130,6 +127,7 @@ nav {
     align-items: center; /* Centers buttons horizontally */
     width: 100%; /* Full width to contain the buttons */
 }
+
 
 /* Adding tile and empty for Super Wordle Animation */
 .tile {
@@ -157,11 +155,9 @@ nav {
     transition: transform 0.5s ease-in-out;
     transform: scale(1);
 }
-
 .modal-content.show {
     transform: scale(1);
 }
-
 @keyframes modalFadeIn {
     from {
         opacity: 0;
@@ -172,7 +168,6 @@ nav {
         transform: translateY(0);
     }
 }
-
 .modal-subheading{
     text-align:center;
     font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
@@ -188,7 +183,6 @@ nav {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 
 }
-
 .modal-body {
     display: block;
     align-items: center;
@@ -208,35 +202,38 @@ nav {
     width: 100%; /* Using 100% to make it responsive */
 }
 
-/* Styling for profile.html email change modal */
-.modal-dialog {
-    max-width: 500px; /* Set the maximum width of the modal for better readability */
-}
-
-/* Styling for profile.html email change modal invalid email animation */
-@keyframes shake {
-    0% { margin-left: 0rem; }
-    25% { margin-left: 1rem; }
-    50% { margin-left: -1rem; }
-    75% { margin-left: 1rem; }
-    100% { margin-left: 0; }
-}
-.invalid-shake {
-    animation: shake 2s;
-}
-
-.is-invalid {
-    border-color: red;
-}
 
 /* Styling for diceIcon, trophy-icon icons */
-.changeEmail-icon, .wordsCompleted-icon, .myThemes-icon, .changePassword-icon {
-    vertical-align: auto;
+#diceIcon, .trophy-icon, .search-icon, .createTheme-icon, .changeEmail-icon, .wordsCompleted-icon, .myThemes-icon, .changePassword-icon {
+    vertical-align: middle;
     margin-left: 0px; /* Space between icon and text */
     width: 2em; /* Width of menu icons */
     height: 2em; /* Height of menu icons */
 
 }
+
+/* High Scores Table Styling */
+.table-responsive {
+    max-height: 50vh; /* 50% of viewport height */
+    width: 100%; /* Full width of container */
+    overflow-y: auto; /* Vertical scroll enabled */
+    overflow-x: auto; /* Horizontal scroll enabled if needed*/
+}
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+    .table-responsive {
+        max-height: 65vh; /* Increase height on smaller screens */
+        width: 85% /* 85% */
+    }
+}
+/* Adjustments for larger screens */
+@media (min-width: 1024px) {
+    .table-responsive {
+        max-height: 50vh;
+        width: 45% /* 85% */ 
+    }
+}
+
 
 /* Back button styling */
 .back-button {
