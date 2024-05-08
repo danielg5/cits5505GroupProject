@@ -252,8 +252,8 @@ nav {
     transition: padding 0.8s ease; /* Smooth transition for padding changes */
 }
 .back-button:hover, .back-button:focus {
-    background-color: #151515; /* Darker shade on hover for user feedback */
-    box-shadow: 0 0 8px #0000004d; /* Shadow on hover */
+    background-color: #151515 !important; /* Darker shade on hover for user feedback */
+    box-shadow: 0 0 8px #0000004d !important; /* Shadow on hover */
 }
 
 /*Back button animation */
