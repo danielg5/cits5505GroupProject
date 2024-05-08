@@ -87,31 +87,42 @@ const diceIcons = [
 ];
 
 
-// function for Dice Animation
+// Function for Dice Animation
 function setupDiceAnimation() {
     let diceInterval;
 
+    function getRandomDegree() {
+        const randomDegree = Math.floor(Math.random() * 360); // Random degree from 0 to 359
+        return randomDegree;
+    }
+
     function changeDiceIcon() {
         const diceIcon = diceIcons[Math.floor(Math.random() * diceIcons.length)];
-        document.getElementById('diceIcon').innerHTML = diceIcon;
+        const diceElement = document.getElementById('diceIcon');
+        diceElement.innerHTML = diceIcon;
+        // Rotate dice icon randomly
+        const rotateDirection = Math.random() > 0.5 ? 1 : -1; // Randomly choose clockwise or counterclockwise
+        const rotationDegrees = getRandomDegree();
+        diceElement.style.transform = `rotate(${rotateDirection * rotationDegrees}deg)`;
+        diceElement.style.transition = 'transform 0.9s ease';
     }
 
     const playButton = document.getElementById('playButton');
     if (playButton) {
-        // Start changing icons on page load
+        // Start on page load
         diceInterval = setInterval(changeDiceIcon, 300);
 
-        // Stop changing when hovering over button
+        // On hover, stop animation
         playButton.addEventListener('mouseover', () => {
             clearInterval(diceInterval);
         });
 
-        // Start changing again when mouse stops hovering
+        // Off hover, Start animation
         playButton.addEventListener('mouseout', () => {
             diceInterval = setInterval(changeDiceIcon, 300);
         });
 
-        // Stop changing and redirect when button is clicked
+        // On click, stop animation and redirect
         playButton.addEventListener('click', () => {
             clearInterval(diceInterval);
             location.href = 'game.html?type=random'; // TO DO: Needs to be handled in JavaScript (AJAX request, Flask routes and views.py)
