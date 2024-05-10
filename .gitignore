@@ -1,4 +1,6 @@
 # Ignore all files in directory:
 __pycache__/
+temp/
 
 # Ignore files:
+test.html
