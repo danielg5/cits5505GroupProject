@@ -2,6 +2,7 @@
  * GAME JAVASCRIPT for game.html *
  *-------------------------------*/
 
+// function sends guess to server and starts game with response
 function submitGuess() {
   // function activated on submit of guess
   let guessWord = document.getElementById("guessWord").value;
@@ -26,8 +27,9 @@ function submitGuess() {
   } else {
     alert("Guess word must be " + secretLength + " characters long!");
   }
-  }
- 
+}
+
+// function process server response and updates game
 function playGame(guessWord, response) {
   let resultArr = response.pattern;
   let guessesRemain = response.guesses_remain;
@@ -46,6 +48,7 @@ function playGame(guessWord, response) {
   }    
 }
 
+// function updates wordle table on a matched character
 function updateWordleTable(guessWord, resultArr) {
   let table = document.getElementById("wordleTable");
   let tbody = table.tBodies[0];
@@ -59,6 +62,7 @@ function updateWordleTable(guessWord, resultArr) {
   }
 }
 
+// function creates guess table to display guesses
 function createTable(guessWord, resultArr, guessesRemain, secretLength, gameWon, gamePoints) {
   let table;
   // Only create a new table on the very first guess
@@ -73,6 +77,7 @@ function createTable(guessWord, resultArr, guessesRemain, secretLength, gameWon,
   prependRow(table, guessWord, resultArr, guessesRemain, secretLength, gameWon);    
 }
 
+// function prepends guess to guess table
 function prependRow(table, guessWord, resultArr, guessesRemain, secretLength, gameWon) {
   let tbody = table.tBodies[0];
   let row = tbody.insertRow(0);
@@ -80,19 +85,19 @@ function prependRow(table, guessWord, resultArr, guessesRemain, secretLength, ga
   let guessNumber = tbody.rows.length;
   cell.textContent = "Guess " + guessNumber;
   cell.className = 'guessTag';
-    for (let i = 0; i < secretLength; i++) {
-      cell = row.insertCell();
-      cell.textContent = guessWord.at(i);
-      switch (resultArr[i]) {
-        case 2:
-          cell.className = 'correctTag';
-          break;
-        case 1:
-          cell.className = 'misplacedTag';
-          break;
-        default:
-          cell.className = 'incorrectTag';
+  for (let i = 0; i < secretLength; i++) {
+    cell = row.insertCell();
+    cell.textContent = guessWord.at(i);
+    switch (resultArr[i]) {
+      case 2:
+        cell.className = 'correctTag';
+        break;
+      case 1:
+        cell.className = 'misplacedTag';
+        break;
+      default:
+        cell.className = 'incorrectTag';
       }
-    }
+  }
 }
 
