@@ -7,12 +7,11 @@ from typing import List
 
 @flaskApp.route('/')
 def index():
-    return "Hello World!"
-#    return render_template('index.html')
+    return render_template('index.html')
 
-#@flaskApp.route('/signup')
-#def signup():
-#    return render_template('signup.html')
+@flaskApp.route('/signup')
+def signup():
+        return render_template('signup.html')
 
 #@flaskApp.route('/menu')
 #def menu():
@@ -34,8 +33,8 @@ def index():
 #def icreate():
 #    return render_template('create.html')
 
-@flaskApp.route('/game')
-def game():
+#@flaskApp.route('/game')
+#def game():
     # TODO: get username(player) from cookie, etc.
     # TODO: get username(theme creator; not the current user) with theme from the database
     # TODO: Use username, get random theme
@@ -45,21 +44,21 @@ def game():
     # save text file, username.txt with data {secret, theme, guessed_already, guesses_made = 0}
     # use same player.txt file for each game, overwrite on new game ('w+')
 
-    dictionary = {}
-    dictionary['secret'] = 'craze'
-    dictionary['theme'] = 'condition'
-    dictionary['guessed_already'] = False
-    dictionary['guesses_made'] = 0
+    #dictionary = {}
+    #dictionary['secret'] = 'craze'
+    #dictionary['theme'] = 'condition'
+    #dictionary['guessed_already'] = False
+    #dictionary['guesses_made'] = 0
     # use secret_length = len(secret) to set guess word length
     # player = 'daniel'
     # filename = player + '.txt'
     # f = open(filename, 'w+')
     # f.write('data')
     # f.close()
-    return render_template('game.html')
+    #return render_template('game.html')
 
-@flaskApp.route('/random')
-def random():
+#@flaskApp.route('/random')
+#def random():
     # TODO: get username(player) from cookie, etc.
     # TODO: get a random username(theme creator; not the current user) with theme from the database
     # TODO: Use random username, get random theme
@@ -72,8 +71,8 @@ def random():
     # f = open(filename, 'w+')
     # f.write('data')
     # f.close()
-    return render_template('game.html')
+    #return render_template('game.html')
 
-@flaskApp.route('/test')
-def test():
-    return render_template('test.html')
+#@flaskApp.route('/test')
+#def test():
+    #return render_template('test.html')
