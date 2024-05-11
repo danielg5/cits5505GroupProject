@@ -1,33 +1,86 @@
-/* Moving this file to 'app/static/' directory 
- * to utilise flask app features */
+/*----------------------------*
+ * GAME STYLES for games.html * 
+ *----------------------------*/
+ 
+ /* center items in a column */
+ body {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: top; 
+  height: 100vh; 
+  margin: 0; 
+}
 
-/* GAME STYLES for games.html
- *------------------------------*/
+.centerText, .guessTag, .correctTag, .misplacedTag, .incorrectTag, #overGame,
+  #wonGame, label, h1, h3, h4 {
+  text-align: center;
+}
+
+.correctTag, .misplacedTag, .incorrectTag {
+  font-size: 20px;
+  height: 20px;
+  width: 20px;
+}
 
 .correctTag {
   background-color: lightgreen;
-  text-align: center;
-  width: 10%;  
 }
 
 .misplacedTag {
   background-color: yellow;
-  text-align: center;
-  width: 10%; 
 }
 
 .incorrectTag {
   background-color: lightgray;
-  text-align: center;
-  width: 10%; 
 }
 
 .guessTag {
   background-color: white;
-   width: 20%;
-   text-align: center; 
+  width: 60px;
+  margin: auto;
 }
 
-.guessTableNode {
-   width: 40%; 
+/* center wordle table */
+#wordleTableNode, #guessInput {
+  width: 100%;
+  text-align: center;
+  align-items: center;  
+}
+
+/* center wordle table */
+#wordleTable{
+  margin: auto;
+}
+
+#wordleTable td {
+  font-size: 25px;
+  height: 30px;
+  width: 30px;
+}
+/* width of input field*/
+#guessWord {
+  width: 40%;
+}
+
+/* center guess table */
+#guessTableNode table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#guessedPreviously {
+  color: red;
+}
+
+#themeWord {
+   color: slateblue;
+}
+
+#overGame {
+   color: red;
+}
+
+#wonGame {
+   color: green;
 }
