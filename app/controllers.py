@@ -2,6 +2,32 @@ import random
 from app import flaskApp, db  # delete if not required
 from app.model import Person, Theme, GuessedWord
 
+def get_player():
+    # get player username
+    # TODO: get username for player
+    player = 'daniel'
+    return player
+
+def add_loss(player):
+    # add 1 to loss_total in database for player
+    player = Person.query.filter_by(username=player).first()
+    if player.loss_total is None:
+        player.loss_total = 1  # cannot add 1 to None
+    else:
+        player.loss_total += 1
+    db.session.commit()
+
+def add_win(player):
+    # add 1 to win_total in database for player
+    # subtract 1 from loss_total in database for player
+    player = Person.query.filter_by(username=player).first()
+    if player.win_total is None:
+        player.win_total = 1  # cannot add 1 to None
+    else:
+        player.win_total += 1
+    player.loss_total += 1
+    db.session.commit()
+
 def get_guessed_words(player):
     # get all guessed words (tuple list) for player
     guessed_words = GuessedWord.query.\

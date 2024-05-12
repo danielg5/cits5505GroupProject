@@ -1,5 +1,6 @@
 from flask import request, jsonify
 from app import flaskApp
+from app.controllers import *
 import json 
 
 # start game (on first guess) as a loss to address players quiting game before using all guesses
@@ -8,24 +9,27 @@ import json
 
 @flaskApp.route('/process_guess', methods=['POST'])
 def process_guess():
+    player = get_player()
+    # file created on game initialisation when '/game' route is used (route.py)
     filename = get_filename()
-    data = read_file(filename)
+    # read player data dictionary
+    data = read_file(filename) 
     if request.is_json:
         dataReceived = request.get_json()
         guess_word = dataReceived['guess_word']
-        # add 1 to loss_total on first guess
-        # if data['guesses_remain'] == len(data['secret']):
-           # TODO: add 1 to loss_total in database
-           # add_loss() 
+        # at game start and on first guess only
+        if data['guesses_remain'] == len(data['secret']):
+           # on first guess, add 1 to loss_total
+           add_loss(player) # start game as lost
+        # at game win
         if guess_word == data['secret']:
-           data['game_won'] = True
-           # TODO: add to 1 win_total and subtract 1 from loss_total in database
-           # TODO: add game_points to total_points in database        
-           # add_win()
+           data['game_won'] = True # set game_won flag in data dictionary to True
+           # on win, add 1 to win_total and subtract 1 from loss_total
+           add_win(player)
         else: 
            data['guesses_remain'] = data['guesses_remain'] - 1
            if not data['guessed_already']:
-               # only subtract point with guess if word not guessed already
+               # only subtract game point with guess if word not guessed already
                data['game_points'] = data['game_points'] - 1
         write_file(filename, data)
     else:
@@ -44,7 +48,7 @@ def process_guess():
 
 def get_filename():
     # TODO: get username(player)
-    player = 'daniel'
+    player = get_player()
     filename = './app/temp/' + player + '.txt'
     return filename
 
