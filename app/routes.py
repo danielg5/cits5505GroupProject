@@ -30,14 +30,14 @@ def signup():
 #def profile():
 #    return render_template('profile.html')
 
-#@flaskApp.route('/search')
-#def search():
+@flaskApp.route('/search')
+def search():
 # TODO: Need to send to send creator and theme to game.html
-#    return render_template('search.html')
+    return render_template('search.html')
 
-#@flaskApp.route('/create')
-#def create():
-#    return render_template('create.html')
+@flaskApp.route('/create')
+def create():
+    return render_template('create.html')
 
 @flaskApp.route('/random')
 def random():
