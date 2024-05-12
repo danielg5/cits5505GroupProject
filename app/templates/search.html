@@ -11,12 +11,12 @@
             font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
-            height: 35vh;
+            height: 35vh; /* Adjusted to full viewport height for better flexibility */
+            background-color: #f4f4f9; /* Lighter background */
         }
         .header-container {
             position: relative;
             width: 100%;
-            min-height: 50%;
             flex: 1;
         }
         .container1 {
@@ -74,19 +74,41 @@
             margin-left: 30px;
         }
         .search-results {
-            display: flex;
-            justify-content: space-evenly;
-            width: 100%;
-            padding: 10px 0;
-            background-color: #f0f0f0;
-            border-top: 1px solid #ccc;
-            font-size: 16px;
-        }
-        .result-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Aligns the search results container’s children centrally */
+    width: 100%;
+    padding: 10px 0;
+}
+
+.theme-row {
+    cursor: pointer;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 5px;
+    text-align: center; /* Centers the text of the theme and username */
+    width: 100%; /* Ensure full width for proper centering */
+}
+
+.hidden {
+    display: none;
+    width: 100%; /* Full width to match theme row */
+}
+
+ul {
+    list-style-type: none; /* Removes bullet points */
+    padding: 0;
+    margin: 0 auto; /* Centers the list in the theme row */
+    text-align: center; /* Ensures text within the list is centered */
+    width: 100%; /* Ensures the list takes full width */
+}
+
+li {
+    display: inline-block; /* Makes list items line up in a row */
+    margin: 5px 10px; /* Adds spacing between items */
+}
+
     </style>
 </head>
 <body>
@@ -103,17 +125,55 @@
         </div>
     </div>
     <div class="search-container">
-        <h2>Search Themes</h2> <!-- Subtitle above search bar -->
-        <div class="search-bar">
-            <label><input type="radio" name="searchOption" value="user"> User</label>
-            <label><input type="radio" name="searchOption" value="theme"> Theme</label>
-            <span class="search-filter-label">Search filter:</span> <input type="text" placeholder="Enter search terms">
-        </div>
+        <h2>Search Themes</h2>
+        <form action="{{ url_for('search') }}" method="post">
+            <div class="search-bar">
+                <label><input type="radio" name="searchOption" value="user" {{ 'checked' if search_option == 'user' else '' }}> User</label>
+                <label><input type="radio" name="searchOption" value="theme" {{ 'checked' if search_option == 'theme' else '' }}> Theme</label>
+                <span class="search-filter-label">Search filter:</span>
+                <input type="text" name="search_query" placeholder="Enter search terms" value="{{ search_query|default('') }}">
+                <button type="submit">Search</button>
+            </div>
+        </form>
     </div>
     <div class="search-results">
-        <div class="result-item"><strong>Theme:</strong> 5</div>
-        <div class="result-item"><strong>User:</strong> 3</div>
-        <div class="result-item"><strong>Remaining unguessed words:</strong> 12</div>
+        {% if search_results %}
+            {% for theme in search_results %}
+            <div class="theme-row" onclick="toggleVisibility('words-{{ theme.id }}');">
+                <strong>{{ theme.theme }}</strong> - <em>{{ theme.person.username }}</em>
+                <span class="arrow">&#9660;</span>
+            </div>
+            <ul id="words-{{ theme.id }}" class="hidden">
+                <li>{{ theme.word1 }}</li>
+                <li>{{ theme.word2 }}</li>
+                <li>{{ theme.word3 }}</li>
+                <li>{{ theme.word4 }}</li>
+                <li>{{ theme.word5 }}</li>
+                <li>{{ theme.word6 }}</li>
+                <li>{{ theme.word7 }}</li>
+                <li>{{ theme.word8 }}</li>
+                <li>{{ theme.word9 }}</li>
+                <li>{{ theme.word10 }}</li>
+            </ul>
+            {% endfor %}
+        {% else %}
+            <p>No results found.</p>
+        {% endif %}
     </div>
+
+    <script>
+        function toggleVisibility(id) {
+            var element = document.getElementById(id);
+            var arrow = element.previousElementSibling.querySelector('.arrow');
+            if (element.style.display === 'block') {
+                element.style.display = 'none';
+                arrow.innerHTML = '&#9660;'; // Arrow down
+            } else {
+                element.style.display = 'block';
+                element.style.textAlign = 'center'; // Ensure text alignment remains centered
+                arrow.innerHTML = '&#9650;'; // Arrow up
+            }
+        }
+    </script>
 </body>
 </html>
