@@ -69,7 +69,7 @@ def game():
     creator = request.args.get('creator')
     theme = request.args.get('theme')
     # TODO: get username(player)
-    player = 'daniel'
+    player = get_player()
     filename = './app/temp/' + player + '.txt'
     # secret_word = 'craze'
     # guessed_already = False
