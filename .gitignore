@@ -2,7 +2,7 @@
 __pycache__/
 temp/
 migrations/
-venv_project2
+venv_project2/
 
 # Ignore files:
 test.html
