@@ -77,7 +77,7 @@ def wordle(secret_word, guess_word):
             secretArr[i] = '_'
     for i, g in enumerate(guess_word):  # find misplaced matches
         for j, s in enumerate(secretArr):
-            if g == s:
+            if g == s and pattern[i] != 2: 
                 pattern[i] = 1
                 secretArr[j] = '_'
     return pattern

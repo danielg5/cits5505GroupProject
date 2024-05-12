@@ -59,7 +59,7 @@ def get_creators_and_themes_list():
 
 def get_theme_words(creator, theme):
    # get theme words matches creator and theme
-   # TODO: theme should be unique per creator 
+   # TODO: theme should be unique per creator, need validate in create.html 
    # TODO: creator cannot have two themes with the same name)
    # get theme words (tuple list)
    # use .first() as theme is duplicated with creator
@@ -76,7 +76,7 @@ def get_theme_words(creator, theme):
 
 def get_random_theme():
     # get a random theme, return creator and theme
-    # TODO: theme should be unique per creator 
+    # TODO: theme should be unique per creator, need validate in create.html 
     # TODO: creator cannot have two themes with the same name)
     random_theme = Theme.query.\
     join(Person).\
