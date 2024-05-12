@@ -12,12 +12,11 @@ os.makedirs('./app/temp', exist_ok=True)
 
 @flaskApp.route('/')
 def index():
-    return "Hello World!"
-#    return render_template('index.html')
+    return render_template('index.html')
 
-#@flaskApp.route('/signup')
-#def signup():
-#    return render_template('signup.html')
+@flaskApp.route('/signup')
+def signup():
+        return render_template('signup.html')
 
 #@flaskApp.route('/menu')
 #def menu():
@@ -37,9 +36,8 @@ def index():
 #    return render_template('search.html')
 
 #@flaskApp.route('/create')
-#def icreate():
+#def create():
 #    return render_template('create.html')
-
 
 @flaskApp.route('/random')
 def random():

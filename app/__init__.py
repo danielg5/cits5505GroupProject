@@ -10,4 +10,4 @@ flaskApp.config.from_object(Config)
 db = SQLAlchemy(flaskApp)
 migrate = Migrate(flaskApp, db)
 
-from app import routes, model, gameplay
+from app import routes, model
