@@ -33,6 +33,7 @@ def index():
 
 #@flaskApp.route('/search')
 #def search():
+# TODO: Need to send to send creator and theme to game.html
 #    return render_template('search.html')
 
 #@flaskApp.route('/create')
@@ -47,6 +48,7 @@ def random():
 
 @flaskApp.route('/game', methods=['GET']) # need to receive username (theme creator) and theme
 def game():
+    # TODO: Need search.html to send creator and theme 
     creator = request.args.get('creator')
     theme = request.args.get('theme')
     # TODO: get username(player)
