@@ -17,15 +17,19 @@ def process_guess():
     if request.is_json:
         dataReceived = request.get_json()
         guess_word = dataReceived['guess_word']
-        # at game start and on first guess only
+        # on game start and on first guess only
         if data['guesses_remain'] == len(data['secret']):
            # on first guess, add 1 to loss_total
            add_loss(player) # start game as lost
-        # at game win
+        # on game win
         if guess_word == data['secret']:
            data['game_won'] = True # set game_won flag in data dictionary to True
-           # on win, add 1 to win_total and subtract 1 from loss_total
+           # add 1 to win_total and subtract 1 from loss_total
            add_win(player)
+           # add points to points_total in database
+           add_points(player, data['game_points'])
+           # add guessed word to database
+           add_guess_word(player, guess_word)
         else: 
            data['guesses_remain'] = data['guesses_remain'] - 1
            if not data['guessed_already']:
@@ -47,7 +51,6 @@ def process_guess():
     })
 
 def get_filename():
-    # TODO: get username(player)
     player = get_player()
     filename = './app/temp/' + player + '.txt'
     return filename
