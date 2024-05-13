@@ -1,4 +1,6 @@
 from app import db
+import random, string
+from werkzeug.security import generate_password_hash, check_password_hash
 
 class Person(db.Model):
    id = db.Column(db.Integer, primary_key=True)
@@ -11,6 +13,16 @@ class Person(db.Model):
    points_total = db.Column(db.Integer)
    guessed_words = db.relationship('GuessedWord', backref='person', lazy=True)
    themes = db.relationship('Theme', backref='person', lazy=True)
+
+   def set_password(self, password, salt):
+       self.password_salt_hash = generate_password_hash(password + salt)
+
+   def check_password(self, password, salt):
+       return check_password_hash(self.password_salt_hash, password + salt)
+   
+   def random_salt():
+       return ''.join(random.choices(string.ascii_letters + string.digits, k=16))
+       # random_salt() suggested by GitHub Copilot
    
 class GuessedWord(db.Model):
    id = db.Column(db.Integer, primary_key=True)
