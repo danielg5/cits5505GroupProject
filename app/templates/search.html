@@ -4,112 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Super Wordle Game</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            height: 35vh; /* Adjusted to full viewport height for better flexibility */
-            background-color: #f4f4f9; /* Lighter background */
-        }
-        .header-container {
-            position: relative;
-            width: 100%;
-            flex: 1;
-        }
-        .container1 {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            position: absolute;
-            top: 10px;
-            left: 10px;
-        }
-        .logout-btn, .back-btn {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-            width: 120px;
-            margin-bottom: 10px;
-        }
-        .back-btn {
-            background-color: #000;
-        }
-        .container2 {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-        }
-        .welcome-text, .username {
-            margin: 5px 0;
-        }
-        .search-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            padding: 20px 0;
-        }
-        .search-bar {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-        input[type="radio"] {
-            margin: 0 5px;
-        }
-        input[type="text"] {
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
-        .search-filter-label {
-            margin-left: 30px;
-        }
-        .search-results {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Aligns the search results container’s children centrally */
-    width: 100%;
-    padding: 10px 0;
-}
-
-.theme-row {
-    cursor: pointer;
-    background-color: #fff;
-    padding: 10px;
-    border: 1px solid #ccc;
-    margin-bottom: 5px;
-    text-align: center; /* Centers the text of the theme and username */
-    width: 100%; /* Ensure full width for proper centering */
-}
-
-.hidden {
-    display: none;
-    width: 100%; /* Full width to match theme row */
-}
-
-ul {
-    list-style-type: none; /* Removes bullet points */
-    padding: 0;
-    margin: 0 auto; /* Centers the list in the theme row */
-    text-align: center; /* Ensures text within the list is centered */
-    width: 100%; /* Ensures the list takes full width */
-}
-
-li {
-    display: inline-block; /* Makes list items line up in a row */
-    margin: 5px 10px; /* Adds spacing between items */
-}
-
-    </style>
+    <link rel="stylesheet" href="../static/search.css">
 </head>
 <body>
     <div class="header-container">
@@ -139,41 +34,13 @@ li {
     <div class="search-results">
         {% if search_results %}
             {% for theme in search_results %}
-            <div class="theme-row" onclick="toggleVisibility('words-{{ theme.id }}');">
+            <div class="theme-row">
                 <strong>{{ theme.theme }}</strong> - <em>{{ theme.person.username }}</em>
-                <span class="arrow">&#9660;</span>
             </div>
-            <ul id="words-{{ theme.id }}" class="hidden">
-                <li>{{ theme.word1 }}</li>
-                <li>{{ theme.word2 }}</li>
-                <li>{{ theme.word3 }}</li>
-                <li>{{ theme.word4 }}</li>
-                <li>{{ theme.word5 }}</li>
-                <li>{{ theme.word6 }}</li>
-                <li>{{ theme.word7 }}</li>
-                <li>{{ theme.word8 }}</li>
-                <li>{{ theme.word9 }}</li>
-                <li>{{ theme.word10 }}</li>
-            </ul>
             {% endfor %}
         {% else %}
             <p>No results found.</p>
         {% endif %}
     </div>
-
-    <script>
-        function toggleVisibility(id) {
-            var element = document.getElementById(id);
-            var arrow = element.previousElementSibling.querySelector('.arrow');
-            if (element.style.display === 'block') {
-                element.style.display = 'none';
-                arrow.innerHTML = '&#9660;'; // Arrow down
-            } else {
-                element.style.display = 'block';
-                element.style.textAlign = 'center'; // Ensure text alignment remains centered
-                arrow.innerHTML = '&#9650;'; // Arrow up
-            }
-        }
-    </script>
 </body>
 </html>
