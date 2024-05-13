@@ -2,6 +2,45 @@ import random
 from app import db
 from app.model import Person, Theme, GuessedWord
 
+###########################################################
+# Functions for new_user, password
+#
+
+def check_password_hash(email, password):
+    # return True if password matches, False otherwise
+    user = Person.query.filter_by(email=email).first()
+    return user.check_password(password, user.salt)
+
+def add_new_user(username, email, password):
+    # create a new Person instance
+    new_user = Person(username=username, email=email)
+    # create random salt using random_salt method
+    salt = Person.random_salt()
+    # set salt attribute for Person instance
+    new_user.salt = salt
+    # set password_salt_hash attribute for Person instance
+    new_user.set_password(password, salt)
+    db.session.add(new_user)
+    # abort on database error
+    try:
+       db.session.commit()
+    except:
+        db.session.rollback()
+
+def check_email_exists(email):
+    # return True if email exists, False otherwise
+    user = Person.query.filter_by(email=email).first()
+    return user is not None
+
+def check_username_exists(username):
+    # return True if username exists, False otherwise
+    user = Person.query.filter_by(username=username).first()
+    return user is not None
+
+###########################################################
+# Functions for game and database
+#
+
 def get_player():
     # get player username
     # TODO: get username for player
