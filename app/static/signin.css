@@ -1,5 +1,19 @@
 /* Index page */ 
 
+body {
+    background-color: white ; /* 浅灰色背景 */
+    color: #333; /* 深色文字，以保证足够的对比度 */
+}
+
+.main {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 650px;
+    margin-top: 60px;
+    margin-left: 450px;
+}
+
 .form-signin {
     max-width: 330px;
     padding: 1rem;
@@ -43,7 +57,7 @@ button{
 
 /* svg setup */ 
 .svg_pos {
-    display: flex;
+    display: inline-flex;
     justify-content: center;
 }
 
@@ -117,4 +131,20 @@ button{
     font-size: 21px;
     color: #760abe;
     font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+}
+
+/* header */
+
+.header-content {
+    text-align: center;
+    flex-grow: 1; /* Takes available space, pushes logout button to end */
+    font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; /* Font for header */
+    color: #24c0a1; /* Color for header*/
+    font-weight: bold;
+}
+.header-body {
+    text-align: center;
+    flex-grow: 1; /* Takes available space, pushes logout button to end */
+    font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; /* Font for header */
+    color: #000000; /* Color for header/*/
 }
