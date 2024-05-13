@@ -35,12 +35,15 @@
         {% if search_results %}
             {% for theme in search_results %}
             <div class="theme-row">
-                <strong>{{ theme.theme }}</strong> - <em>{{ theme.person.username }}</em>
+                <!-- Clickable theme and creator sending parameters to /game -->
+                <a href="{{ url_for('game', creator=theme.person.username, theme=theme.theme) }}">
+                    <strong>{{ theme.theme }}</strong> - <em>{{ theme.person.username }}</em>
+                </a>
             </div>
             {% endfor %}
         {% else %}
             <p>No results found.</p>
         {% endif %}
-    </div>
+    </div>    
 </body>
 </html>
