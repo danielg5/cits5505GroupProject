@@ -21,23 +21,23 @@
     </div>
     <div class="create-theme-container">
         <h2>Create New Theme</h2>
-        <form class="theme-form">
-            <input type="text" placeholder="New Theme Name" class="theme-name">
-            <input type="text" placeholder="Word 1">
-            <input type="text" placeholder="Word 6">
-            <input type="text" placeholder="Word 2">
-            <input type="text" placeholder="Word 7">
-            <input type="text" placeholder="Word 3">
-            <input type="text" placeholder="Word 8">
-            <input type="text" placeholder="Word 4">
-            <input type="text" placeholder="Word 9">
-            <input type="text" placeholder="Word 5">
-            <input type="text" placeholder="Word 10">
-        </form>
-    </div>
-    <div class="form-buttons">
-        <button type="button" class="form-button">Create Theme</button>
-        <button type="submit" class="form-button">Submit Theme</button>
+        <form class="theme-form" action="{{ url_for('create_theme') }}" method="post">
+            <input type="text" name="theme_name" placeholder="New Theme Name" class="theme-name">
+            <input type="text" name="word1" placeholder="Word 1">
+            <input type="text" name="word6" placeholder="Word 6">
+            <input type="text" name="word2" placeholder="Word 2">
+            <input type="text" name="word7" placeholder="Word 7">
+            <input type="text" name="word3" placeholder="Word 3">
+            <input type="text" name="word8" placeholder="Word 8">
+            <input type="text" name="word4" placeholder="Word 4">
+            <input type="text" name="word9" placeholder="Word 9">
+            <input type="text" name="word5" placeholder="Word 5">
+            <input type="text" name="word10" placeholder="Word 10">
+            <div class="form-buttons">
+                <button type="button" class="form-button">Create Theme</button>
+                <button type="submit" class="form-button">Submit Theme</button>
+            </div>
+        </form>        
     </div>
 </body>
 </html>

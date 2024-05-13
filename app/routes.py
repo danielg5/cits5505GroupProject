@@ -1,7 +1,8 @@
-from flask import redirect, render_template, request, url_for
-from app import flaskApp
+from flask import session, redirect, render_template, request, url_for, flash
+from app import flaskApp, db
 from app.controllers import *
 from typing import List
+from app.model import Person, Theme
 import json, os 
 
 # create directory for temp player files if it does not exist
@@ -54,9 +55,40 @@ def search():
     return render_template('search.html', search_results=results, search_query=search_query, search_option=search_option)
 
 
-@flaskApp.route('/create')
-def create():
-    return render_template('create.html')
+@flaskApp.route('/create', methods=['GET', 'POST'])
+def create_theme():
+    if request.method == 'POST':
+        # To-Do: Include logic once user authentication
+        # Assuming the user is already logged in and their username is stored in session
+        username = session.get('username')
+        if not username:
+            flash('You need to login first.')
+            return redirect(url_for('login'))
+
+        user = Person.query.filter_by(username=username).first()
+
+        new_theme = Theme(
+            person_id=user.id,
+            theme=request.form['theme_name'],
+            word1=request.form['word1'],
+            word2=request.form['word2'],
+            word3=request.form['word3'],
+            word4=request.form['word4'],
+            word5=request.form['word5'],
+            word6=request.form['word6'],
+            word7=request.form['word7'],
+            word8=request.form['word8'],
+            word9=request.form['word9'],
+            word10=request.form['word10']
+        )
+        db.session.add(new_theme)
+        db.session.commit()
+        flash('New theme created successfully!')
+        return redirect(url_for('index'))
+    else:
+        # Handle GET request - display the form
+        return render_template('create.html')
+
 
 @flaskApp.route('/random')
 def random():
