@@ -14,7 +14,6 @@
         </div>
         <div class="container2">
             <h1>Super Wordle Game</h1>
-            <br>
             <div class="welcome-text">Welcome to the word guessing game!</div>
             <div class="username">Username: JohnDoe</div>
         </div>
@@ -22,22 +21,22 @@
     <div class="create-theme-container">
         <h2>Create New Theme</h2>
         <form class="theme-form" action="{{ url_for('create_theme') }}" method="post">
-            <input type="text" name="theme_name" placeholder="New Theme Name" class="theme-name">
-            <input type="text" name="word1" placeholder="Word 1">
-            <input type="text" name="word6" placeholder="Word 6">
-            <input type="text" name="word2" placeholder="Word 2">
-            <input type="text" name="word7" placeholder="Word 7">
-            <input type="text" name="word3" placeholder="Word 3">
-            <input type="text" name="word8" placeholder="Word 8">
-            <input type="text" name="word4" placeholder="Word 4">
-            <input type="text" name="word9" placeholder="Word 9">
-            <input type="text" name="word5" placeholder="Word 5">
-            <input type="text" name="word10" placeholder="Word 10">
+            {{ form.hidden_tag() }}
+            <div class="form-row">{{ form.theme_name.label }} {{ form.theme_name(size=32, class_='theme-name') }}</div><br>
+            <div class="form-row">{{ form.word1.label }} {{ form.word1(size=20) }}</div>
+            <div class="form-row">{{ form.word2.label }} {{ form.word2(size=20) }}</div>
+            <div class="form-row">{{ form.word3.label }} {{ form.word3(size=20) }}</div>
+            <div class="form-row">{{ form.word4.label }} {{ form.word4(size=20) }}</div>
+            <div class="form-row">{{ form.word5.label }} {{ form.word5(size=20) }}</div>
+            <div class="form-row">{{ form.word6.label }} {{ form.word6(size=20) }}</div>
+            <div class="form-row">{{ form.word7.label }} {{ form.word7(size=20) }}</div>
+            <div class="form-row">{{ form.word8.label }} {{ form.word8(size=20) }}</div>
+            <div class="form-row">{{ form.word9.label }} {{ form.word9(size=20) }}</div>
+            <div class="form-row">{{ form.word10.label }} {{ form.word10(size=20) }}</div>
             <div class="form-buttons">
-                <button type="button" class="form-button">Create Theme</button>
                 <button type="submit" class="form-button">Submit Theme</button>
             </div>
-        </form>        
+        </form>
     </div>
 </body>
 </html>

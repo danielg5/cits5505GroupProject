@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
 flaskApp = Flask(__name__)
+flaskApp.config['SECRET_KEY'] = 'cits5505'
 CORS(flaskApp)  # enable CORS on all routes
 flaskApp.config.from_object(Config)
 db = SQLAlchemy(flaskApp)
