@@ -1,5 +1,6 @@
-from flask import redirect, render_template
+from flask import redirect, render_template, request, url_for
 from app import flaskApp
+from app.controllers import *
 from typing import List
 import json, os 
 
@@ -31,39 +32,29 @@ def signup():
 
 #@flaskApp.route('/search')
 #def search():
+# TODO: Need to send to send creator and theme to game.html
 #    return render_template('search.html')
 
 #@flaskApp.route('/create')
-#def icreate():
+#def create():
 #    return render_template('create.html')
 
+@flaskApp.route('/random')
+def random():
+    creator, theme = get_random_theme()
+    return redirect(url_for('game', creator=creator, theme=theme))
 
-#@flaskApp.route('/random')
-#def random():
-    # TODO: get username(player) from cookie, etc.
-    # TODO: get a random username(theme creator; not the current user) with theme from the database
-    # TODO: Use random username, get random theme
-    # TODO: filter out guessed words, and get random secret
-    # if all guessed pick any word, set variable to 'guessed_already = True' (otherwise false). 
-    # True will launch a "word guessed previously" game, False will launch normal game.
-    # save text file, username.txt with data {secret, theme, guessed_already, guesses_made = 0}
-    # use same player.txt file for each game, overwrite on new game ('w+')
-    # filename = player + '.txt'
-    # f = open(filename, 'w+')
-    # f.write('data')
-    # f.close()
-    #return render_template('game.html')
-
-@flaskApp.route('/game')
+@flaskApp.route('/game', methods=['GET']) # need to receive username (theme creator) and theme
 def game():
-    player = 'daniel'
+    # TODO: Need search.html to send creator and theme 
+    creator = request.args.get('creator')
+    theme = request.args.get('theme')
+    # TODO: get username(player)
+    player = get_player()
     filename = './app/temp/' + player + '.txt'
-    # TODO: get theme
-    theme = 'condition'
-    # TODO: get secret word
-    secret_word = 'craze'
-    # TODO: check if guessed_already
-    guessed_already = False # word has been guessed already
+    # secret_word = 'craze'
+    # guessed_already = False
+    secret_word, guessed_already = get_random_word(player, creator, theme)
     if guessed_already:
         game_points = 0
     else:

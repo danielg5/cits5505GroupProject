@@ -1,6 +1,9 @@
 # Ignore all files in directory:
 __pycache__/
 temp/
+migrations/
+venv_project2/
 
 # Ignore files:
+app.db
 test.html
