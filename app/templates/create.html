@@ -4,92 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Super Wordle Game</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            height: 35vh; /* Corrected for full page height */
-        }
-        .header-container {
-            position: relative;
-            width: 100%;
-            min-height: 50%;
-            flex: 1;
-        }
-        .container1 {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            position: absolute;
-            top: 10px;
-            left: 10px;
-        }
-        .logout-btn, .back-btn {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-            width: 120px;
-            margin-bottom: 10px;
-        }
-        .back-btn {
-            background-color: #000;
-        }
-        .container2 {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-        }
-        .welcome-text, .username {
-            margin: 5px 0;
-        }
-        .create-theme-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            padding: 20px 0;
-        }
-        .theme-form {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            width: 50%; /* Adjust width as necessary */
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .theme-form input[type="text"] {
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .theme-name {
-            grid-column: 1 / 3; /* Makes the theme name input span two columns */
-        }
-        .form-buttons {
-            display: flex;
-            justify-content: center; /* Centers the buttons horizontally */
-            width: 100%; /* Full width of the form */
-            padding: 10px 0; /* Adds vertical padding for spacing */
-        }
-        .form-button {
-            padding: 10px 20px;
-            margin: 0 10px; /* Adds spacing between buttons */
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            background-color: #007bff;
-            color: white;
-            font-size: 16px;
-        }
-    </style>
+    <link rel="stylesheet" href="../static/create.css">
 </head>
 <body>
     <div class="header-container">
@@ -99,30 +14,29 @@
         </div>
         <div class="container2">
             <h1>Super Wordle Game</h1>
-            <br>
             <div class="welcome-text">Welcome to the word guessing game!</div>
             <div class="username">Username: JohnDoe</div>
         </div>
     </div>
     <div class="create-theme-container">
         <h2>Create New Theme</h2>
-        <form class="theme-form">
-            <input type="text" placeholder="New Theme Name" class="theme-name">
-            <input type="text" placeholder="Word 1">
-            <input type="text" placeholder="Word 6">
-            <input type="text" placeholder="Word 2">
-            <input type="text" placeholder="Word 7">
-            <input type="text" placeholder="Word 3">
-            <input type="text" placeholder="Word 8">
-            <input type="text" placeholder="Word 4">
-            <input type="text" placeholder="Word 9">
-            <input type="text" placeholder="Word 5">
-            <input type="text" placeholder="Word 10">
+        <form class="theme-form" action="{{ url_for('create_theme') }}" method="post">
+            {{ form.hidden_tag() }}
+            <div class="form-row">{{ form.theme_name.label }} {{ form.theme_name(size=32, class_='theme-name') }}</div><br>
+            <div class="form-row">{{ form.word1.label }} {{ form.word1(size=20) }}</div>
+            <div class="form-row">{{ form.word2.label }} {{ form.word2(size=20) }}</div>
+            <div class="form-row">{{ form.word3.label }} {{ form.word3(size=20) }}</div>
+            <div class="form-row">{{ form.word4.label }} {{ form.word4(size=20) }}</div>
+            <div class="form-row">{{ form.word5.label }} {{ form.word5(size=20) }}</div>
+            <div class="form-row">{{ form.word6.label }} {{ form.word6(size=20) }}</div>
+            <div class="form-row">{{ form.word7.label }} {{ form.word7(size=20) }}</div>
+            <div class="form-row">{{ form.word8.label }} {{ form.word8(size=20) }}</div>
+            <div class="form-row">{{ form.word9.label }} {{ form.word9(size=20) }}</div>
+            <div class="form-row">{{ form.word10.label }} {{ form.word10(size=20) }}</div>
+            <div class="form-buttons">
+                <button type="submit" class="form-button">Submit Theme</button>
+            </div>
         </form>
-    </div>
-    <div class="form-buttons">
-        <button type="button" class="form-button">Create Theme</button>
-        <button type="submit" class="form-button">Submit Theme</button>
     </div>
 </body>
 </html>

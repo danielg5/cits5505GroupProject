@@ -1,8 +1,10 @@
-from flask import flash, redirect, render_template, request, url_for
+from flask import flash, session, redirect, render_template, request, url_for
 from flask_login import current_user, login_required, login_user, logout_user
-from app import flaskApp
+from app import flaskApp, db
 from app.controllers import *
 from typing import List
+from app.model import Person, Theme
+from app.forms import ThemeForm
 import json, os 
 
 # create directory for temp player files if it does not exist
@@ -82,7 +84,6 @@ def search():
 
 
 @flaskApp.route('/create')
-#@login_required
 def create():
     return render_template('create.html')
 
