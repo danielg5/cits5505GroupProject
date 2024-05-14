@@ -18,6 +18,10 @@ def index():
 def signup():
         return render_template('signup.html')
 
+@flaskApp.route('/submit-login', methods=['POST'])
+def login():
+    return render_template('signup.html')
+
 #@flaskApp.route('/menu')
 #def menu():
 #    return render_template('menu.html')
