@@ -1,4 +1,5 @@
-from flask import redirect, render_template, request, url_for
+from flask import flash, redirect, render_template, request, url_for
+from flask_login import current_user, login_required, login_user, logout_user
 from app import flaskApp
 from app.controllers import *
 from typing import List
@@ -10,31 +11,53 @@ os.makedirs('./app/temp', exist_ok=True)
 # html files must be located in either 'app/templates' or 'app/static'
 # remove comments (below) to enable the routes
 
-@flaskApp.route('/')
+
+@flaskApp.route('/', methods=['GET', 'POST'])
 def index():
+    # login user
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        user = Person.get_user_by_email(email)
+        if user and user.check_password(password):
+            login_user(user)
+            return redirect(url_for('menu'))
+        else:
+            flash('Invalid email or password')
     return render_template('index.html')
+
+def logout():
+    # logout user
+    logout_user()
+    return redirect(url_for('index'))       
 
 @flaskApp.route('/signup')
 def signup():
-        return render_template('signup.html')
+    # use similar to index() to login user
+    return render_template('signup.html')
 
 @flaskApp.route('/submit-login', methods=['POST'])
 def login():
     return render_template('menu.html')
 
 #@flaskApp.route('/menu')
+#@login_required
 #def menu():
 #    return render_template('menu.html')
 
 #@flaskApp.route('/leaderboard')
+#@login_required
 #def leaderboard():
 #    return render_template('leaderboard.html')
 
 #@flaskApp.route('/profile')
+#@login_required
 #def profile():
 #    return render_template('profile.html')
 
+
 @flaskApp.route('/search', methods=['GET', 'POST'])
+#@login_required
 def search():
     search_query = ''
     search_option = 'theme'  # Default search option
@@ -59,21 +82,26 @@ def search():
 
 
 @flaskApp.route('/create')
+#@login_required
 def create():
     return render_template('create.html')
 
+
 @flaskApp.route('/random')
+#@login_required
 def random():
     creator, theme = get_random_theme()
     return redirect(url_for('game', creator=creator, theme=theme))
 
 @flaskApp.route('/game', methods=['GET']) # need to receive username (theme creator) and theme
+#@login_required
 def game():
     # TODO: Need search.html to send creator and theme 
     creator = request.args.get('creator')
     theme = request.args.get('theme')
     # TODO: get username(player)
-    player = get_player()
+    #player = current_user.username
+    player = 'daniel'
     filename = './app/temp/' + player + '.txt'
     # secret_word = 'craze'
     # guessed_already = False

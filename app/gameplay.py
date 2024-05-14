@@ -1,5 +1,6 @@
 from flask import request, jsonify
 from app import flaskApp
+from flask_login import current_user, login_required
 from app.controllers import *
 import json 
 
@@ -8,6 +9,7 @@ import json
 # which will be corrected on win, subtract 1 from loss_total and add 1 to win_total
 
 @flaskApp.route('/process_guess', methods=['POST'])
+#@login_required
 def process_guess():
     player = get_player()
     # file created on game initialisation when '/game' route is used (route.py)
@@ -51,7 +53,9 @@ def process_guess():
     })
 
 def get_filename():
-    player = get_player()
+    # TODO: get username(player)
+    #player = current_user.username
+    player = 'daniel'
     filename = './app/temp/' + player + '.txt'
     return filename
 

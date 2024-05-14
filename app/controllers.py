@@ -1,5 +1,5 @@
 import random
-from app import db
+from app import flaskApp, db  # delete flaskApp if not required
 from app.model import Person, Theme, GuessedWord
 
 ###########################################################
@@ -36,6 +36,22 @@ def check_username_exists(username):
     # return True if username exists, False otherwise
     user = Person.query.filter_by(username=username).first()
     return user is not None
+
+def get_userid(email):
+    # return user id for email
+    user = Person.query.filter_by(email=email).first()
+    return user.id
+
+def get_username(email):
+    # return username for email
+    user = Person.query.filter_by(email=email).first()
+    return user.username
+
+def get_username_by_id(id):
+    # return username for id
+    user = Person.query.filter_by(id=id).first()
+    return user.username
+
 
 ###########################################################
 # Functions for game and database
