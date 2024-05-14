@@ -20,7 +20,7 @@ def signup():
 
 @flaskApp.route('/submit-login', methods=['POST'])
 def login():
-    return render_template('signup.html')
+    return render_template('menu.html')
 
 #@flaskApp.route('/menu')
 #def menu():
