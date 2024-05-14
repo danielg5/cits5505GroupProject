@@ -1,8 +1,9 @@
-from app import db
-import random, string
+from app import db, login
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
+import random, string
 
-class Person(db.Model):
+class Person(UserMixin, db.Model):
    id = db.Column(db.Integer, primary_key=True)
    username = db.Column(db.String(64), unique=True, nullable=False)
    email = db.Column(db.String(120), unique=True, nullable=False)
@@ -23,6 +24,11 @@ class Person(db.Model):
    def random_salt():
        return ''.join(random.choices(string.ascii_letters + string.digits, k=16))
        # random_salt() suggested by GitHub Copilot
+
+   def get_user_by_email(email):
+       # return user for email
+       user = Person.query.filter_by(email=email).first()
+       return user
    
 class GuessedWord(db.Model):
    id = db.Column(db.Integer, primary_key=True)

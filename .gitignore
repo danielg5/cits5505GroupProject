@@ -7,3 +7,4 @@ venv_project2/
 # Ignore files:
 app.db
 test.html
+flask_secret_key.sh

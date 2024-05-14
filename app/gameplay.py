@@ -1,5 +1,6 @@
 from flask import request, jsonify
 from app import flaskApp
+from flask_login import current_user, login_required
 import json 
 
 # start game (on first guess) as a loss to address players quiting game before using all guesses
@@ -7,6 +8,7 @@ import json
 # which will be corrected on win, subtract 1 from loss_total and add 1 to win_total
 
 @flaskApp.route('/process_guess', methods=['POST'])
+#@login_required
 def process_guess():
     filename = get_filename()
     data = read_file(filename)
@@ -44,6 +46,7 @@ def process_guess():
 
 def get_filename():
     # TODO: get username(player)
+    #player = current_user.username
     player = 'daniel'
     filename = './app/temp/' + player + '.txt'
     return filename
