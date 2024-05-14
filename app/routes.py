@@ -6,6 +6,7 @@ from typing import List
 from app.model import Person, Theme
 from app.forms import ThemeForm
 import json, os 
+from app.model import Person
 
 # create directory for temp player files if it does not exist
 os.makedirs('./app/temp', exist_ok=True)
@@ -16,17 +17,11 @@ os.makedirs('./app/temp', exist_ok=True)
 
 @flaskApp.route('/', methods=['GET', 'POST'])
 def index():
-    # login user
-    if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
-        user = Person.get_user_by_email(email)
-        if user and user.check_password(password):
-            login_user(user)
-            return redirect(url_for('menu'))
-        else:
-            flash('Invalid email or password')
-    return render_template('index.html')
+    if request.method == 'GET':
+        return render_template('index.html')
+    elif request.method == 'POST':
+        pass
+
 
 def logout():
     # logout user
@@ -38,14 +33,39 @@ def signup():
     # use similar to index() to login user
     return render_template('signup.html')
 
-@flaskApp.route('/submit-login', methods=['POST'])
+@flaskApp.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('menu.html')
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        user = Person.get_user_by_email(email)
+        if not user:
+            
+            flash('No user found with that email', 'error')
+            return redirect(url_for('login'))
+        else:
+           
+            salt = user.salt
+            if not Person.check_password(user, password, salt):
+                
+                flash('Invalid password', 'error')
+                return redirect(url_for('login'))
+            else:
+               
+                login_user(user)
+                return redirect(url_for('menu'))
+    else:
+        return render_template('index.html')
 
-#@flaskApp.route('/menu')
-#@login_required
-#def menu():
-#    return render_template('menu.html')
+
+
+
+        
+
+@flaskApp.route('/menu')
+@login_required
+def menu():
+    return render_template('menu.html')
 
 #@flaskApp.route('/leaderboard')
 #@login_required
