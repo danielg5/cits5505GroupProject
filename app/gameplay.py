@@ -11,7 +11,9 @@ import json
 @flaskApp.route('/process_guess', methods=['POST'])
 #@login_required
 def process_guess():
-    player = get_player()
+    # TODO: get username(player)
+    #player = current_user.username
+    player = 'daniel'
     # file created on game initialisation when '/game' route is used (route.py)
     filename = get_filename()
     # read player data dictionary
