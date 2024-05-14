@@ -57,12 +57,6 @@ def get_username_by_id(id):
 # Functions for game and database
 #
 
-def get_player():
-    # get player username
-    # TODO: get username for player
-    player = 'daniel'
-    return player
-
 def add_loss(player):
     # add 1 to loss_total in database for player
     player = Person.query.filter_by(username=player).first()
