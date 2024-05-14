@@ -36,6 +36,10 @@ def signup():
     # use similar to index() to login user
     return render_template('signup.html')
 
+@flaskApp.route('/submit-login', methods=['POST'])
+def login():
+    return render_template('menu.html')
+
 #@flaskApp.route('/menu')
 #@login_required
 #def menu():
@@ -51,16 +55,37 @@ def signup():
 #def profile():
 #    return render_template('profile.html')
 
-#@flaskApp.route('/search')
-#@login_required
-#def search():
-# TODO: Need to send to send creator and theme to game.html
-#    return render_template('search.html')
 
-#@flaskApp.route('/create')
+@flaskApp.route('/search', methods=['GET', 'POST'])
 #@login_required
-#def create():
-#    return render_template('create.html')
+def search():
+    search_query = ''
+    search_option = 'theme'  # Default search option
+    results = []
+
+    if request.method == 'POST':
+        search_query = request.form['search_query']
+        search_option = request.form.get('searchOption', 'theme')
+
+        if search_option == 'user':
+            # Search for themes by username
+            user = Person.query.filter_by(username=search_query).first()
+            if user:
+                results = user.themes
+            else:
+                results = []
+        elif search_option == 'theme':
+            # Search themes by theme name
+            results = Theme.query.filter(Theme.theme.like(f'%{search_query}%')).all()
+
+    return render_template('search.html', search_results=results, search_query=search_query, search_option=search_option)
+
+
+@flaskApp.route('/create')
+#@login_required
+def create():
+    return render_template('create.html')
+
 
 @flaskApp.route('/random')
 #@login_required
