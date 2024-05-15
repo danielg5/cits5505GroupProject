@@ -20,8 +20,8 @@ os.makedirs('./app/temp', exist_ok=True)
 def index():
     # login user
     if request.method == 'POST':
-        email = request.form['user_email']
-        password = request.form['user_pw']
+        email = request.form['email']
+        password = request.form['password']
         user = Person.get_user_by_email(email)
         if user and user.check_password(password, user.salt):
             login_user(user)
