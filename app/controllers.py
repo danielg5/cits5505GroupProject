@@ -75,7 +75,7 @@ def add_win(player):
         player.win_total = 1  # cannot add 1 to None
     else:
         player.win_total += 1
-    player.loss_total += 1
+    player.loss_total -= 1
     db.session.commit()
 
 def add_points(player, points):
