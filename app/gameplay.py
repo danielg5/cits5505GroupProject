@@ -3,6 +3,7 @@ from app import flaskApp
 from flask_login import current_user, login_required
 from app.controllers import *
 import json 
+import logging
 
 # start game (on first guess) as a loss to address players quiting game before using all guesses
 # with first guess and if guessed_already = False, add 1 to loss_total
@@ -11,11 +12,13 @@ import json
 @flaskApp.route('/process_guess', methods=['POST'])
 #@login_required
 def process_guess():
-    # TODO: get username(player)
-    #player = current_user.username
-    player = 'daniel'
+    # request data from client (game.html)
+    data = request.get_json()
+    guess_word = data.get('guess_word')
+    # username from flask-login
+    player = current_user.username
     # file created on game initialisation when '/game' route is used (route.py)
-    filename = get_filename()
+    filename = get_filename(player)
     # read player data dictionary
     data = read_file(filename) 
     if request.is_json:
@@ -43,21 +46,20 @@ def process_guess():
     else:
         guess_word = request.form.get('guess_word', 'No word received')
     return jsonify({
-        #'message': 'guessed received',
-        #'received_word': guess_word,
+        'message': 'guessed received',
+        'received_word': guess_word,
         'pattern': wordle(data['secret'], guess_word),
         'theme': data['theme'],
         #'secret_word': secret_word,
         'secret_length': len(data['secret']),
         'guesses_remain': data['guesses_remain'],
         'game_points': data['game_points'],
-        'game_won': data['game_won']
-    })
+        'game_won': data['game_won'],
+        'player:' : player,
+        'player is authenticated': current_user.is_authenticated
+    }), 200
 
-def get_filename():
-    # TODO: get username(player)
-    #player = current_user.username
-    player = 'daniel'
+def get_filename(player):
     filename = './app/temp/' + player + '.txt'
     return filename
 

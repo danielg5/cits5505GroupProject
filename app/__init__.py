@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_wtf import CSRFProtect
 from flask_cors import CORS
 from app.config import Config
 from flask_sqlalchemy import SQLAlchemy
@@ -9,6 +10,7 @@ from flask_login import LoginManager
 flaskApp = Flask(__name__)
 CORS(flaskApp)  # enable CORS on all routes
 flaskApp.config.from_object(Config)
+csrf = CSRFProtect(flaskApp)
 db = SQLAlchemy(flaskApp)
 migrate = Migrate(flaskApp, db)
 login = LoginManager(flaskApp)

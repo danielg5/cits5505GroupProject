@@ -2,6 +2,7 @@ from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required, login_user, logout_user
 from app import flaskApp
 from app.controllers import *
+from app.gameplay import get_filename
 from typing import List
 import json, os 
 
@@ -16,12 +17,14 @@ os.makedirs('./app/temp', exist_ok=True)
 def index():
     # login user
     if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
+        email = request.form['user_email']
+        password = request.form['user_pw']
         user = Person.get_user_by_email(email)
-        if user and user.check_password(password):
+        if user and user.check_password(password, user.salt):
             login_user(user)
-            return redirect(url_for('menu'))
+            #return redirect(url_for('menu'))
+            creator, theme = get_random_theme()
+            return redirect(url_for('game', creator=creator, theme=theme))
         else:
             flash('Invalid email or password')
     return render_template('index.html')
@@ -31,14 +34,28 @@ def logout():
     logout_user()
     return redirect(url_for('index'))       
 
-@flaskApp.route('/signup')
+@flaskApp.route('/signup', methods=['GET', 'POST'])
 def signup():
-    # use similar to index() to login user
+    if request.method == 'POST':
+        email = request.form['user_email']
+        password = request.form['user_pw']
+        username = request.form['username']
+        add_new_user(username, email, password)
+        user = Person.get_user_by_email(email)
+        if user and user.check_password(password, user.salt):
+            login_user(user)
+            #return redirect(url_for('menu'))
+            creator, theme = get_random_theme()
+            return redirect(url_for('game', creator=creator, theme=theme))
+        else:
+            flash('Invalid email or password')
     return render_template('signup.html')
 
-@flaskApp.route('/submit-login', methods=['POST'])
-def login():
-    return render_template('menu.html')
+@flaskApp.route('/test')
+#@login_required
+def test():
+    return render_template('test.html')
+
 
 #@flaskApp.route('/menu')
 #@login_required
@@ -80,7 +97,6 @@ def search():
 
     return render_template('search.html', search_results=results, search_query=search_query, search_option=search_option)
 
-
 @flaskApp.route('/create')
 #@login_required
 def create():
@@ -100,9 +116,9 @@ def game():
     creator = request.args.get('creator')
     theme = request.args.get('theme')
     # TODO: get username(player)
-    #player = current_user.username
-    player = 'daniel'
-    filename = './app/temp/' + player + '.txt'
+    player = current_user.username
+    filename = get_filename(player)
+    #filename = './app/temp/' + player + '.txt'
     # secret_word = 'craze'
     # guessed_already = False
     secret_word, guessed_already = get_random_word(player, creator, theme)
