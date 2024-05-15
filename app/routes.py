@@ -1,10 +1,13 @@
-from flask import flash, redirect, render_template, request, url_for
+from flask import flash, session, redirect, render_template, request, url_for
 from flask_login import current_user, login_required, login_user, logout_user
-from app import flaskApp
+from app import flaskApp, db
 from app.controllers import *
 from app.gameplay import get_filename
 from typing import List
+from app.model import Person, Theme
+from app.forms import ThemeForm
 import json, os 
+from app.model import Person
 
 # create directory for temp player files if it does not exist
 os.makedirs('./app/temp', exist_ok=True)
@@ -51,16 +54,39 @@ def signup():
             flash('Invalid email or password')
     return render_template('signup.html')
 
-@flaskApp.route('/test')
+#@flaskApp.route('/test')
 #@login_required
-def test():
-    return render_template('test.html')
+#def test():
+#    return render_template('test.html')
 
+#@flaskApp.route('/login', methods=['GET', 'POST'])
+#def login():
+#    if request.method == 'POST':
+#        email = request.form['email']
+#        password = request.form['password']
+#        user = Person.get_user_by_email(email)
+#        if not user:
+            
+#            flash('No user found with that email', 'error')
+#            return redirect(url_for('login'))
+#        else:
+           
+#            salt = user.salt
+#            if not Person.check_password(user, password, salt):
+                
+#                flash('Invalid password', 'error')
+#                return redirect(url_for('login'))
+#            else:
+               
+#                login_user(user)
+#                return redirect(url_for('menu'))
+#    else:
+#        return render_template('index.html')       
 
-#@flaskApp.route('/menu')
-#@login_required
-#def menu():
-#    return render_template('menu.html')
+@flaskApp.route('/menu')
+@login_required
+def menu():
+    return render_template('menu.html')
 
 #@flaskApp.route('/leaderboard')
 #@login_required
@@ -98,7 +124,6 @@ def search():
     return render_template('search.html', search_results=results, search_query=search_query, search_option=search_option)
 
 @flaskApp.route('/create')
-#@login_required
 def create():
     return render_template('create.html')
 

@@ -6,7 +6,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 
-
 flaskApp = Flask(__name__)
 CORS(flaskApp)  # enable CORS on all routes
 flaskApp.config.from_object(Config)
