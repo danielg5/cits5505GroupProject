@@ -28,7 +28,8 @@
         <main class="form-signin w-100 m-auto">
             <!-- <form action="/submit-login" method="POST"> -->
             <form action="/" method="POST">
-                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"> <!-- manually insert CSRF token if not using WTForm/Jinja -->
                 <div class="form-floating mb-3">
                     <input type="email" class="form-control" id="user_email" name="email" required>
                     <label for="user_email">Email:</label>

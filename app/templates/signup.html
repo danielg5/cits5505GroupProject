@@ -27,6 +27,8 @@
 
     <div class="signPos">
         <form action="/signup" method="post">
+            
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/> <!-- manually insert CSRF token if not using WTForm/Jinja -->
             <div class="form-group" style="margin-bottom: 30px;">
                 <label for="emailSignUp" class="col-sm-2" style="z-index: 5; white-space: nowrap">
                     <span class="small bg-white text-muted pt-1 pl-2 pr-2">Email:</span>
