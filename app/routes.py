@@ -17,25 +17,37 @@ os.makedirs('./app/temp', exist_ok=True)
 
 
 @flaskApp.route('/', methods=['GET', 'POST'])
-def index():
-    # login user
+def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
         user = Person.get_user_by_email(email)
-        if user and user.check_password(password, user.salt):
-            login_user(user)
-            #return redirect(url_for('menu'))
-            creator, theme = get_random_theme()
-            return redirect(url_for('game', creator=creator, theme=theme))
+        
+        if not user:
+            
+            flash('No user found with that email', 'error')
         else:
-            flash('Invalid email or password')
+            
+            salt = user.salt
+            if user.check_password(password, salt):
+                login_user(user)
+                
+                creator, theme = get_random_theme()
+                return redirect(url_for('game', creator=creator, theme=theme))
+            else:
+                
+                flash('Invalid password', 'error')
+                
     return render_template('index.html')
+
+
 
 def logout():
     # logout user
     logout_user()
     return redirect(url_for('index'))       
+
+
 
 @flaskApp.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -43,16 +55,31 @@ def signup():
         email = request.form['user_email']
         password = request.form['user_pw']
         username = request.form['username']
+
+        # check if email already exists
+        if check_email_exists(email):
+            flash('Email already registered.', 'error')
+            return render_template('signup.html')
+        
+        # check if username already exists
+        if check_username_exists(username):
+            flash('Username already taken.', 'error')
+            return render_template('signup.html')
+
+        # add new user
         add_new_user(username, email, password)
         user = Person.get_user_by_email(email)
+        
+        # login user
         if user and user.check_password(password, user.salt):
             login_user(user)
-            #return redirect(url_for('menu'))
             creator, theme = get_random_theme()
             return redirect(url_for('game', creator=creator, theme=theme))
         else:
-            flash('Invalid email or password')
+            flash('Signup failed. Please try again.', 'error')
+
     return render_template('signup.html')
+
 
 #@flaskApp.route('/test')
 #@login_required
