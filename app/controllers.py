@@ -15,6 +15,7 @@ def add_new_user(username, email, password):
     # create a new Person instance
     new_user = Person(username=username, email=email)
     # create random salt using random_salt method
+    #salt = '0123456789123456'
     salt = Person.random_salt()
     # set salt attribute for Person instance
     new_user.salt = salt

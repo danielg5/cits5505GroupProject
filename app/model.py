@@ -15,16 +15,16 @@ class Person(UserMixin, db.Model):
    guessed_words = db.relationship('GuessedWord', backref='person', lazy=True)
    themes = db.relationship('Theme', backref='person', lazy=True)
 
+   def random_salt():
+       return ''.join(random.choices(string.ascii_letters + string.digits, k=16))
+       # random_salt() suggested by GitHub Copilot
+
    def set_password(self, password, salt):
        self.password_salt_hash = generate_password_hash(password + salt)
 
    def check_password(self, password, salt):
        return check_password_hash(self.password_salt_hash, password + salt)
    
-   def random_salt():
-       return ''.join(random.choices(string.ascii_letters + string.digits, k=16))
-       # random_salt() suggested by GitHub Copilot
-
    def get_user_by_email(email):
        # return user for email
        user = Person.query.filter_by(email=email).first()

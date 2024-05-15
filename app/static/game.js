@@ -4,30 +4,27 @@
 
 // function sends guess to server and starts game with response
 function submitGuess() {
-  // function activated on submit of guess
   let guessWord = document.getElementById("guessWord").value;
-  //let secretLength = Number.parseInt('{{ length|safe }}');
-  let secretLength = sLength;
-  console.log("Secret length: " + secretLength);
-  console.log(typeof secretLength);    
-  if (secretLength == guessWord.length){
-    $.ajax({
+  let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+  $.ajax({
       type: "POST",
-      url: "http://localhost:5000/process_guess",
-      data: JSON.stringify({guess_word: guessWord}),
+      url: "/process_guess",
+      data: JSON.stringify({ guess_word: guessWord }),
       contentType: "application/json; charset=utf-8",
+      beforeSend: function(xhr) {
+          xhr.setRequestHeader("X-CSRF-Token", csrfToken);
+      },
       success: function(response) {
-        console.log('Response:', response);
-        playGame(guessWord, response)
+          console.log('Response:', response);
+          playGame(guessWord, response);
       },
       error: function(xhr, status, error) {
-        console.error('Error:', error);
+          console.error('Error:', error);
       }
-    });
-  } else {
-    alert("Guess word must be " + secretLength + " characters long!");
-  }
+  });
 }
+
 
 // function process server response and updates game
 function playGame(guessWord, response) {
