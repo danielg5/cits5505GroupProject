@@ -39,9 +39,8 @@ def check_email_exists(email):
     return user is not None
 
 def check_username_exists(username):
-    # return True if username exists, False otherwise
-    user = Person.query.filter_by(username=username).first()
-    return user is not None
+    return Person.query.filter_by(username=username).first() is not None
+
 
 def get_userid(email):
     # return user id for email
