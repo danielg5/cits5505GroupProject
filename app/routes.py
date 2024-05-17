@@ -5,8 +5,7 @@ from app.controllers import *
 from app.gameplay import get_filename
 from typing import List
 from app.model import Person, Theme
-from app.create_forms import ThemeForm
-from app.search_forms import SearchForm
+from app.forms import ThemeForm, SearchForm
 import json, os 
 
 
