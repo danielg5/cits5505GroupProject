@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import RadioField, StringField, SubmitField
+from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 
 class ThemeForm(FlaskForm):
@@ -15,8 +15,3 @@ class ThemeForm(FlaskForm):
     word9 = StringField('Word 9', validators=[DataRequired()])
     word10 = StringField('Word 10', validators=[DataRequired()])
     submit = SubmitField('Submit')
-
-class SearchForm(FlaskForm):
-    search_query = StringField('Search Query', validators=[DataRequired()])
-    search_option = RadioField('Search Options', choices=[('user', 'User'), ('theme', 'Theme')])
-    submit = SubmitField('Search')
