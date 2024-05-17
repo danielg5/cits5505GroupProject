@@ -54,8 +54,8 @@
     </div>
     <div id="guessTableNode"></div>
 <script> 
-   let sLength = Number.parseInt('{{ length|safe }}'); 
-   console.log('sLength:', sLength);
+  // save secret word length to a variable for use in game.js
+  let sLength = Number.parseInt('{{ length|safe }}'); 
 </script>
 </div>     
 </body>

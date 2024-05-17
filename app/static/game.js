@@ -7,8 +7,6 @@ function submitGuess() {
   let guessWord = document.getElementById("guessWord").value;
   let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
   let secretLength = sLength; // from game.html
-  console.log("Secret length: " + secretLength);
-  console.log(typeof secretLength); 
   if (secretLength == guessWord.length){
     $.ajax({
       type: "POST",
@@ -19,7 +17,6 @@ function submitGuess() {
         xhr.setRequestHeader("X-CSRF-Token", csrfToken);
       },
       success: function(response) {
-        console.log('Response:', response);
         playGame(guessWord, response);
       },
       error: function(xhr, status, error) {
