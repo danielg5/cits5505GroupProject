@@ -1,8 +1,8 @@
 /* Index page */ 
 
 body {
-    background-color: white ; /* 浅灰色背景 */
-    color: #333; /* 深色文字，以保证足够的对比度 */
+    background-color: white ; 
+    color: #333; 
 }
 
 .main {

@@ -4,7 +4,7 @@ document.getElementById('email').addEventListener('blur', function() {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'X-CSRFToken': csrfToken  // 使用从 HTML 传递的 CSRF 令牌
+            'X-CSRFToken': csrfToken  
         },
         body: new URLSearchParams({
             'email': email
@@ -42,7 +42,7 @@ document.getElementById('username').addEventListener('blur', function() {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'X-CSRFToken': csrfToken  // 使用从 HTML 传递的 CSRF 令牌
+            'X-CSRFToken': csrfToken  
         },
         body: new URLSearchParams({
             'username': username
