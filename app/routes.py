@@ -32,6 +32,8 @@ def index():
             flash('Invalid email or password')
     return render_template('index.html')
 
+@flaskApp.route('/logout', methods=['GET', 'POST'])
+@login_required
 def logout():
     logout_user()
     session.clear()
