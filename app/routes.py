@@ -5,9 +5,10 @@ from app.controllers import *
 from app.gameplay import get_filename
 from typing import List
 from app.model import Person, Theme
-from app.forms import ThemeForm
+from app.create_forms import ThemeForm
+from app.search_forms import SearchForm
 import json, os 
-from app.model import Person
+
 
 # create directory for temp player files if it does not exist
 os.makedirs('./app/temp', exist_ok=True)
@@ -100,33 +101,51 @@ def menu():
 
 
 @flaskApp.route('/search', methods=['GET', 'POST'])
-#@login_required
+@login_required
 def search():
-    search_query = ''
-    search_option = 'theme'  # Default search option
+    form = SearchForm()
     results = []
-
-    if request.method == 'POST':
-        search_query = request.form['search_query']
-        search_option = request.form.get('searchOption', 'theme')
+    if form.validate_on_submit():
+        search_query = form.search_query.data
+        search_option = form.search_option.data
 
         if search_option == 'user':
-            # Search for themes by username
             user = Person.query.filter_by(username=search_query).first()
             if user:
                 results = user.themes
             else:
                 results = []
         elif search_option == 'theme':
-            # Search themes by theme name
             results = Theme.query.filter(Theme.theme.like(f'%{search_query}%')).all()
 
-    return render_template('search.html', search_results=results, search_query=search_query, search_option=search_option)
+    return render_template('search.html', form=form, search_results=results, username=current_user.username)
 
-@flaskApp.route('/create')
+@flaskApp.route('/create', methods=['GET', 'POST'])
+@login_required
 def create():
-    return render_template('create.html')
-
+    form = ThemeForm()
+    if form.validate_on_submit():
+        # Correctly create a new Theme instance with the proper field names
+        new_theme = Theme(
+            person_id=current_user.id,
+            theme=form.theme_name.data,
+            word1=form.word1.data,
+            word2=form.word2.data,
+            word3=form.word3.data,
+            word4=form.word4.data,
+            word5=form.word5.data,
+            word6=form.word6.data,
+            word7=form.word7.data,
+            word8=form.word8.data,
+            word9=form.word9.data,
+            word10=form.word10.data
+        )
+        db.session.add(new_theme)
+        db.session.commit()
+        flash('Theme created successfully!', 'success')
+        return redirect(url_for('search'))  # Adjust to your valid endpoint for redirect
+    # Pass the username from current_user if available in your user model
+    return render_template('create.html', form=form, username=current_user.username if current_user else 'Guest')
 
 @flaskApp.route('/random')
 #@login_required

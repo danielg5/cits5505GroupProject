@@ -20,7 +20,7 @@
     </div>
     <div class="create-theme-container">
         <h2>Create New Theme</h2>
-        <form class="theme-form" action="{{ url_for('create_theme') }}" method="post">
+        <form class="theme-form" action="{{ url_for('create') }}" method="post">
             {{ form.hidden_tag() }}
             <div class="form-row">{{ form.theme_name.label }} {{ form.theme_name(size=32, class_='theme-name') }}</div><br>
             <div class="form-row">{{ form.word1.label }} {{ form.word1(size=20) }}</div>
