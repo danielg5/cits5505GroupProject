@@ -167,7 +167,7 @@ def create():
         flash('Theme created successfully!', 'success')
         return redirect(url_for('search'))  # Adjust to your valid endpoint for redirect
     # Pass the username from current_user if available in your user model
-    return render_template('create.html', form=form, username=current_user.username if current_user else 'Guest')
+    return render_template('create.html', form=form, logged_in_username=current_user.username if current_user else 'Guest')
 
 @flaskApp.route('/random')
 #@login_required
