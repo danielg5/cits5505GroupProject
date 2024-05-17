@@ -1,86 +1,75 @@
-/*----------------------------*
- * GAME STYLES for games.html * 
- *----------------------------*/
- 
- /* center items in a column */
- body {
+/* General Styles for the Game */
+body {
   display: flex;
-  flex-direction: column; 
-  align-items: center; 
-  justify-content: top; 
-  height: 100vh; 
-  margin: 0; 
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4; /* Light grey background */
 }
 
-.centerText, .guessTag, .correctTag, .misplacedTag, .incorrectTag, #overGame,
-  #wonGame, label, h1, h3, h4 {
+.container1 {
+  position: absolute; /* Absolute positioning to move it to the left */
+  top: 20px; /* Margin from the top */
+  left: 20px; /* Margin from the left */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.logout-btn, .back-btn {
+  margin-bottom: 10px; /* Space between buttons */
+  padding: 10px 20px;
+  background-color: #007bff; /* Bootstrap primary blue */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.container {
   text-align: center;
+  margin-top: 50px;
 }
 
-.correctTag, .misplacedTag, .incorrectTag {
-  font-size: 20px;
-  height: 20px;
-  width: 20px;
-}
-
-.correctTag {
-  background-color: lightgreen;
-}
-
-.misplacedTag {
-  background-color: yellow;
-}
-
-.incorrectTag {
-  background-color: lightgray;
-}
-
-.guessTag {
-  background-color: white;
-  width: 60px;
-  margin: auto;
-}
-
-/* center wordle table */
+/* Table and Text Styling */
 #wordleTableNode, #guessInput {
   width: 100%;
   text-align: center;
-  align-items: center;  
 }
 
-/* center wordle table */
-#wordleTable{
+#wordleTable {
   margin: auto;
+  border-collapse: collapse;
 }
 
 #wordleTable td {
   font-size: 25px;
   height: 30px;
   width: 30px;
-}
-/* width of input field*/
-#guessWord {
-  width: 40%;
+  border: 1px solid #ccc;
 }
 
-/* center guess table */
-#guessTableNode table {
-  margin-left: auto;
-  margin-right: auto;
+#guessWord {
+  width: 40%;
+  padding: 8px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  margin-top: 20px;
 }
 
 #guessedPreviously {
   color: red;
+  font-weight: bold;
 }
 
-#themeWord {
-   color: slateblue;
-}
-
-#overGame {
-   color: red;
-}
-
-#wonGame {
-   color: green;
+#gamePoints, #gameGuesses {
+  color: #333;
+  margin-top: 10px;
 }
