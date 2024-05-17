@@ -1,6 +1,11 @@
 import random
 from app import flaskApp, db  # delete flaskApp if not required
 from app.model import Person, Theme, GuessedWord
+import logging
+
+# logging guessed_already flag
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s - %(levelname)s - %(message)s')
 
 ###########################################################
 # Functions for new_user, password
@@ -134,16 +139,25 @@ def get_random_theme():
     return random_theme.person.username, random_theme.theme
 
 def get_random_word(player, creator, theme):
-    # get a random word from the theme words not guessed before
-    # if all words guessed, pick any word from the theme words
     theme_words_list = get_theme_words(creator, theme)
     guessed_words = get_guessed_words(player)
+    
+    guessed_list = [] # list of guessed words
+    for guessed_word in guessed_words:
+        guessed_list.append(guessed_word.guessed_word)
+
     temp_list = theme_words_list[:] # make a shallow copy of theme words list
-    # remove previously guessed words from theme list
+    # Remove previously guessed words from temp_list
     for theme_word in theme_words_list:
-        for guessed_word in guessed_words:
-            if guessed_word == theme_word and temp_list:
-                temp_list.remove(theme_word) # remove guessed word from theme words list
+        for guessed_word in guessed_list:
+            #if theme_word == guessed_word and temp_list:
+            if theme_word == guessed_word:
+                try:
+                    # remove guessed word from theme words list
+                    temp_list.remove(theme_word) 
+                except:
+                    logging.debug(f"Already removed {theme_word} from temp_list")
+    
     random_word = None
     guessed_already = False
     if temp_list:
@@ -151,4 +165,5 @@ def get_random_word(player, creator, theme):
     else:
         random_word = random.choice(theme_words_list)
         guessed_already = True
+
     return random_word, guessed_already

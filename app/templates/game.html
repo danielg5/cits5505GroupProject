@@ -57,7 +57,10 @@
       <button type="button" onclick="submitGuess()">Submit</button>
     </div>
     <div id="guessTableNode"></div>
-<script> let sLength = Number.parseInt('{{ length|safe }}'); </script>
+<script> 
+  // save secret word length to a variable for use in game.js
+  let sLength = Number.parseInt('{{ length|safe }}'); 
+</script>
 </div>     
 </body>
 </html>
