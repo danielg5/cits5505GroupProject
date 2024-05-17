@@ -32,9 +32,6 @@ body {
     width: 320px;
 }
 
-.headerstyle {
-    font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
-}
 
 .link {
     font-weight: 400;
@@ -147,4 +144,20 @@ button{
     flex-grow: 1; /* Takes available space, pushes logout button to end */
     font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; /* Font for header */
     color: #000000; /* Color for header/*/
+}
+
+.headerstyle {
+    font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+    color: blueviolet;
+    font-weight: bold;
+    font-size: 20px;
+    display: flex;
+    list-style: none;
+}
+
+.header_first{
+   color: #24c0a1;
+   font-size: 30px;
+   font-size: 25px;
+    margin-right: 25px;
 }

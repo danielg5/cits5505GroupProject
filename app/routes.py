@@ -1,4 +1,4 @@
-from flask import flash, session, redirect, render_template, request, url_for
+from flask import flash, session, redirect, render_template, request, url_for, g, jsonify
 from flask_login import current_user, login_required, login_user, logout_user
 from app import flaskApp, db
 from app.controllers import *
@@ -6,7 +6,8 @@ from app.gameplay import get_filename
 from typing import List
 from app.model import Person, Theme
 from app.forms import ThemeForm, SearchForm
-import json, os 
+import json, os
+
 
 
 # create directory for temp player files if it does not exist
@@ -30,7 +31,7 @@ def index():
             return redirect(url_for('game', creator=creator, theme=theme))
         else:
             flash('Invalid email or password')
-    return render_template('index.html')
+    return render_template('index.html', user=current_user)
 
 @flaskApp.route('/logout', methods=['GET', 'POST'])
 @login_required
@@ -56,8 +57,25 @@ def signup():
             return redirect(url_for('game', creator=creator, theme=theme))
         else:
             flash('Invalid email or password')
-    return render_template('signup.html')
+    return render_template('signup.html', user=current_user)
 
+
+# check if email exists
+@flaskApp.route('/check_email', methods=['POST'])
+def check_email():
+    email = request.form.get('email')
+    if email:
+        user_exists = Person.query.filter_by(email=email).first() is not None
+        return jsonify({'exists': user_exists})
+    return jsonify({'error': 'Email is required'}), 400
+
+@flaskApp.route('/check_username', methods=['POST'])
+def check_username():
+    username = request.form.get('username')
+    if username:
+        user_exists = Person.query.filter_by(username=username).first() is not None
+        return jsonify({'exists': user_exists})
+    return jsonify({'error': 'Username is required'}), 400
 #@flaskApp.route('/test')
 #@login_required
 #def test():
@@ -90,16 +108,17 @@ def signup():
 @flaskApp.route('/menu')
 @login_required
 def menu():
-    return render_template('menu.html')
+    return render_template('menu.html', user=current_user)
 
-#@flaskApp.route('/leaderboard')
-#@login_required
-#def leaderboard():
-#    return render_template('leaderboard.html')
+@flaskApp.route('/leaderboard')
+@login_required
+def leaderboard():
+    return render_template('leaderboard.html', user=current_user)
 
-#@flaskApp.route('/profile')
-#@login_required
-#def profile():
+@flaskApp.route('/profile')
+@login_required
+def profile():
+    return render_template('profile.html', user=current_user)
 #    return render_template('profile.html')
 
 

@@ -1,61 +1,61 @@
-//function checkEmail() {
-//    var email = document.getElementById('email').value;
-//    var warningText = document.getElementById('emailWarning');
-//
-//    fetch(`/check_email?email=${encodeURIComponent(email)}`)
-//    .then(response => response.json())
-//    .then(data => {
-//        if(data.status === 'taken') {
-//            warningText.textContent = 'This email is already registered, please use a different email.';
-//        } else {
-//            warningText.textContent = '';
-//        }
-//    })
-//    .catch(error => {
-//        console.error('Request failed:', error);
-//        warningText.textContent = 'Request error, please try again later.';
-//    });
-//}
+document.getElementById('email').addEventListener('blur', function() {
+    const email = this.value;
+    fetch('/check_email', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': csrfToken  // 使用从 HTML 传递的 CSRF 令牌
+        },
+        body: new URLSearchParams({
+            'email': email
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        const emailWarning = document.getElementById('emailWarning');
+        if (data.exists) {
+            emailWarning.textContent = 'Email is already registered.';
+        } else {
+            emailWarning.textContent = '';
+        }
+    })
+    .catch(error => console.error('Error:', error));
+});
 
-// check if user name available
-//function checkUsername() {
-//    var username = document.getElementById('username').value;
-//    var usernameWarning = document.getElementById('usernameWarning');
-
-//    fetch(`/check_username?username=${encodeURIComponent(username)}`)
-//    .then(response => response.json())
-//    .then(data => {
-//        if(data.status === 'taken') {
-//            usernameWarning.textContent = 'This username is already taken, please choose a different one.';
-//        } else {
-//            usernameWarning.textContent = '';
-//        }
-//    })
-//    .catch(error => {
-//        console.error('Request failed:', error);
-//        usernameWarning.textContent = 'Request error, please try again later.';
-//    });
-//}
-
-// check if password match previous one
-function checkPasswordsMatch() {
-    var password = document.getElementById('password').value;
-    var confirmPassword = document.getElementById('confirmPassword').value;
-    var message = document.getElementById('matchMessage');
+document.getElementById('confirmPassword').addEventListener('keyup', function() {
+    const password = document.getElementById('password').value;
+    const confirmPassword = this.value;
+    const matchMessage = document.getElementById('matchMessage');
 
     if (password === confirmPassword) {
-        message.textContent = 'Passwords match.';
-        message.style.color = 'green';
+        matchMessage.textContent = 'Passwords match.';
+        matchMessage.style.color = 'green';
     } else {
-        message.textContent = 'Passwords do not match.';
-        message.style.color = 'red';
+        matchMessage.textContent = 'Passwords do not match.';
+        matchMessage.style.color = 'red';
     }
-}
+});
 
-
-
- 
-
-
-
-
+document.getElementById('username').addEventListener('blur', function() {
+    const username = this.value;
+    fetch('/check_username', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': csrfToken  // 使用从 HTML 传递的 CSRF 令牌
+        },
+        body: new URLSearchParams({
+            'username': username
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        const usernameWarning = document.getElementById('usernameWarning');
+        if (data.exists) {
+            usernameWarning.textContent = 'Username is already taken.';
+        } else {
+            usernameWarning.textContent = '';
+        }
+    })
+    .catch(error => console.error('Error:', error));
+});
