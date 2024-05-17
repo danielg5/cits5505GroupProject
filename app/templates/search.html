@@ -24,9 +24,16 @@
         <form action="{{ url_for('search') }}" method="post">
             {{ form.hidden_tag() }}
             <div class="search-bar">
-                {{ form.search_option }}
+                {{ form.search_option() }} <!-- Corrected this line -->
                 <span class="search-filter-label">Search filter:</span>
                 {{ form.search_query(size=32) }}
+                {% if form.search_query.errors %}
+                    <ul class="errors">
+                        {% for error in form.search_query.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
                 {{ form.submit() }}
             </div>
         </form>
@@ -34,12 +41,11 @@
     <div class="search-results">
         {% if search_results %}
             {% for theme in search_results %}
-            <div class="theme-row">
-                <!-- Clickable theme and creator sending parameters to /game -->
-                <a href="{{ url_for('game', creator=theme.person.username, theme=theme.theme) }}">
-                    <strong>{{ theme.theme }}</strong> - <em>{{ theme.person.username }}</em>
-                </a>
-            </div>
+                <div class="theme-row">
+                    <a href="{{ url_for('game', creator=theme.person.username, theme=theme.theme) }}">
+                        <strong>{{ theme.theme }}</strong> - <em>{{ theme.person.username }}</em>
+                    </a>
+                </div>
             {% endfor %}
         {% else %}
             <p>No results found.</p>

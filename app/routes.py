@@ -128,17 +128,17 @@ def search():
     form = SearchForm()
     results = []
     if form.validate_on_submit():
-        search_query = form.search_query.data
+        search_query = form.search_query.data.strip()
         search_option = form.search_option.data
 
         if search_option == 'user':
-            user = Person.query.filter_by(username=search_query).first()
-            if user:
-                results = user.themes
-            else:
-                results = []
+            user = Person.query.filter(Person.username.ilike(search_query)).first()
+            results = user.themes if user else []
         elif search_option == 'theme':
-            results = Theme.query.filter(Theme.theme.like(f'%{search_query}%')).all()
+            results = Theme.query.filter(Theme.theme.ilike(f'%{search_query}%')).all()
+    else:
+        # Load default results, could be all themes or the most recent ones etc.
+        results = Theme.query.order_by(Theme.id.desc()).all()  # Example: Get all themes
 
     return render_template('search.html', form=form, search_results=results, username=current_user.username)
 
