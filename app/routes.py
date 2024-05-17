@@ -1,4 +1,4 @@
-from flask import flash, session, redirect, render_template, request, url_for
+from flask import flash, session, redirect, render_template, request, url_for, g, jsonify
 from flask_login import current_user, login_required, login_user, logout_user
 from app import flaskApp, db
 from app.controllers import *
@@ -6,7 +6,8 @@ from app.gameplay import get_filename
 from typing import List
 from app.model import Person, Theme
 from app.forms import ThemeForm, SearchForm
-import json, os 
+import json, os
+
 
 
 # create directory for temp player files if it does not exist
@@ -58,6 +59,23 @@ def signup():
             flash('Invalid email or password')
     return render_template('signup.html')
 
+# check if email exists
+@flaskApp.route('/check_email', methods=['POST'])
+def check_email():
+    email = request.json.get('email')
+    if check_email_exists(email):
+        return jsonify({'exists': True})
+    else:
+        return jsonify({'exists': False})
+
+@flaskApp.route('/check_username', methods=['POST'])
+def check_username():
+    username = request.json.get('username')
+    if check_username_exists(username):
+        return jsonify({'exists': True})
+    else:
+        return jsonify({'exists': False})
+    
 #@flaskApp.route('/test')
 #@login_required
 #def test():
@@ -92,14 +110,15 @@ def signup():
 def menu():
     return render_template('menu.html')
 
-#@flaskApp.route('/leaderboard')
-#@login_required
-#def leaderboard():
-#    return render_template('leaderboard.html')
+@flaskApp.route('/leaderboard')
+@login_required
+def leaderboard():
+    return render_template('leaderboard.html')
 
-#@flaskApp.route('/profile')
-#@login_required
-#def profile():
+@flaskApp.route('/profile')
+@login_required
+def profile():
+    return render_template('profile.html')
 #    return render_template('profile.html')
 
 
@@ -109,19 +128,19 @@ def search():
     form = SearchForm()
     results = []
     if form.validate_on_submit():
-        search_query = form.search_query.data
+        search_query = form.search_query.data.strip()
         search_option = form.search_option.data
 
         if search_option == 'user':
-            user = Person.query.filter_by(username=search_query).first()
-            if user:
-                results = user.themes
-            else:
-                results = []
+            user = Person.query.filter(Person.username.ilike(search_query)).first()
+            results = user.themes if user else []
         elif search_option == 'theme':
-            results = Theme.query.filter(Theme.theme.like(f'%{search_query}%')).all()
+            results = Theme.query.filter(Theme.theme.ilike(f'%{search_query}%')).all()
+    else:
+        # Load default results, could be all themes or the most recent ones etc.
+        results = Theme.query.order_by(Theme.id.desc()).all()  # Example: Get all themes
 
-    return render_template('search.html', form=form, search_results=results, username=current_user.username)
+    return render_template('search.html', form=form, search_results=results, logged_in_username=current_user.username)
 
 @flaskApp.route('/create', methods=['GET', 'POST'])
 @login_required
@@ -148,7 +167,7 @@ def create():
         flash('Theme created successfully!', 'success')
         return redirect(url_for('search'))  # Adjust to your valid endpoint for redirect
     # Pass the username from current_user if available in your user model
-    return render_template('create.html', form=form, logged_in_username=current_user.username if current_user else 'Guest')
+    return render_template('create.html', form=form, username=current_user.username if current_user else 'Guest')
 
 @flaskApp.route('/random')
 #@login_required
