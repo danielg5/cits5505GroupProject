@@ -53,7 +53,10 @@
       <button type="button" onclick="submitGuess()">Submit</button>
     </div>
     <div id="guessTableNode"></div>
-<script> let sLength = Number.parseInt('{{ length|safe }}'); </script>
+<script> 
+   let sLength = Number.parseInt('{{ length|safe }}'); 
+   console.log('sLength:', sLength);
+</script>
 </div>     
 </body>
 </html>

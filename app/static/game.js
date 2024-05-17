@@ -6,23 +6,29 @@
 function submitGuess() {
   let guessWord = document.getElementById("guessWord").value;
   let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-  $.ajax({
+  let secretLength = sLength; // from game.html
+  console.log("Secret length: " + secretLength);
+  console.log(typeof secretLength); 
+  if (secretLength == guessWord.length){
+    $.ajax({
       type: "POST",
       url: "/process_guess",
       data: JSON.stringify({ guess_word: guessWord }),
       contentType: "application/json; charset=utf-8",
       beforeSend: function(xhr) {
-          xhr.setRequestHeader("X-CSRF-Token", csrfToken);
+        xhr.setRequestHeader("X-CSRF-Token", csrfToken);
       },
       success: function(response) {
-          console.log('Response:', response);
-          playGame(guessWord, response);
+        console.log('Response:', response);
+        playGame(guessWord, response);
       },
       error: function(xhr, status, error) {
-          console.error('Error:', error);
+        console.error('Error:', error);
       }
-  });
+    });
+  } else {
+    alert("Guess word must be " + secretLength + " characters long!");
+  }
 }
 
 

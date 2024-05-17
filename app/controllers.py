@@ -1,6 +1,11 @@
 import random
 from app import flaskApp, db  # delete flaskApp if not required
 from app.model import Person, Theme, GuessedWord
+import logging
+
+# logging guessed_already flag
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s - %(levelname)s - %(message)s')
 
 ###########################################################
 # Functions for new_user, password
@@ -134,21 +139,46 @@ def get_random_theme():
     return random_theme.person.username, random_theme.theme
 
 def get_random_word(player, creator, theme):
-    # get a random word from the theme words not guessed before
-    # if all words guessed, pick any word from the theme words
+    logging.debug("Fetching theme words and guessed words.")
     theme_words_list = get_theme_words(creator, theme)
     guessed_words = get_guessed_words(player)
-    temp_list = theme_words_list[:] # make a shallow copy of theme words list
-    # remove previously guessed words from theme list
+
+    logging.debug(f"Theme words: {theme_words_list}")
+    logging.debug(f"Guessed words: {guessed_words}")
+    
+    guessed_list = [] # list of guessed words
+    for guessed_word in guessed_words:
+        guessed_list.append(guessed_word.guessed_word)
+
+    logging.debug(f"Guessed words list: {guessed_list}")
+
+    temp_list = theme_words_list[:]  # make a shallow copy of theme words list
+    #temp_list =[]
+    #for word in theme_words_list:
+    #    temp_list.append(word)
+
+    # Remove previously guessed words from theme list
     for theme_word in theme_words_list:
-        for guessed_word in guessed_words:
-            if guessed_word == theme_word and temp_list:
-                temp_list.remove(theme_word) # remove guessed word from theme words list
+        for guessed_word in guessed_list:
+            logging.debug(f"theme_word : {theme_word}")
+            logging.debug(f"guessed_word : {guessed_word}")
+            logging.debug(f"temp_list : {temp_list}")
+            #if theme_word == guessed_word and temp_list:
+            if theme_word == guessed_word:
+                try:
+                    temp_list.remove(theme_word) # remove guessed word from theme words list
+                    logging.debug(f"Removed {theme_word} from temp_list")
+                except:
+                    logging.debug(f"Already removed {theme_word} from temp_list")
     random_word = None
     guessed_already = False
     if temp_list:
         random_word = random.choice(temp_list)
+        logging.debug(f"Selected word from temp_list: {random_word}")
     else:
         random_word = random.choice(theme_words_list)
         guessed_already = True
+        logging.debug(f"No unguessed words left. Selected from all words: {random_word}")
+
+    logging.debug(f"Returning word: {random_word}, Guessed already: {guessed_already}")
     return random_word, guessed_already
