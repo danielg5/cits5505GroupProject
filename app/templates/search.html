@@ -16,18 +16,18 @@
             <h1>Super Wordle Game</h1>
             <br>
             <div class="welcome-text">Welcome to the word guessing game!</div>
-            <div class="username">Username: JohnDoe</div>
+            <div class="username">Player: {{ username }}</div>
         </div>
     </div>
     <div class="search-container">
         <h2>Search Themes</h2>
         <form action="{{ url_for('search') }}" method="post">
+            {{ form.hidden_tag() }}
             <div class="search-bar">
-                <label><input type="radio" name="searchOption" value="user" {{ 'checked' if search_option == 'user' else '' }}> User</label>
-                <label><input type="radio" name="searchOption" value="theme" {{ 'checked' if search_option == 'theme' else '' }}> Theme</label>
+                {{ form.search_option }}
                 <span class="search-filter-label">Search filter:</span>
-                <input type="text" name="search_query" placeholder="Enter search terms" value="{{ search_query|default('') }}">
-                <button type="submit">Search</button>
+                {{ form.search_query(size=32) }}
+                {{ form.submit() }}
             </div>
         </form>
     </div>
