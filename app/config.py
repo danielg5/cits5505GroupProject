@@ -9,5 +9,3 @@ class Config(object):
     # environment variable FLASK_SECRET_KEY
     # TODO: set SECRET_KEY value each time on system startup on server
     SECRET_KEY = os.environ.get("FLASK_SECRET_KEY")
-    PERMANENT_SESSION_LIFETIME = timedelta(hours=1)
-    REMEMBER_COOKIE_DURATION = timedelta(days=14)

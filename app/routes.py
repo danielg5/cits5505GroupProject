@@ -33,9 +33,11 @@ def index():
     return render_template('index.html')
 
 def logout():
-    # logout user
     logout_user()
-    return redirect(url_for('index'))       
+    session.clear()
+    flash('You have been successfully logged out.')
+    return redirect(url_for('index'))
+
 
 @flaskApp.route('/signup', methods=['GET', 'POST'])
 def signup():

@@ -9,8 +9,8 @@
 <body>
     <div class="header-container">
         <div class="container1">
-            <button class="logout-btn">Logout</button>
-            <button class="back-btn">Back</button>
+            <button class="logout-btn" onclick="location.href='{{ url_for('index') }}'">Logout</button>
+            <button class="back-btn" onclick="history.back()">Back</button>
         </div>
         <div class="container2">
             <h1>Super Wordle Game</h1>
