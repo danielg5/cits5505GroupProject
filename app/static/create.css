@@ -82,3 +82,9 @@ body {
     color: white;
     font-size: 16px;
 }
+
+.errors li {
+    color: red;
+    font-size: 0.8em;
+    margin-top: 5px;
+}

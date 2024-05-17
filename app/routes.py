@@ -140,7 +140,7 @@ def search():
         # Load default results, could be all themes or the most recent ones etc.
         results = Theme.query.order_by(Theme.id.desc()).all()  # Example: Get all themes
 
-    return render_template('search.html', form=form, search_results=results, username=current_user.username)
+    return render_template('search.html', form=form, search_results=results, logged_in_username=current_user.username)
 
 @flaskApp.route('/create', methods=['GET', 'POST'])
 @login_required

@@ -5,18 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Super Wordle Game</title>
     <link rel="stylesheet" href="../static/search.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const errors = document.querySelector('.errors');
+            if (errors && errors.innerHTML.trim().length > 0) {
+                // You can customize the error message directly here
+                const customErrorMessage = "Please enter only alphabetic characters and numbers.";
+
+                const errorContainer = document.createElement('div');
+                errorContainer.textContent = customErrorMessage;  // Set the custom error message text
+                errorContainer.className = 'popup-error'; // Use a class for styling
+                errorContainer.style.position = 'absolute';
+                errorContainer.style.backgroundColor = 'rgba(255, 100, 100, 0.9)';
+                errorContainer.style.color = 'white';
+                errorContainer.style.padding = '10px';
+                errorContainer.style.borderRadius = '5px';
+                errorContainer.style.top = '100px'; // Adjust based on your layout
+                errorContainer.style.left = '50%';
+                errorContainer.style.transform = 'translateX(-50%)';
+                errorContainer.style.zIndex = '1000';
+                errorContainer.style.width = 'fit-content';
+                errorContainer.style.textAlign = 'center';
+                document.body.appendChild(errorContainer);
+
+                setTimeout(function() {
+                    errorContainer.style.display = 'none';
+                }, 5000); // Dismiss the error pop-up after 5 seconds
+            }
+        });
+    </script>
 </head>
 <body>
     <div class="header-container">
         <div class="container1">
             <button class="logout-btn" onclick="location.href='{{ url_for('logout') }}'">Logout</button>
-            <button class="back-btn" onclick="history.back()">Back</button>
+            <button class="back-btn" onclick="location.href='{{ url_for('menu') }}'">Back</button>
         </div>
         <div class="container2">
             <h1>Super Wordle Game</h1>
             <br>
             <div class="welcome-text">Welcome to the word guessing game!</div>
-            <div class="username">Player: {{ username }}</div>
+            <div class="username">Player: {{ logged_in_username }}</div>
         </div>
     </div>
     <div class="search-container">
@@ -24,17 +53,16 @@
         <form action="{{ url_for('search') }}" method="post">
             {{ form.hidden_tag() }}
             <div class="search-bar">
-                {{ form.search_option() }} <!-- Corrected this line -->
+                {{ form.search_option() }}
                 <span class="search-filter-label">Search filter:</span>
                 {{ form.search_query(size=32) }}
-                {% if form.search_query.errors %}
-                    <ul class="errors">
-                        {% for error in form.search_query.errors %}
-                            <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
                 {{ form.submit() }}
+                <!-- Hidden errors for backend validation, not displayed directly -->
+                <div class="errors" style="display: none;">
+                    {% for error in form.search_query.errors %}
+                        <div>{{ error }}</div>
+                    {% endfor %}
+                </div>
             </div>
         </form>
     </div>

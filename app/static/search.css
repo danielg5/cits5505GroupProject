@@ -85,8 +85,3 @@ input[type="text"] {
     display: none;
     width: 100%;
 }
-
-.errors li {
-    color: red;
-    font-size: 0.8em;
-}

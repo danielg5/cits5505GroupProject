@@ -35,6 +35,16 @@
             <div class="form-row">{{ form.word10.label }} {{ form.word10(size=20) }}</div>
             <div class="form-buttons">
                 <button type="submit" class="form-button">Submit Theme</button>
+                <!-- Display errors below the submit button -->
+                {% if form.errors %}
+                    <ul class="errors">
+                        {% for field, errors in form.errors.items() %}
+                            {% for error in errors %}
+                                <li><strong>{{ form[field].label.text }}:</strong> {{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                {% endif %}
             </div>
         </form>
     </div>
