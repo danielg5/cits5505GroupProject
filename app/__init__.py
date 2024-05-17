@@ -22,5 +22,3 @@ from app.model import Person
 def load_user(id):
     return Person.query.get(int(id))
 
-def before_request():
-    g.user = current_user

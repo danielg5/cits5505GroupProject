@@ -148,9 +148,9 @@ button{
 
 .headerstyle {
     font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
-    color: blueviolet;
+    color: #24c0a1;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 40px;
     display: flex;
     list-style: none;
 }
