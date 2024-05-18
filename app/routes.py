@@ -169,6 +169,7 @@ def create():
     # Pass the username from current_user if available in your user model
     return render_template('create.html', form=form, username=current_user.username if current_user else 'Guest')
 
+""" Function for random game initialisation"""
 @flaskApp.route('/random')
 #@login_required
 def random():

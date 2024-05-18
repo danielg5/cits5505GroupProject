@@ -146,10 +146,10 @@ function setupDiceAnimation() {
             diceInterval = setInterval(changeDiceIcon, 300);
         });
 
-        // On click, stop animation and redirect
+        // On click, stop animation and redirect to /random
         playButton.addEventListener('click', () => {
             clearInterval(diceInterval);
-            location.href = 'game.html?type=random'; // TO DO: Needs to be handled in JavaScript (AJAX request, Flask routes and views.py)
+            location.href = '/random';
         });
     }
 }
