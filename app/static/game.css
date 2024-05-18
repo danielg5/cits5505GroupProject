@@ -19,18 +19,20 @@ body {
   align-items: flex-start;
 }
 
-.logout-btn, .back-btn {
-  margin-bottom: 10px; /* Space between buttons */
-  padding: 10px 20px;
-  background-color: #007bff; /* Bootstrap primary blue */
+.logout-btn, .back-btn, button {
+  border-radius: 20px;
+  border: 1px solid #760abe;
+  background-color:#760abe;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  margin-left: 90px;
   color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
 .button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #6145c6; /* Darker blue on hover */
 }
 
 .container {
@@ -57,7 +59,7 @@ body {
 }
 
 #guessWord {
-  width: 40%;
+  width: 60%;
   padding: 8px;
   border: 2px solid #ccc;
   border-radius: 4px;
@@ -73,3 +75,69 @@ body {
   color: #333;
   margin-top: 10px;
 }
+
+/* Game Styling */
+
+.header-content {
+  text-align: center;
+  flex-grow: 1; /* Takes available space, pushes logout button to end */
+  font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; /* Font for header */
+  color: #24c0a1; /* Color for header*/
+  font-weight: bold;
+}
+
+.header-body, h3, h4, label, caption {
+  text-align: center;
+  flex-grow: 1; /* Takes available space, pushes logout button to end */
+  font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; /* Font for header */
+  color: #000000; /* Color for header/*/
+}
+
+
+#themeWord, #currentUserTitle {
+  color: slateblue;
+}
+
+#overGame {
+  color: red;
+}
+
+#wonGame {
+  color: green;
+}
+
+.guessTag, .correctTag, .misplacedTag, .incorrectTag, #overGame,
+  #wonGame, label, h1, h3, h4 {
+  text-align: center;
+}
+
+.correctTag, .misplacedTag, .incorrectTag {
+  font-size: 20px;
+  height: 20px;
+  width: 20px;
+}
+
+.correctTag {
+  background-color: lightgreen;
+}
+
+.misplacedTag {
+  background-color: yellow;
+}
+
+.incorrectTag {
+  background-color: lightgray;
+}
+
+.guessTag {
+  background-color: white;
+  width: 60px;
+  margin: auto;
+}
+
+/* center guess table */
+#guessTableNode table, button {
+  margin-left: auto;
+  margin-right: auto;
+}
+
