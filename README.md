@@ -70,11 +70,21 @@ export FLASK_SECRET_KEY='insert_your_custom_string_between_the_single_quotes'
 6. Verify SECRET_KEY in flask shell:
 print(app.config['SECRET_KEY'])
 
-7. Test in Flask development server:
+7. Create 'app.db' database. In parent directory of 'app/', enter commands using terminal:
+flask db init
+flask db migrate -m "Create Person, GuessedWord and Theme Tables"
+flask db upgrade
+
+8. Populate 'app.db' with instances of test data from test_data.py. In parent directory of 'app/', run flask shell and enter command:
+import app.test_data
+
+9. Test in Flask development server:
 flask run
 
-8. Open local host server:
+10. Open local host server:
 http://127.0.0.1:5000
+
+11. Register a new user account on the signup page (e.g. email: bob@email.com, password: password, user: bob) to gain access to the web application. The new user account can be used for subsequent login sessions.
 
 
 ***5. Instructions for Running Tests on Application***
