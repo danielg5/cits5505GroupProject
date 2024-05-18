@@ -32,10 +32,38 @@ Users can create a list of ten words with a specific theme, e.g. beach theme [sh
 
 ***3. Summary of Application Architecture***
 TODO To complete
+The application consists of:
+1. index - login page, to login with previously registered account
+2. signup - signup page, to register a new account
+3. menu - menu page, provide option to: (i) start a random game, from any user and theme; (ii) view leaderboard of player scores; (iii) search themes created by other users to play; (iv) create a theme for other players to play.
 
 
 ***4. Instructions to Launch Application***
 TODO To complete
+1. After completing a git pull of repository. 
+
+2. Create a Python environment in Ubuntu 22.04: 
+sudo apt-get install python3-pip
+sudo apt-get install python3-venv
+python3 -m venv venv_project2. 
+
+3. Activate Python environment: 
+source venv_project2/bin/activate
+
+4. Install required programs:
+pip install -r requirements.txt
+
+5. Install Flask secret key in Ubuntu terminal:
+export FLASK_SECRET_KEY='insert_your_custom_string_between_the_single_quotes'
+
+6. Verify SECRET_KEY in flask shell:
+print(app.config['SECRET_KEY'])
+
+7. Test in Flask development server:
+flask run
+
+8. Open local host server:
+http://127.0.0.1:5000
 
 
 ***5. Instructions for Running Tests on Application***
