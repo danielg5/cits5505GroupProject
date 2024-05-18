@@ -15,17 +15,19 @@ const initTooltips = () => {
 };
 
 
-/* Set username
-
-TO DO : Placeholder
-
-*/ 
-const setUsername = () => {
-    const usernameElement = document.getElementById('username');
-    if (usernameElement) {
-        usernameElement.textContent = 'YourUsername'; // TODO: Replace 'YourUsername' from database
-    }
+/* Get username*/ 
+const fetchUsername = () => {
+    fetch('/get_username')
+        .then(response => response.json())
+        .then(data => {
+            const usernameElement = document.getElementById('username');
+            if (usernameElement && data.username) {
+                usernameElement.textContent = data.username;
+            }
+        })
+        .catch(error => console.error('Error fetching username:', error));
 };
+
 
 /* SuperWordle animation */
 const setupSuperWordleAnimation = () => {
@@ -156,7 +158,7 @@ function setupDiceAnimation() {
 // Event listeners when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
     initTooltips();
-    setUsername();
+    fetchUsername(); // get username
     setupSuperWordleAnimation();
     setupDiceAnimation();
     document.querySelector('.logout-button btn btn-primary')?.addEventListener('click', logout); // logout

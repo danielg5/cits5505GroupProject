@@ -12,17 +12,18 @@
     <div class="main-container">
         <header>
             <div class="header-content">
-                <h1><b>SUPER WORDLE</b></h1>
+                <!-- <h1><b>SUPER WORDLE</b></h1> -->
+                <!-- Wordle Grid -->
+                <div class="wordle-animation">
+                    <div id="wordle-grid" class="d-grid gap-2 justify-content-center">
+                        <!-- JavaScript will generate Wordle grid here -->
+                    </div>
+            </div>
             </div>
             <div class ="header-body">
                 <h4>Welcome to the word guessing game</h4>
             </div>
-            <!-- Wordle Grid -->
-            <div class="wordle-animation">
-                <div id="wordle-grid" class="d-grid gap-2 justify-content-center">
-                    <!-- JavaScript will generate Wordle grid here -->
-                </div>
-            </div>
+            
             <!-- Logout button -->
             <button class="logout-button btn btn-primary"  title="Log me out" onclick="location.href='{{ url_for('logout') }}'">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-door-closed-fill" viewBox="0 0 16 16">
@@ -43,9 +44,9 @@
             
         </header>
         <div class="user-info">
-            <p>User: <a id="username" title="Username">Username</a></p>
-            <p>Email: <a id="useremail" title="Email">email@example.com</a></p>
-        </div>
+            <p>User: <span id="username" title="Username">Loading username...</span></p>
+            <p>Email: <span id="useremail" title="Email">Loading email...</span></p>
+        </div>       
         <nav>
             <!-- Change Email button -->
             <button class="btn btn-primary nav-button" id="changeEmailButton" title="Change my email" data-bs-toggle="modal" data-bs-target="#emailModal">
@@ -203,6 +204,6 @@
     </div>
     <!-- Include Bootstrap JS with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="profile.js"></script>
+    <script src="../static/profile.js"></script>
 </body>
 </html>

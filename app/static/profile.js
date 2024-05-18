@@ -5,24 +5,57 @@ Used for JavaScript functionality for profile.html
 
 */
 
-// Initialize tooltips for all elements with titles
+// Initialise tooltips for all elements with titles
 const initTooltips = () => {
     const tooltipTriggerList = [].slice.call(document.querySelectorAll('[title]'));
     const tooltipList = tooltipTriggerList.map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 };
 
 
-// Handle animation "SUPERWORDLE"
-const animateWord = () => {
-    const gridContainer = document.getElementById('wordle-grid');
-    const word = 'SUPERWORDLE';
-    const rows = 1;
-    const cols = word.length;
 
+/* Get username */ 
+const fetchUsername = () => {
+    fetch('/get_username')
+        .then(response => response.json())
+        .then(data => {
+            const usernameElement = document.getElementById('username');
+            if (usernameElement && data.username) {
+                usernameElement.textContent = data.username;
+            }
+        })
+        .catch(error => console.error('Error fetching username:', error));
+};
+
+/* Get email */
+const fetchEmail = () => {
+    fetch('/get_email')
+        .then(response => response.json())
+        .then(data => {
+            const emailElement = document.getElementById('useremail');
+            if (emailElement && data.email) {
+                emailElement.textContent = data.email;
+            }
+        })
+        .catch(error => console.error('Error fetching email:', error));
+};
+
+
+/* SuperWordle animation */
+const setupSuperWordleAnimation = () => {
+    const gridContainer = document.getElementById('wordle-grid');
+    if (!gridContainer) return;
+
+    const word = 'SUPERWORDLE';
+    const rows = 1;  // Display word in one row
+
+    // Clear content
+    gridContainer.innerHTML = '';
+
+    // Create grid
     for (let i = 0; i < rows; i++) {
         const row = document.createElement('div');
         row.className = 'd-flex justify-content-center';
-        for (let j = 0; j < cols; j++) {
+        for (let j = 0; j < word.length; j++) {
             const tile = document.createElement('div');
             tile.className = 'tile empty';
             row.appendChild(tile);
@@ -31,12 +64,40 @@ const animateWord = () => {
     }
 
     const tiles = document.querySelectorAll('.tile');
-    tiles.forEach((tile, index) => {
-        setTimeout(() => {
-            tile.classList.remove('empty');
-            tile.textContent = word[index];
-        }, 200 * index);
-    });
+    const animationDelay = 200;
+    const totalAnimationTime = word.length * animationDelay;
+
+    // Function animates tiles forward
+    const revealWord = () => {
+        tiles.forEach((tile, index) => {
+            setTimeout(() => {
+                tile.classList.remove('empty');
+                tile.textContent = word[index];
+            }, animationDelay * index);  // Animation delay
+        });
+    };
+
+    // Function animates tiles backward
+    const hideWord = () => {
+        Array.from(tiles).reverse().forEach((tile, index) => {
+            setTimeout(() => {
+                tile.classList.add('empty');
+                tile.textContent = '';
+            }, animationDelay * index);  // Animation delay
+        });
+    };
+
+    // Initial call to start animation
+    revealWord();
+
+    // Set up interval to repeat the animation sequence
+    setInterval(() => {
+        // Schedule the hide animation after the reveal completes and waits 1 second
+        setTimeout(hideWord, totalAnimationTime + 1000);
+
+        // Schedule the reveal to start again after the hide completes and waits another second
+        setTimeout(revealWord, 2 * totalAnimationTime + 2000);
+    }, 2 * totalAnimationTime + 2500);  // Total duration of a full cycle
 };
 
 // Fetch and update email functionality
@@ -171,12 +232,14 @@ function populateWordsList(words) {
 // Event listeners for DOMContentLoaded
 document.addEventListener("DOMContentLoaded", function() {
     initTooltips();
-    animateWord();
-    setupEmailForm();
-    setupPasswordForm();
+    setupSuperWordleAnimation();
+    //setupEmailForm();
+    //setupPasswordForm();
+    fetchUsername(); // get username
+    fetchEmail(); // get email
     document.querySelector('.logout-button btn btn-primary').addEventListener('click', logout); // logout
     document.querySelector('."back-button btn btn-primary').addEventListener('click', menu); // back to menu
-    setupMyThemesButton(); // TO DO
-    setupWordsCompletedButton(); // TO DO
-    document.getElementById('username').textContent = 'YourUsername'; // TODO Placeholder: Replace 'YourUsername' with database data
+    //setupMyThemesButton(); // TO DO
+    //setupWordsCompletedButton(); // TO DO
+    
 });

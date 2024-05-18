@@ -204,3 +204,21 @@ def game():
     json.dump(data, f)
     f.close()
     return render_template('game.html', length=len(data['secret']), theme=data['theme'], user=player, points=data['game_points'], guessLeft=len(data['secret']), guessedAlreadyJ=data['guessed_already'])
+
+
+
+''' Function returns username'''
+@flaskApp.route('/get_username', methods=['GET'])
+@login_required
+def get_username():
+    return jsonify(username=current_user.username)
+
+
+''' Function returns email'''
+@flaskApp.route('/get_email', methods=['GET'])
+@login_required
+def get_email():
+    if current_user.is_authenticated:
+        return jsonify(email=current_user.email)
+    else:
+        return jsonify(email="No user logged in"), 404
