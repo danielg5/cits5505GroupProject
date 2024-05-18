@@ -35,6 +35,9 @@ const setupSuperWordleAnimation = () => {
     const word = 'SUPERWORDLE';
     const rows = 1;  // Display word in one row
 
+    // Clear content
+    gridContainer.innerHTML = '';
+
     // Create grid
     for (let i = 0; i < rows; i++) {
         const row = document.createElement('div');
@@ -47,13 +50,41 @@ const setupSuperWordleAnimation = () => {
         gridContainer.appendChild(row);
     }
 
-    // Animate tiles to reveal word
-    document.querySelectorAll('.tile').forEach((tile, index) => {
-        setTimeout(() => {
-            tile.classList.remove('empty');
-            tile.textContent = word[index];
-        }, 200 * index);  // Animation delay
-    });
+    const tiles = document.querySelectorAll('.tile');
+    const animationDelay = 200;
+    const totalAnimationTime = word.length * animationDelay;
+
+    // Function animates tiles forward
+    const revealWord = () => {
+        tiles.forEach((tile, index) => {
+            setTimeout(() => {
+                tile.classList.remove('empty');
+                tile.textContent = word[index];
+            }, animationDelay * index);  // Animation delay
+        });
+    };
+
+    // Function animates tiles backward
+    const hideWord = () => {
+        Array.from(tiles).reverse().forEach((tile, index) => {
+            setTimeout(() => {
+                tile.classList.add('empty');
+                tile.textContent = '';
+            }, animationDelay * index);  // Animation delay
+        });
+    };
+
+    // Initial call to start animation
+    revealWord();
+
+    // Set up interval to repeat the animation sequence
+    setInterval(() => {
+        // Schedule the hide animation after the reveal completes and waits 1 second
+        setTimeout(hideWord, totalAnimationTime + 1000);
+
+        // Schedule the reveal to start again after the hide completes and waits another second
+        setTimeout(revealWord, 2 * totalAnimationTime + 2000);
+    }, 2 * totalAnimationTime + 2500);  // Total duration of a full cycle
 };
 
 /* Play a Random Game Dice Icon animation */
@@ -129,5 +160,4 @@ document.addEventListener("DOMContentLoaded", () => {
     setupSuperWordleAnimation();
     setupDiceAnimation();
     document.querySelector('.logout-button btn btn-primary')?.addEventListener('click', logout); // logout
-    document.querySelector('.logout-button btn btn-primary')?.addEventListener('click', logout);
 });

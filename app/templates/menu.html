@@ -11,18 +11,17 @@
 <body>
     <div class="main-container">
         <header>
-            <!---<button class="logout-btn" onclick="location.href='{{ url_for('logout') }}'">Logout</button>-->
             <div class="header-content">
-                <h1><b>SUPER WORDLE</b></h1>
-            </div>
-            <div class ="header-body">
-                <h4>Welcome to the word guessing game</h4>
-            </div>
             <!-- Wordle Grid -->
             <div class="wordle-animation">
                 <div id="wordle-grid" class="d-grid gap-2 justify-content-center">
                     <!-- JavaScript will generate Wordle grid here -->
                 </div>
+            </div>
+                <!-- <h1><b>SUPER WORDLE</b></h1>-->
+            </div>
+            <div class ="header-body">
+                <h4>Welcome to the word guessing game</h4>
             </div>
             <button class="logout-button btn btn-primary" onclick="location.href='{{ url_for('logout') }}'" title="Log me out">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-door-closed-fill" viewBox="0 0 16 16">
