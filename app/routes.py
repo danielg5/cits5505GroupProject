@@ -170,13 +170,13 @@ def create():
     return render_template('create.html', form=form, username=current_user.username if current_user else 'Guest')
 
 @flaskApp.route('/random')
-#@login_required
+@login_required
 def random():
     creator, theme = get_random_theme()
     return redirect(url_for('game', creator=creator, theme=theme))
 
 @flaskApp.route('/game', methods=['GET']) # need to receive username (theme creator) and theme
-#@login_required
+@login_required
 def game():
     # TODO: Need search.html to send creator and theme 
     creator = request.args.get('creator')
