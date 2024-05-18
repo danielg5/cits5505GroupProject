@@ -3,7 +3,7 @@ from app import flaskApp, db  # delete flaskApp if not required
 from app.model import Person, Theme, GuessedWord
 import logging
 
-# logging guessed_already flag
+# logging for get_random_word() when theme_word already removed from temp_list
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -153,6 +153,7 @@ def get_random_word(player, creator, theme):
             if theme_word == guessed_word:
                 try:
                     # remove guessed word from theme words list
+                    # cause error if theme_word already removed from temp_list
                     temp_list.remove(theme_word) 
                 except:
                     logging.debug(f"Already removed {theme_word} from temp_list")
