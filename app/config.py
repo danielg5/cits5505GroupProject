@@ -9,3 +9,9 @@ class Config(object):
     # environment variable FLASK_SECRET_KEY
     # TODO: set SECRET_KEY value each time on system startup on server
     SECRET_KEY = os.environ.get("FLASK_SECRET_KEY")
+
+class TestConfig(Config):
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'  # Use an in-memory SQLite database for tests
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    WTF_CSRF_ENABLED = False  # Disable CSRF for testing forms
