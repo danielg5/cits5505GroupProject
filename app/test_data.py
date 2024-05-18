@@ -6,7 +6,7 @@ i2 = Person(username='daniel', email='daniel@email.com', password_salt_hash='pas
 i3 = Person(username='max', email='max@email.com', password_salt_hash='passworD123', salt='salt', win_total=2, loss_total=2, points_total=8)
 i4 = Person(username='shuyu', email='shuyu@email.com', password_salt_hash='passworD123', salt='salt', win_total=1, loss_total=3, points_total=9)
 i5 = Theme(person_id=1, theme='beach', word1='shell', word2='sun', word3='sand', word4='surfboard', word5='fish', word6='starfish', word7='seaweed', word8='towel', word9='wave', word10='umbrella')
-i6 = Theme(person_id=1, theme='food', word1='pavlova', word2='cheesecake', word3='lasagna', word4='spaghetti', word5='hamburger', word6='biscuit', word7='croissant', word8='baguette', word9='avocado', word10='cantaloupe')
+i6 = Theme(person_id=1, theme='food', word1='pavova', word2='cheesecake', word3='lasagna', word4='spaghetti', word5='hamburger', word6='biscuit', word7='croissant', word8='baguette', word9='avocado', word10='cantaloupe')
 i7 = Theme(person_id=1, theme='country', word1='australia', word2='china', word3='brazil', word4='mexico', word5='malaysia',word6='germany', word7='france', word8='portugal', word9='spain', word10='indonesia')
 i8 = Theme(person_id=2, theme='nuts', word1='peanut', word2='almond', word3='cashew', word4='hazelnut', word5='walnut', word6='macadamia', word7='pecan', word8='pistachio', word9='bunya', word10='acorn')
 i9 = Theme(person_id=2, theme='cars', word1='mustang', word2='commodore', word3='ferrari', word4='ford', word5='holden', word6='limousine', word7='tesla', word8='opel', word9='toyota', word10='corolla')

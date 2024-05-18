@@ -11,20 +11,19 @@
 <body>
     <div class="main-container">
         <header>
-            <button class="logout-btn" onclick="location.href='{{ url_for('logout') }}'">Logout</button>
             <div class="header-content">
-                <h1><b>SUPER WORDLE</b></h1>
-            </div>
-            <div class ="header-body">
-                <h4>Welcome to the word guessing game</h4>
-            </div>
             <!-- Wordle Grid -->
             <div class="wordle-animation">
                 <div id="wordle-grid" class="d-grid gap-2 justify-content-center">
                     <!-- JavaScript will generate Wordle grid here -->
                 </div>
             </div>
-            <button class="logout-button btn btn-primary" onclick="location.href='{{ url_for('index') }}'" title="Log me out">
+                <!-- <h1><b>SUPER WORDLE</b></h1>-->
+            </div>
+            <div class ="header-body">
+                <h4>Welcome to the word guessing game</h4>
+            </div>
+            <button class="logout-button btn btn-primary" onclick="location.href='{{ url_for('logout') }}'" title="Log me out">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-door-closed-fill" viewBox="0 0 16 16">
                     <path d="M12 1a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2a1 1 0 0 1 1-1zm-2 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
                 </svg>
@@ -32,7 +31,7 @@
             </button>                         
         </header>
         <div class="user-info">
-            <p>User: <a href="profile.html" id="username" title="View my profile">Username</a></p>
+            <p>User Profile: <a href="#" id="username" title="View my profile" onclick="location.href='{{ url_for('profile') }}'">Username</a></p>
         </div>
         <nav>
             <!-- Play a Random Game button -->
@@ -42,7 +41,7 @@
             </button>
             
             <!-- High Scores button -->
-            <button class="btn btn-primary nav-button" id="highScoresButton" title="See the leaderboards" onclick="location.href='leaderboard.html'">
+            <button class="btn btn-primary nav-button" id="highScoresButton" title="See the leaderboards" onclick="location.href='{{ url_for('leaderboard') }}'">
                 <span class="trophy-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trophy-fill" viewBox="0 0 16 16">
                         <path d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5q0 .807-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33 33 0 0 1 2.5.5m.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935m10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935"/>
@@ -51,8 +50,8 @@
                 High Scores
             </button>
 
-             <!-- High Scores button -->
-             <button class="btn btn-primary nav-button" onclick="location.href='search.html'" id="searchThemesButton" title="Play a game using existing themes">
+             <!-- Search Themes button -->
+             <button class="btn btn-primary nav-button" onclick="location.href='{{ url_for('search') }}'" id="searchThemesButton" title="Play a game using existing themes">
                 <span class="search-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
@@ -62,7 +61,7 @@
             </button>
 
             <!-- Create a Theme button -->
-            <button class="btn btn-primary nav-button" onclick="location.href='create.html'" id="createThemeButton" title="Create a customised theme">
+            <button class="btn btn-primary nav-button" onclick="location.href='{{ url_for('create') }}'" id="createThemeButton" title="Create a customised theme">
                 <span class="createTheme-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-hammer" viewBox="0 0 16 16">
                         <path d="M9.972 2.508a.5.5 0 0 0-.16-.556l-.178-.129a5 5 0 0 0-2.076-.783C6.215.862 4.504 1.229 2.84 3.133H1.786a.5.5 0 0 0-.354.147L.146 4.567a.5.5 0 0 0 0 .706l2.571 2.579a.5.5 0 0 0 .708 0l1.286-1.29a.5.5 0 0 0 .146-.353V5.57l8.387 8.873A.5.5 0 0 0 14 14.5l1.5-1.5a.5.5 0 0 0 .017-.689l-9.129-8.63c.747-.456 1.772-.839 3.112-.839a.5.5 0 0 0 .472-.334"/>
@@ -92,11 +91,11 @@
                        <b> <u>Menu Options</u> </b>
                     </div>
                     <div class="modal-body">
-                        <b>Profile</b> - Click your username to visit your profile management page.<br>
-                        <b>Play a Random Game</b> - Play a random game of Super Wordle with a random theme now. <br>
-                        <b>High Scores</b> - See how you stack up! Check out the leaderboards to find your ranking.<br>
-                        <b>Search Themes</b> - Search for a custom theme to play a customised Super Wordle Game. <br> 
-                        <b>Create a Theme</b> - Create a custom theme so that others can play using your custom theme. <br>
+                        <b>👤User Profile</b> - Click your username to visit your profile management page.<br>
+                        <b>🎲Play a Random Game</b> - Play a random game of Super Wordle with a random theme now. <br>
+                        <b>🏅High Scores</b> - See how you stack up! Check out the leaderboards to find your ranking.<br>
+                        <b>🔍Search Themes</b> - Search for a custom theme to play a customised Super Wordle Game. <br> 
+                        <b>🛠️Create a Theme</b> - Create a custom theme so that others can play using your custom theme. <br>
                     </div>
                     <div class="modal-footer">
                         <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->

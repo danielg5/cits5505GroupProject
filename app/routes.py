@@ -170,6 +170,7 @@ def create():
     # Pass the username from current_user if available in your user model
     return render_template('create.html', form=form, username=current_user.username if current_user else 'Guest')
 
+""" Function for random game initialisation"""
 @flaskApp.route('/random')
 @login_required
 def random():
@@ -205,3 +206,43 @@ def game():
     json.dump(data, f)
     f.close()
     return render_template('game.html', length=len(data['secret']), theme=data['theme'], user=player, points=data['game_points'], guessLeft=len(data['secret']), guessedAlreadyJ=data['guessed_already'])
+
+
+
+''' Function returns username'''
+@flaskApp.route('/get_username', methods=['GET'])
+@login_required
+def get_username():
+    return jsonify(username=current_user.username)
+
+
+''' Function returns email'''
+@flaskApp.route('/get_email', methods=['GET'])
+@login_required
+def get_email():
+    if current_user.is_authenticated:
+        return jsonify(email=current_user.email)
+    else:
+        return jsonify(email="No user logged in"), 404
+
+"""
+    Fetches and returns leaderboard data sorted by total points in descending order.
+
+    Leaderboard includes rank, username, total points, win rate, and total games played for each user.
+    Win rate is calculated as percentage of games won out of total games played.
+    Only users with at least one game played are considered for win rate calculation. """
+
+@flaskApp.route('/api/leaderboard', methods=['GET'])
+@login_required
+def leaderboard_data():
+    leaderboard = Person.query.order_by(Person.points_total.desc()).all()
+    data = [
+        {
+            "rank": idx + 1,
+            "username": player.username,
+            "points": player.points_total,
+            "win_rate": f"{(player.win_total / (player.win_total + player.loss_total) * 100) if player.win_total + player.loss_total > 0 else 0:.2f}%",
+            "games_played": player.win_total + player.loss_total
+        } for idx, player in enumerate(leaderboard)
+    ]
+    return jsonify(data)
