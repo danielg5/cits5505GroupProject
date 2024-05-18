@@ -33,9 +33,20 @@ Users can create a list of ten words with a specific theme, e.g. beach theme [sh
 ***3. Summary of Application Architecture***
 TODO To complete
 The application consists of:
-1. index - login page, to login with previously registered account
-2. signup - signup page, to register a new account
-3. menu - menu page, provide option to: (i) start a random game, from any user and theme; (ii) view leaderboard of player scores; (iii) search themes created by other users to play; (iv) create a theme for other players to play.
+1. Index page, to login with previously registered account.
+2. Signup page, to register a new account.
+3. Menu page, provide links to: 
+       - random game, from a random theme from any user
+       - view leaderboard of player scores
+       - search themes created by users
+       - create a theme for users to play
+4. Profile page, provide access to themes created by user or words previously guessed, or to change email or password. 
+5. Leaderboard (High Scores) page to view player statistics.
+6. Create page, to create custom theme of ten thematic words (up to 12 characters in length) for other users to play.
+7. Search page, to search in terms of user or theme names to play.
+8. Game page to play Wordle game. If the game is over or won, a new game will be started if the browser is refreshed. The game randomly selects words from the theme list that the player has not previously guessed. When a secret word is guessed, the word is saved to the player's list of previously guessed words. This is to ensure that points are not awarded for guessing the same word repeatedly. If the player has guessed words for all the words in the theme, then a "word previously guessed" game begins where no points are awarded.
+
+User data is stored in an SQLite database. Temporary gameplay data for each user is stored as a text file (one for each player) in 'app/temp/' which is over-writtten on the start of player's game.
 
 
 ***4. Instructions to Launch Application***
