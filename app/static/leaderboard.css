@@ -235,8 +235,8 @@ nav {
 }
 
 
-/* Back button styling */
-.back-button {
+/* Menu button styling */
+.menu-button {
     padding: 8px 16px;
     background-color: #636363; /* Black color */
     color: white;
@@ -248,16 +248,16 @@ nav {
     left: 10px; /* Distance from right of viewport */
     display: flex; /* Align SVG and text horizontally */
     align-items: center; /* Align SVG and text vertically */
-    overflow: hidden; /* So the back button animation doesn't go outside button */
+    overflow: hidden; /* So the menu button animation doesn't go outside button */
     transition: padding 0.8s ease; /* Smooth transition for padding changes */
 }
-.back-button:hover, .back-button:focus {
+.menu-button:hover, .menu-button:focus {
     background-color: #151515 !important; /* Darker shade on hover for user feedback */
     box-shadow: 0 0 8px #0000004d !important; /* Shadow on hover */
 }
 
-/*Back button animation */
-.back-button svg {
+/*Menu button animation */
+.menu-button svg {
     width: 20px;
     height: 20px;
     fill: currentColor;
@@ -275,6 +275,6 @@ nav {
         opacity: 1;
     }
 }
-.back-button:hover svg {
+.menu-button:hover svg {
     animation: wipeEffect 1.5s forwards infinite; /* Loop animation while hovered*/
 }

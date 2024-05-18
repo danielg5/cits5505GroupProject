@@ -14,26 +14,17 @@ const initTooltips = () => {
     tooltipTriggerList.forEach(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 };
 
-/* Handle user logout
-
-TO DO: Placeholder
-
-*/
-const logout = () => {
-    // TO DO: Add cleanup operations before logout - clear cookies
-    window.location.href = 'index.html';  // Redirect to index.html page after logout
-};
-
-/* Set username
-
-TO DO : Placeholder
-
-*/ 
-const setUsername = () => {
-    const usernameElement = document.getElementById('username');
-    if (usernameElement) {
-        usernameElement.textContent = 'YourUsername'; // TODO: Replace 'YourUsername' from database
-    }
+/* Get username*/ 
+const fetchUsername = () => {
+    fetch('/get_username')
+        .then(response => response.json())
+        .then(data => {
+            const usernameElement = document.getElementById('username');
+            if (usernameElement && data.username) {
+                usernameElement.textContent = data.username;
+            }
+        })
+        .catch(error => console.error('Error fetching username:', error));
 };
 
 /* SuperWordle animation */
@@ -43,6 +34,9 @@ const setupSuperWordleAnimation = () => {
 
     const word = 'SUPERWORDLE';
     const rows = 1;  // Display word in one row
+
+    // Clear content
+    gridContainer.innerHTML = '';
 
     // Create grid
     for (let i = 0; i < rows; i++) {
@@ -56,13 +50,41 @@ const setupSuperWordleAnimation = () => {
         gridContainer.appendChild(row);
     }
 
-    // Animate tiles to reveal word
-    document.querySelectorAll('.tile').forEach((tile, index) => {
-        setTimeout(() => {
-            tile.classList.remove('empty');
-            tile.textContent = word[index];
-        }, 200 * index);  // Animation delay
-    });
+    const tiles = document.querySelectorAll('.tile');
+    const animationDelay = 200;
+    const totalAnimationTime = word.length * animationDelay;
+
+    // Function animates tiles forward
+    const revealWord = () => {
+        tiles.forEach((tile, index) => {
+            setTimeout(() => {
+                tile.classList.remove('empty');
+                tile.textContent = word[index];
+            }, animationDelay * index);  // Animation delay
+        });
+    };
+
+    // Function animates tiles backward
+    const hideWord = () => {
+        Array.from(tiles).reverse().forEach((tile, index) => {
+            setTimeout(() => {
+                tile.classList.add('empty');
+                tile.textContent = '';
+            }, animationDelay * index);  // Animation delay
+        });
+    };
+
+    // Initial call to start animation
+    revealWord();
+
+    // Set up interval to repeat the animation sequence
+    setInterval(() => {
+        // Schedule the hide animation after the reveal completes and waits 1 second
+        setTimeout(hideWord, totalAnimationTime + 1000);
+
+        // Schedule the reveal to start again after the hide completes and waits another second
+        setTimeout(revealWord, 2 * totalAnimationTime + 2000);
+    }, 2 * totalAnimationTime + 2500);  // Total duration of a full cycle
 };
 
 
@@ -103,8 +125,8 @@ function goBack() {
 // Event listeners when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
     initTooltips();
-    setUsername();
+    fetchUsername(); // get username
     setupSuperWordleAnimation();
     fetchLeaderboardData();
-    document.querySelector('.logout-button')?.addEventListener('click', logout);
+    document.querySelector('.logout-button btn btn-primary')?.addEventListener('click', logout); // logout
 });
