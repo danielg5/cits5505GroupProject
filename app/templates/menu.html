@@ -11,7 +11,7 @@
 <body>
     <div class="main-container">
         <header>
-            <button class="logout-btn" onclick="location.href='{{ url_for('logout') }}'">Logout</button>
+            <!---<button class="logout-btn" onclick="location.href='{{ url_for('logout') }}'">Logout</button>-->
             <div class="header-content">
                 <h1><b>SUPER WORDLE</b></h1>
             </div>
@@ -24,7 +24,7 @@
                     <!-- JavaScript will generate Wordle grid here -->
                 </div>
             </div>
-            <button class="logout-button btn btn-primary" onclick="location.href='{{ url_for('index') }}'" title="Log me out">
+            <button class="logout-button btn btn-primary" onclick="location.href='{{ url_for('logout') }}'" title="Log me out">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-door-closed-fill" viewBox="0 0 16 16">
                     <path d="M12 1a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2a1 1 0 0 1 1-1zm-2 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
                 </svg>
@@ -32,7 +32,7 @@
             </button>                         
         </header>
         <div class="user-info">
-            <p>User: <a href="profile.html" id="username" title="View my profile">Username</a></p>
+            <p>User: <a href="#" id="username" title="View my profile"  onclick="location.href='{{ url_for('profile') }}'">Username</a></p>
         </div>
         <nav>
             <!-- Play a Random Game button -->

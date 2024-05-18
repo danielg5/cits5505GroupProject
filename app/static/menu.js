@@ -14,15 +14,6 @@ const initTooltips = () => {
     tooltipTriggerList.forEach(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 };
 
-/* Handle user logout
-
-TO DO: Placeholder
-
-*/
-const logout = () => {
-    // TO DO: Add cleanup operations before logout - clear cookies
-    window.location.href = 'index.html';  // Redirect to index.html page after logout
-};
 
 /* Set username
 
@@ -137,5 +128,6 @@ document.addEventListener("DOMContentLoaded", () => {
     setUsername();
     setupSuperWordleAnimation();
     setupDiceAnimation();
-    document.querySelector('.logout-button')?.addEventListener('click', logout);
+    document.querySelector('.logout-button btn btn-primary')?.addEventListener('click', logout); // logout
+    document.querySelector('.logout-button btn btn-primary')?.addEventListener('click', logout);
 });

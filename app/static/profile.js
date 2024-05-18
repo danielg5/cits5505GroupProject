@@ -11,12 +11,6 @@ const initTooltips = () => {
     const tooltipList = tooltipTriggerList.map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 };
 
-// TO DO: Handle user logout
-const logout = () => {
-    // Perform cleanup operations if necessary (clearing cookies)
-    // Redirect to index.html page after logout
-    window.location.href = 'index.html';
-};
 
 // Handle animation "SUPERWORDLE"
 const animateWord = () => {
@@ -173,10 +167,6 @@ function populateWordsList(words) {
     });
 }
 
-// Back button function
-function goBack() {
-    window.history.back(); // Browser's history stack to go back
-}
 
 // Event listeners for DOMContentLoaded
 document.addEventListener("DOMContentLoaded", function() {
@@ -184,7 +174,8 @@ document.addEventListener("DOMContentLoaded", function() {
     animateWord();
     setupEmailForm();
     setupPasswordForm();
-    document.querySelector('.logout-button').addEventListener('click', logout);
+    document.querySelector('.logout-button btn btn-primary').addEventListener('click', logout); // logout
+    document.querySelector('."back-button btn btn-primary').addEventListener('click', menu); // back to menu
     setupMyThemesButton(); // TO DO
     setupWordsCompletedButton(); // TO DO
     document.getElementById('username').textContent = 'YourUsername'; // TODO Placeholder: Replace 'YourUsername' with database data
