@@ -1,11 +1,11 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint
 
 auth = Blueprint('auth', __name__)
 
 @auth.route('/login')
 def login():
-    return jsonify({"message": "Login Page"})
+    return "Login Page"
 
 @auth.route('/logout')
 def logout():
-    return jsonify({"message": "Logout Page"})
+    return "Logout Page"
