@@ -94,7 +94,7 @@ body {
 }
 
 
-#themeWord, #currentUserTitle {
+#themeWord, #currentUserTitle, label {
   color: slateblue;
 }
 
