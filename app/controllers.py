@@ -11,6 +11,8 @@ logging.basicConfig(level=logging.DEBUG,
 # Functions for new_user, password
 #
 
+# TODO: function replaced by check_password() method in Person class
+# delete this function (on confirmation) when no longer required
 def check_password_hash(email, password):
     # return True if password matches, False otherwise
     user = Person.query.filter_by(email=email).first()
