@@ -5,7 +5,7 @@ from app.controllers import *
 from app.gameplay import get_filename
 from typing import List
 from app.model import Person, Theme
-from app.forms import ThemeForm, SearchForm
+from app.forms import ThemeForm, SearchForm, LoginForm, RegistrationForm
 import json, os
 
 
@@ -19,19 +19,20 @@ os.makedirs('./app/temp', exist_ok=True)
 
 @flaskApp.route('/', methods=['GET', 'POST'])
 def index():
-    # login user
-    if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
+    form = LoginForm()
+    if form.validate_on_submit():
+        email = form.email.data
+        password = form.password.data
         user = Person.get_user_by_email(email)
         if user and user.check_password(password, user.salt):
             login_user(user)
-            #return redirect(url_for('menu'))
             creator, theme = get_random_theme()
             return redirect(url_for('game', creator=creator, theme=theme))
         else:
             flash('Invalid email or password')
-    return render_template('index.html')
+    return render_template('index.html', form=form)
+
+
 
 @flaskApp.route('/logout', methods=['GET', 'POST'])
 @login_required
@@ -44,20 +45,20 @@ def logout():
 
 @flaskApp.route('/signup', methods=['GET', 'POST'])
 def signup():
-    if request.method == 'POST':
-        email = request.form['user_email']
-        password = request.form['user_pw']
-        username = request.form['username']
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        email = form.email.data
+        password = form.password.data
+        username = form.username.data
         add_new_user(username, email, password)
         user = Person.get_user_by_email(email)
         if user and user.check_password(password, user.salt):
             login_user(user)
-            #return redirect(url_for('menu'))
             creator, theme = get_random_theme()
             return redirect(url_for('game', creator=creator, theme=theme))
         else:
             flash('Invalid email or password')
-    return render_template('signup.html')
+    return render_template('signup.html', form=form)
 
 # check if email exists
 @flaskApp.route('/check_email', methods=['POST'])

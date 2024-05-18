@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const csrfToken = document.getElementById('csrf_token').value;
+    const csrfToken = document.querySelector('input[name="csrf_token"]').value;
 
     // Common function to check email existence
     function checkEmail(emailInput, feedbackElement) {
@@ -27,8 +27,34 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Common function to check username existence
+    function checkUsername(usernameInput, feedbackElement) {
+        const username = usernameInput.value;
+        if (username) {
+            fetch('/check_username', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify({ username: username })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.exists) {
+                    feedbackElement.style.display = 'block';
+                    usernameInput.classList.add('is-invalid');
+                } else {
+                    feedbackElement.style.display = 'none';
+                    usernameInput.classList.remove('is-invalid');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    }
+
     // Check email existence on index page
-    const loginEmailInput = document.getElementById('user_email');
+    const loginEmailInput = document.getElementById('email');
     if (loginEmailInput) {
         loginEmailInput.addEventListener('blur', function() {
             const feedback = document.getElementById('email-feedback');
@@ -40,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const signupEmailInput = document.getElementById('email');
     const usernameInput = document.getElementById('username');
     const passwordInput = document.getElementById('password');
-    const confirmPasswordInput = document.getElementById('confirmPassword');
+    const confirmPasswordInput = document.getElementById('confirm_password');
 
     if (signupEmailInput) {
         signupEmailInput.addEventListener('blur', function() {
@@ -49,27 +75,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         usernameInput.addEventListener('blur', function() {
-            const username = usernameInput.value;
-            if (username) {
-                fetch('/check_username', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': csrfToken
-                    },
-                    body: JSON.stringify({ username: username })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    const usernameWarning = document.getElementById('usernameWarning');
-                    if (data.exists) {
-                        usernameWarning.textContent = 'This username is already taken.';
-                    } else {
-                        usernameWarning.textContent = '';
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-            }
+            const usernameWarning = document.getElementById('usernameWarning');
+            checkUsername(usernameInput, usernameWarning);
         });
 
         confirmPasswordInput.addEventListener('keyup', function() {

@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, RadioField, SubmitField
-from wtforms.validators import DataRequired, Regexp
+from wtforms import StringField, RadioField, SubmitField, PasswordField
+from wtforms.validators import DataRequired, Regexp, Email, EqualTo
 
 class ThemeForm(FlaskForm):
     theme_name = StringField('Theme Name', validators=[
@@ -57,3 +57,15 @@ class SearchForm(FlaskForm):
     ])
     search_option = RadioField('Search Options', choices=[('user', 'User'), ('theme', 'Theme')], validators=[DataRequired()])
     submit = SubmitField('Search')
+
+class LoginForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Log in')
+
+class RegistrationForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
+    username = StringField('User Name', validators=[DataRequired()])
+    submit = SubmitField('Sign Up')   
