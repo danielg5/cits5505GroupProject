@@ -10,7 +10,7 @@ import logging
 # which will be corrected on win, subtract 1 from loss_total and add 1 to win_total
 
 @flaskApp.route('/process_guess', methods=['POST'])
-#@login_required
+@login_required
 def process_guess():
     # request data from client (game.html)
     data = request.get_json()

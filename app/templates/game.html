@@ -27,13 +27,13 @@
 </head>
 <body>
   <div class="container1">
-    <button class="logout-btn" onclick="location.href='{{ url_for('logout') }}'">Logout</button>
+    <button class="logout-btn" onclick="location.href='{{ url_for('logout') }}'">Logout</button><br>
     <button class="back-btn" onclick="location.href='{{ url_for('menu') }}'">Back</button>
   </div>
   <div class="container">
-    <h1>Super Wordle Game</h1>
-    <h3>Welcome to the word guessing game</h3>
-    <h3>User: {{ user }}</h3><br>    
+    <h1 class="headerstyle header-content">Super Wordle Game</h1>
+    <h3 class="header-body">Welcome to the word guessing game</h3>
+    <h3>User: <span id="currentUserTitle">{{ user }}</span></h3><br>    
     <div id="wordleTableNode">
       <table id="wordleTable">
         <caption><b>Theme Word: <span id="themeWord">{{ theme }}</span></b></caption>
@@ -53,9 +53,9 @@
     <h4 id="gameGuesses">(Guesses Remaining: {{ guessLeft }})</h4>
     <div id="guessInput">
       <label for="guessWord">Guess the word:</label><br>
-      <input id="guessWord" type="text" name="guess_word">
+      <input id="guessWord" type="text" name="guess_word"><br>
       <button type="button" onclick="submitGuess()">Submit</button>
-    </div>
+    </div><br>
     <div id="guessTableNode"></div>
 <script> 
   // save secret word length to a variable for use in game.js
