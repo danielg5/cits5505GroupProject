@@ -87,8 +87,33 @@ const setupSuperWordleAnimation = () => {
     }, 2 * totalAnimationTime + 2500);  // Total duration of a full cycle
 };
 
+/** fetch and display leaderboard */
+const fetchLeaderboardData = () => {
+    fetch('/api/leaderboard')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.getElementById('leaderboardData');
+            tableBody.innerHTML = '';  // Clear existing entries
+            data.forEach((item, index) => {
+                const row = `<tr>
+                                <td>${item.rank}</td>
+                                <td>${item.username}</td>
+                                <td>${item.points}</td>
+                                <td>${item.win_rate}</td>
+                                <td>${item.games_played}</td>
+                             </tr>`;
+                tableBody.innerHTML += row;
+            });
+        })
+        .catch(error => console.error('Error loading leaderboard:', error));
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+    fetchLeaderboardData(); // Fetch and display leaderboard
+});
 
 /* Get leaderboard data - placeholders*/
+/** 
 function fetchLeaderboardData() {
     fetch('path/to/your/api/endpoint')
     .then(response => response.json())
@@ -114,7 +139,7 @@ function populateLeaderboard(data) {
         winRateCell.textContent = `${item.winRate}%`;
         gamesPlayedCell.textContent = item.totalGames;
     });
-}
+} */
 
 // Back button function
 function goBack() {
@@ -127,6 +152,6 @@ document.addEventListener("DOMContentLoaded", () => {
     initTooltips();
     fetchUsername(); // get username
     setupSuperWordleAnimation();
-    fetchLeaderboardData();
+    fetchLeaderboardData(); //Fetch and display leaderboard
     document.querySelector('.logout-button btn btn-primary')?.addEventListener('click', logout); // logout
 });
