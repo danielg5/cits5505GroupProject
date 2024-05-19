@@ -25,7 +25,37 @@ body, html {
     margin-bottom: 20px;
 }
 
+/* Menu button styling */
+.menu-button {
+    padding: 8px 16px;
+    background-color: #636363; /* Black color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute; /* Absolute position on page */
+    top: 60px; /* Distance from top of viewport */
+    left: 10px; /* Distance from right of viewport */
+    display: flex; /* Align SVG and text horizontally */
+    align-items: center; /* Align SVG and text vertically */
+    overflow: hidden; /* So the menu button animation doesn't go outside button */
+    transition: padding 0.8s ease; /* Smooth transition for padding changes */
+}
+.menu-button:hover, .menu-button:focus {
+    background-color: #151515 !important; /* Darker shade on hover for user feedback */
+    box-shadow: 0 0 8px #0000004d !important; /* Shadow on hover */
+}
 
+/*Menu button animation */
+.menu-button svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+    margin-right: 10px; /* Space between the icon and the text */
+    transition: transform 0.5s ease-out; /* Smooth transition for transformation */
+}
+
+/* Logout button styling */
 .logout-button {
     padding: 8px 16px;
     background-color: #007bff; /* Blue color */
@@ -38,20 +68,7 @@ body, html {
     left: 10px; /* Distance from left of viewport */
     display: flex; /* Align SVG and text horizontally */
     align-items: center; /* Align SVG and text vertically */
-}
-
-.logout-button {
-    padding: 8px 16px;
-    background-color: #000000; /* Blue color */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    position: absolute; /* Absolute position on page */
-    top: 10px; /* Distance from top of viewport */
-    left: 10px; /* Distance from left of viewport */
-    display: flex; /* Align SVG and text horizontally */
-    align-items: center; /* Align SVG and text vertically */
+    transition: all 0.3s ease; /* Transition for smooth effects */
 }
 
 /* Welcome text and user info */
