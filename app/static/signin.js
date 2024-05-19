@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const csrfToken = document.querySelector('input[name="csrf_token"]').value;
 
     // Common function to check email existence
-    function checkEmail(emailInput, feedbackElement) {
+    function checkEmail(emailInput, feedbackElement, page="login") {
         const email = emailInput.value;
         if (email) {
             fetch('/check_email', {
@@ -15,12 +15,23 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(response => response.json())
             .then(data => {
-                if (!data.exists) {
-                    feedbackElement.style.display = 'block';
-                    emailInput.classList.add('is-invalid');
+                if (page === "login") {
+                    if (!data.exists) {
+                        feedbackElement.style.display = 'block';
+                        emailInput.classList.add('is-invalid');
+                    } else {
+                        feedbackElement.style.display = 'none';
+                        emailInput.classList.remove('is-invalid');
+                    }
+                    
                 } else {
-                    feedbackElement.style.display = 'none';
-                    emailInput.classList.remove('is-invalid');
+                    if (data.exists) {
+                        feedbackElement.style.display = 'block';
+                        emailInput.classList.add('is-invalid');
+                    } else {
+                        feedbackElement.style.display = 'none';
+                        emailInput.classList.remove('is-invalid');
+                    }
                 }
             })
             .catch(error => console.error('Error:', error));
@@ -71,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (signupEmailInput) {
         signupEmailInput.addEventListener('blur', function() {
             const emailWarning = document.getElementById('emailWarning');
-            checkEmail(signupEmailInput, emailWarning);
+            checkEmail(signupEmailInput, emailWarning, "signup");
         });
 
         usernameInput.addEventListener('blur', function() {
@@ -83,8 +94,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const matchMessage = document.getElementById('matchMessage');
             if (passwordInput.value !== confirmPasswordInput.value) {
                 matchMessage.textContent = 'Passwords do not match.';
+                matchMessage.style.display = 'block';
+                confirmPasswordInput.classList.add('is-invalid');
             } else {
                 matchMessage.textContent = '';
+                matchMessage.style.display = 'none';
+                confirmPasswordInput.classList.remove('is-invalid');
             }
         });
     }
