@@ -51,7 +51,7 @@
             <p>User Profile: <a href="#" id="username" onclick="location.href='{{ url_for('profile') }}'">Username</a></p>
         </div>
         <div class="search-container">
-            <h2>Search Themes</h2>
+            <h2>Search Themes</h2><br>
             <form class="theme-form" action="{{ url_for('search') }}" method="post">
                 {{ form.hidden_tag() }}
                 <label for="searchOption" class="search-filter-label">Search Filter</label>
@@ -59,7 +59,8 @@
                     {{ form.search_option() }}
                     <input type="text" id="search_query" name="search_query" size="32">
                     <button type="submit" class="form-button">Search</button>
-                </div>
+                </div><br>
+                <label for="searchOption" class="search-filter-label">Theme Name | Creator</label>
                 <div class="errors" style="display: none;">
                     {% for error in form.search_query.errors %}
                         <div>{{ error }}</div>
