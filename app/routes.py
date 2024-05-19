@@ -118,12 +118,18 @@ def menu():
 def leaderboard():
     return render_template('leaderboard.html')
 
-""" Profile and Change Email Form instance"""
-@flaskApp.route('/profile')
+""" Profile, Change Email Form instance"""
+@flaskApp.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-    form = ChangeEmailForm()  # Create an instance of form
-    return render_template('profile.html', form=form)  # Pass form
+    form = ChangeEmailForm(current_email=current_user.email)
+    if form.validate_on_submit():
+        if form.new_email.data != current_user.email:
+            current_user.email = form.new_email.data
+            db.session.commit()
+            flash('Your email has been updated successfully!', 'success')
+            return redirect(url_for('profile_success_modal'))  # Redirect to new modal showing success
+    return render_template('profile.html', form=form)
 
 
 
@@ -244,9 +250,9 @@ def leaderboard_data():
         {
             "rank": idx + 1,
             "username": player.username,
-            "points": player.points_total,
-            "win_rate": f"{(player.win_total / (player.win_total + player.loss_total) * 100) if player.win_total + player.loss_total > 0 else 0:.2f}%",
-            "games_played": player.win_total + player.loss_total
+            "points": int(player.points_total or 0),
+            "win_rate": f"{(int(player.win_total or 0) / (int(player.win_total or 0) + int(player.loss_total or 0)) * 100) if (player.win_total or 0) + (player.loss_total or 0) > 0 else 0:.2f}%",
+            "games_played": int(player.win_total or 0) + int(player.loss_total or 0)
         } for idx, player in enumerate(leaderboard)
     ]
     return jsonify(data)
@@ -266,3 +272,10 @@ def change_email():
             for err in errorMessages:
                 flash(f'Error in {fieldName}: {err}', 'error')
     return redirect(url_for('profile'))  # Redirect or re-render the form page
+
+""" Change Email modal """
+@flaskApp.route('/profile_success_modal')
+@login_required
+def profile_success_modal():
+    success = True  # TO DO, not currently working as expected.
+    return render_template('profile_success_modal.html', success=success)
