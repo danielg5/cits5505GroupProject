@@ -120,12 +120,20 @@ input[type="text"], select {
 
 .form-button {
     padding: 10px 20px;
-    background-color: #4CAF50;
+    background-color: #4CAF50; /* Green color */
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
 }
+
+.form-button:hover {
+    background-color: #45a049; /* Slightly darker green on hover */
+    transform: scale(1.05); /* Slightly increase size */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3); /* Soft shadow for depth */
+}
+
 
 .search-results {
     width: 100%;
