@@ -100,4 +100,3 @@ function prependRow(table, guessWord, resultArr, guessesRemain, secretLength, ga
       }
   }
 }
-
