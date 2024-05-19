@@ -233,12 +233,12 @@ function populateWordsList(words) {
 document.addEventListener("DOMContentLoaded", function() {
     initTooltips();
     setupSuperWordleAnimation();
-    //setupEmailForm();
-    //setupPasswordForm();
+    //setupEmailForm(); TO DO
+    //setupPasswordForm(); TO DO
     fetchUsername(); // get username
     fetchEmail(); // get email
     document.querySelector('.logout-button btn btn-primary').addEventListener('click', logout); // logout
-    document.querySelector('."back-button btn btn-primary').addEventListener('click', menu); // back to menu
+    document.querySelector('.back-button.btn.btn-primary').addEventListener('click', menu); // back to menu
     //setupMyThemesButton(); // TO DO
     //setupWordsCompletedButton(); // TO DO
     
