@@ -44,7 +44,7 @@ The application consists of:
 5. Leaderboard (High Scores) page to view player statistics.
 6. Create page, to create custom theme of ten thematic words (up to 12 characters in length) for other users to play.
 7. Search page, to search in terms of user or theme names to play.
-8. Game page to play Wordle game. If the game is over or won, a new game will be started if the browser is refreshed. The game randomly selects words from the theme list that the player has not previously guessed. When a secret word is guessed, the word is saved to the player's list of previously guessed words. This is to ensure that points are not awarded for guessing the same word repeatedly. If the player has guessed words for all the words in the theme, then a "word previously guessed" game begins where no points are awarded.
+8. Game page to play Wordle game. If the game is over or won, a new game will be started if the browser is refreshed. The game randomly selects words from the theme list that the player has not previously guessed. When a secret word is guessed, the word is saved to the player's list of previously guessed words. This is to ensure that points are not awarded for guessing the same word repeatedly. If the player has guessed words for all the words in the theme, then a "word previously guessed" game begins where no points are awarded, and player can continue to play to win or lose game. Each letter of secret word is worth a point and guess.
 
 User data is stored in an SQLite database. Temporary gameplay data for each user is stored as a text file (one for each player) in 'app/temp/' which is over-writtten on the start of player's game.
 
