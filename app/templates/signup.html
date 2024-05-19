@@ -24,6 +24,7 @@
             {{ form.hidden_tag() }}
             <div class="form-floating mb-3">
                 {{ form.email(class="custom-input", id="email", placeholder="Email") }}
+                <!-- check if email is valid -->
                 <div id="emailWarning" class="invalid-feedback">
                     {% for error in form.email.errors %}
                         <span>{{ error }}</span>
@@ -32,15 +33,17 @@
                 </div>
             </div>
             <div class="form-floating mb-3">
+                <!-- check if username is valid -->
                 {{ form.username(class="custom-input", id="username", placeholder="Username") }}
                 <div id="usernameWarning" class="invalid-feedback">
                     {% for error in form.username.errors %}
-                        <span>{{ error }}</span>
+                        <span>{{ error }}</span>    
                     {% endfor %}
                     <span>This username is already taken.</span>
                 </div>
             </div>
             <div class="form-floating mb-3">
+                <!-- check if password is valid -->
                 {{ form.password(class="custom-input", id="password", placeholder="Password") }}
                 <div id="password-feedback" class="invalid-feedback">
                     {% for error in form.password.errors %}
@@ -49,6 +52,7 @@
                 </div>
             </div>
             <div class="form-floating mb-3">
+                <!-- check if confirm password is valid -->
                 {{ form.confirm_password(class="custom-input", id="confirm_password", placeholder="Confirm Password") }}
                 <div id="matchMessage" class="invalid-feedback">
                     {% for error in form.confirm_password.errors %}

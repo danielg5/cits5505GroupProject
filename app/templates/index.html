@@ -23,6 +23,7 @@
             <form action="/" method="POST" id="login-form">
                 {{ form.hidden_tag() }}
                 <div class="form-floating mb-3">
+                    <!-- check if email is valid -->
                     {{ form.email(class="custom-input", id="email", placeholder="Email") }}
                     <div id="email-feedback" class="invalid-feedback">
                         {% for error in form.email.errors %}
@@ -32,6 +33,7 @@
                     </div>
                 </div>
                 <div class="form-floating">
+                    <!-- check if password is valid -->
                     {{ form.password(class="custom-input", id="password", placeholder="Password") }}
                     <div id="password-feedback" class="invalid-feedback">
                         {% for error in form.password.errors %}

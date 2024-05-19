@@ -134,16 +134,16 @@ body {
 
 .header-content {
     text-align: center;
-    flex-grow: 1; /* Takes available space, pushes logout button to end */
-    font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; /* Font for header */
-    color: #24c0a1; /* Color for header*/
+    flex-grow: 1; 
+    font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; 
+    color: #24c0a1;
     font-weight: bold;
 }
 .header-body {
     text-align: center;
     flex-grow: 1; /* Takes available space, pushes logout button to end */
-    font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; /* Font for header */
-    color: #000000; /* Color for header/*/
+    font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+    color: #000000;
 }
 
 .headerstyle {
@@ -161,6 +161,8 @@ body {
    font-size: 25px;
     margin-right: 25px;
 }
+
+/* input style */
 
 .custom-input {
     background-color: #f2f2f2;
