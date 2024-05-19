@@ -28,5 +28,16 @@ class TestIndexRoute(unittest.TestCase):
         # Ensure the status code is 200, implying that the user stays on the index page
         self.assertEqual(response.status_code, 200)
 
+    def test_logout_route(self):
+        # First log in to create a session
+        login_response = self.app.post('/', data={'email': 'test@uwa.com', 'password': 'testpass'}, follow_redirects=True)
+        # Verify login was successful before testing logout
+        self.assertIn('/game', login_response.request.path)  # Assuming successful login redirects to the game page
+        # Now attempt to log out
+        response = self.app.get('/logout', follow_redirects=True)
+        # Check that the user is redirected to the index page
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('/' in response.request.path)  # Assuming '/' is the index page
+
 if __name__ == '__main__':
     unittest.main()
