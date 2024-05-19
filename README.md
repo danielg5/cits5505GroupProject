@@ -86,5 +86,5 @@ http://127.0.0.1:5000
 
 
 ***5. Instructions for Running Tests on Application***
-TODO To complete
+(TODO To complete)
 Test are available in test directory
