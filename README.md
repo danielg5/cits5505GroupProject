@@ -49,40 +49,43 @@ User data is stored in an SQLite database. Temporary gameplay data for each user
 
 
 ***4. Instructions to Launch Application***
-1. After completing a git pull of repository. 
+1. Clone to your working directory on Ubuntu
+- in terminal: git clone https://github.com/danielg5/cits5505GroupProject.git
 
-2. Create a Python environment in Ubuntu 22.04: 
+2. After completing a git pull of repository. 
+
+3. Create a Python environment in Ubuntu 22.04: 
 sudo apt-get install python3-pip
 sudo apt-get install python3-venv
 python3 -m venv venv_project2. 
 
-3. Activate Python environment: 
+4. Activate Python environment: 
 source venv_project2/bin/activate
 
-4. Install required programs:
+5. Install required programs:
 pip install -r requirements.txt
 
-5. Install Flask secret key in Ubuntu terminal:
+6. Install Flask secret key in Ubuntu terminal:
 export FLASK_SECRET_KEY='insert_your_custom_string_between_the_single_quotes'
 
-6. Verify SECRET_KEY in flask shell:
+7. Verify SECRET_KEY in flask shell:
 print(app.config['SECRET_KEY'])
 
-7. Create 'app.db' database. In parent directory of 'app/', enter commands using terminal:
+8. Create 'app.db' database. In parent directory of 'app/', enter commands using terminal:
 flask db init
 flask db migrate -m "Create Person, GuessedWord and Theme Tables"
 flask db upgrade
 
-8. Populate 'app.db' with instances of test data from test_data.py. In parent directory of 'app/', run flask shell and enter command:
+9. Populate 'app.db' with instances of test data from test_data.py. In parent directory of 'app/', run flask shell and enter command:
 import app.test_data
 
-9. Test in Flask development server:
+10. Test in Flask development server:
 flask run
 
-10. Open local host server:
+11. Open local host server:
 http://127.0.0.1:5000
 
-11. Register a new user account on the signup page (e.g. email: bob@email.com, password: password, user: bob) to gain access to the web application. The new user account can be used for subsequent login sessions.
+12. Register a new user account on the signup page (e.g. email: bob@email.com, password: password, user: bob) to gain access to the web application. The new user account can be used for subsequent login sessions.
 
 
 ***5. Instructions for Running Tests on Application***
