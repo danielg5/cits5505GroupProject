@@ -87,7 +87,7 @@ http://127.0.0.1:5000
 
 12. Register a new user account on the signup page (e.g. email: bob@email.com, password: password, user: bob) to gain access to the web application. The new user account can be used for subsequent login sessions.
 
-** Troubleshooting - failure to launch **
+***Troubleshooting - failure to launch***
 Delete app.db in app directory and delete migrations folder then follow step 8 to step 12.
 
 
