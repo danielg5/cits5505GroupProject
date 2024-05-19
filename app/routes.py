@@ -26,8 +26,6 @@ def index():
         user = Person.get_user_by_email(email)
         if user and user.check_password(password, user.salt):
             login_user(user)
-            #creator, theme = get_random_theme()
-            #return redirect(url_for('game', creator=creator, theme=theme))
             return redirect(url_for('menu'))
         else:
             flash('Invalid email or password')
@@ -55,8 +53,6 @@ def signup():
         user = Person.get_user_by_email(email)
         if user and user.check_password(password, user.salt):
             login_user(user)
-            #creator, theme = get_random_theme()
-            #return redirect(url_for('game', creator=creator, theme=theme))
             return redirect(url_for('menu'))
         else:
             flash('Invalid email or password')
@@ -78,35 +74,7 @@ def check_username():
         return jsonify({'exists': True})
     else:
         return jsonify({'exists': False})
-    
-#@flaskApp.route('/test')
-#@login_required
-#def test():
-#    return render_template('test.html')
-
-#@flaskApp.route('/login', methods=['GET', 'POST'])
-#def login():
-#    if request.method == 'POST':
-#        email = request.form['email']
-#        password = request.form['password']
-#        user = Person.get_user_by_email(email)
-#        if not user:
-            
-#            flash('No user found with that email', 'error')
-#            return redirect(url_for('login'))
-#        else:
-           
-#            salt = user.salt
-#            if not Person.check_password(user, password, salt):
-                
-#                flash('Invalid password', 'error')
-#                return redirect(url_for('login'))
-#            else:
-               
-#                login_user(user)
-#                return redirect(url_for('menu'))
-#    else:
-#        return render_template('index.html')       
+     
 
 @flaskApp.route('/menu')
 @login_required
@@ -190,15 +158,10 @@ def random():
 @flaskApp.route('/game', methods=['GET']) # need to receive username (theme creator) and theme
 @login_required
 def game():
-    # TODO: Need search.html to send creator and theme 
     creator = request.args.get('creator')
     theme = request.args.get('theme')
-    # TODO: get username(player)
     player = current_user.username
     filename = get_filename(player)
-    #filename = './app/temp/' + player + '.txt'
-    # secret_word = 'craze'
-    # guessed_already = False
     secret_word, guessed_already = get_random_word(player, creator, theme)
     if guessed_already:
         game_points = 0
