@@ -1,5 +1,4 @@
-/* create.css */
-/* General Styles */
+/* Global styles */
 body, html {
     margin: 0;
     padding: 0;
@@ -8,118 +7,189 @@ body, html {
     color: #000000; /* Black text */
 }
 
-/* Header Styles */
+/* Header styles */
 .header-container {
-    position: relative;
-    width: 100%;
-    min-height: 50%;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between; /* Aligns Logout and Menu buttons on the right */
+    padding: 20px; /* Adds padding for spacing */
+}
+
+.container1, .container2 {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    padding: 20px 0;
+    width: 100%;
 }
 
 .container1 {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    position: absolute;
-    top: 10px;
-    left: 10px;
+    margin-bottom: 20px;
 }
 
-.logout-btn, .back-btn {
-    background-color: #007bff;
-    color: #fff;
+
+.logout-button {
+    padding: 8px 16px;
+    background-color: #007bff; /* Blue color */
+    color: white;
     border: none;
-    padding: 10px 20px;
-    cursor: pointer;
     border-radius: 5px;
-    width: 120px;
-    margin-bottom: 10px;
+    cursor: pointer;
+    position: absolute; /* Absolute position on page */
+    top: 10px; /* Distance from top of viewport */
+    left: 10px; /* Distance from left of viewport */
+    display: flex; /* Align SVG and text horizontally */
+    align-items: center; /* Align SVG and text vertically */
 }
 
-.back-btn {
-    background-color: #000;
+.logout-button {
+    padding: 8px 16px;
+    background-color: #000000; /* Blue color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute; /* Absolute position on page */
+    top: 10px; /* Distance from top of viewport */
+    left: 10px; /* Distance from left of viewport */
+    display: flex; /* Align SVG and text horizontally */
+    align-items: center; /* Align SVG and text vertically */
 }
 
-.container2 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-}
-
+/* Welcome text and user info */
 .welcome-text, .username {
-    margin: 5px 0;
+    text-align: center;
+    font-size: 1.2em;
+    padding: 5px;
+    color: #333;
 }
 
-/* Create Theme Form Styles */
+/* Theme creation form styling */
+/* General Styles */
 .create-theme-container {
+    width: 80%; /* Adjust width as needed */
+    margin: auto; /* Center the container */
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
-    padding: 20px 0;
+    border: 2px solid #ccc;
+    box-shadow: 0px 0px 10px #aaa;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    margin-top: 20px;
 }
 
+/* Form Styles */
 .theme-form {
+    width: 30%;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
-    width: 50%; /* Adjust width as necessary */
-    padding: 20px;
-    box-sizing: border-box;
+    align-items: center; /* Ensures alignment is centered vertically */
 }
 
-.theme-form input[type="text"] {
+.form-row {
+    display: flex;
+    justify-content: center; /* Centers the content horizontally */
+    align-items: center; /* Aligns items vertically */
+    width: 100%; /* Full width to align edges */
+    margin-bottom: 10px; /* Adds space between rows */
+}
+
+/* Label and Input Styles */
+label {
+    flex: 0 0 20%; /* Gives label a fixed width, does not grow or shrink */
+    text-align: right; /* Aligns text to the right */
+    padding-right: 10px; /* Adds space between label and input field */
+}
+
+/* Styling for input fields */
+input[type="text"], .theme-name {
+    flex: 1; /* Allows input to fill remaining space */
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
-.theme-name {
-    grid-column: 1 / 3; /* Makes the theme name input span two columns */
+/* Specific styling for the first row for increased top margin */
+.form-row:first-child {
+    margin-top: 20px; /* Adds space above the first input field */
 }
 
+/* Specific styling for the last row for increased bottom margin */
+.form-row:last-child {
+    margin-bottom: 20px; /* Adds space below the last input field */
+}
+
+/* Centering the submit button */
 .form-buttons {
     display: flex;
-    justify-content: center; /* Centers the buttons horizontally */
-    width: 100%; /* Full width of the form */
-    padding: 10px 0; /* Adds vertical padding for spacing */
+    justify-content: center; /* Centers button horizontally */
+    width: 100%; /* Matches width to form */
 }
 
 .form-button {
-    padding: 10px 20px;
-    margin: 0 10px; /* Adds spacing between buttons */
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    background-color: #007bff;
+    width: 50%; /* Sets width of the button */
+    padding: 10px 15px;
+    background-color: #4CAF50; /* Green background */
     color: white;
-    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin-top: 20px; /* Adds space above the submit button */
 }
 
-/* Error Message Styles */
-.errors li {
+/* Responsive Design */
+@media (max-width: 768px) {
+    .theme-form {
+        width: 95%;
+    }
+
+    .theme-name, .form-button {
+        width: 70%; /* Adjusting width on smaller screens */
+    }
+
+    label {
+        margin-right: 10px; /* Smaller margin on smaller screens */
+    }
+}
+
+
+/* Error styling */
+.errors {
     color: red;
-    font-size: 0.8em;
-    margin-top: 5px;
+    margin-top: 10px;
+    list-style-type: none;
 }
 
-/* Popup Error Styles */
 .popup-error {
     position: absolute;
     background-color: rgba(255, 100, 100, 0.9);
     color: white;
     padding: 10px;
     border-radius: 5px;
-    top: 100px; /* Adjust based on your layout */
+    top: 100px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 1000;
     width: fit-content;
     text-align: center;
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .theme-form {
+        width: 95%;
+    }
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+    .container1, .container2 {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .logout-btn, .back-btn {
+        margin-bottom: 10px;
+    }
 }
