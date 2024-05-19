@@ -3,81 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Super Wordle Game</title>
+    <title>Super Wordle Game - Search Themes</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/menu.css">
     <link rel="stylesheet" href="../static/search.css">
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const errors = document.querySelector('.errors');
             if (errors && errors.innerHTML.trim().length > 0) {
-                // You can customize the error message directly here
                 const customErrorMessage = "Please enter only alphabetic characters and numbers.";
-
                 const errorContainer = document.createElement('div');
-                errorContainer.textContent = customErrorMessage;  // Set the custom error message text
-                errorContainer.className = 'popup-error'; // Use a class for styling
+                errorContainer.textContent = customErrorMessage;
+                errorContainer.className = 'popup-error';
                 errorContainer.style.position = 'absolute';
                 errorContainer.style.backgroundColor = 'rgba(255, 100, 100, 0.9)';
                 errorContainer.style.color = 'white';
                 errorContainer.style.padding = '10px';
                 errorContainer.style.borderRadius = '5px';
-                errorContainer.style.top = '100px'; // Adjust based on your layout
+                errorContainer.style.top = '100px';
                 errorContainer.style.left = '50%';
                 errorContainer.style.transform = 'translateX(-50%)';
                 errorContainer.style.zIndex = '1000';
                 errorContainer.style.width = 'fit-content';
                 errorContainer.style.textAlign = 'center';
                 document.body.appendChild(errorContainer);
-
                 setTimeout(function() {
                     errorContainer.style.display = 'none';
-                }, 5000); // Dismiss the error pop-up after 5 seconds
+                }, 5000);
             }
         });
     </script>
 </head>
 <body>
-    <div class="header-container">
-        <div class="container1">
-            <button class="logout-btn" onclick="location.href='{{ url_for('logout') }}'">Logout</button>
-            <button class="back-btn" onclick="location.href='{{ url_for('menu') }}'">Back</button>
+    <div class="main-container">
+        <header>
+            <div class="header-content">
+                <h1>SUPER WORDLE</h1>
+            </div>
+            <div class="header-body">
+                <h4>Welcome to the word guessing game</h4>
+            </div>
+            <div class="button-container">
+                <button class="logout-button btn btn-primary" onclick="location.href='{{ url_for('logout') }}'">Logout</button>
+            </div>
+        </header>
+        <div class="user-info">
+            <p>User Profile: <a href="#" id="username" onclick="location.href='{{ url_for('profile') }}'">Username</a></p>
         </div>
-        <div class="container2">
-            <h1>Super Wordle Game</h1>
-            <br>
-            <div class="welcome-text">Welcome to the word guessing game!</div>
-            <div class="username">Player: {{ logged_in_username }}</div>
-        </div>
-    </div>
-    <div class="search-container">
-        <h2>Search Themes</h2>
-        <form action="{{ url_for('search') }}" method="post">
-            {{ form.hidden_tag() }}
-            <div class="search-bar">
-                {{ form.search_option() }}
-                <span class="search-filter-label">Search filter:</span>
-                {{ form.search_query(size=32) }}
-                {{ form.submit() }}
-                <!-- Hidden errors for backend validation, not displayed directly -->
+        <div class="search-container">
+            <h2>Search Themes</h2>
+            <form class="theme-form" action="{{ url_for('search') }}" method="post">
+                {{ form.hidden_tag() }}
+                <label for="searchOption" class="search-filter-label">Search Filter</label>
+                <div class="form-row">
+                    {{ form.search_option() }}
+                    <input type="text" id="search_query" name="search_query" size="32">
+                    <button type="submit" class="form-button">Search</button>
+                </div>
                 <div class="errors" style="display: none;">
                     {% for error in form.search_query.errors %}
                         <div>{{ error }}</div>
                     {% endfor %}
                 </div>
-            </div>
-        </form>
+            </form>
+            <div class="search-results">
+                {% if search_results %}
+                    {% for theme in search_results %}
+                        <div class="theme-row">
+                            <a href="{{ url_for('game', creator=theme.person.username, theme=theme.theme) }}">
+                                <strong>{{ theme.theme }}</strong> - <em>{{ theme.person.username }}</em>
+                            </a>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No results found.</p>
+                {% endif %}
+            </div>    
+        </div>
     </div>
-    <div class="search-results">
-        {% if search_results %}
-            {% for theme in search_results %}
-                <div class="theme-row">
-                    <a href="{{ url_for('game', creator=theme.person.username, theme=theme.theme) }}">
-                        <strong>{{ theme.theme }}</strong> - <em>{{ theme.person.username }}</em>
-                    </a>
-                </div>
-            {% endfor %}
-        {% else %}
-            <p>No results found.</p>
-        {% endif %}
-    </div>    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/menu.js"></script>
 </body>
 </html>
