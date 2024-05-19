@@ -41,11 +41,11 @@ body, html {
     overflow: hidden; /* So the menu button animation doesn't go outside button */
     transition: padding 0.8s ease; /* Smooth transition for padding changes */
 }
-.menu-button:hover, .menu-button:focus {
+.menu-button:hover, .menu-button:focus, .menu-button:active {
     background-color: #151515 !important; /* Darker shade on hover for user feedback */
     box-shadow: 0 0 8px #0000004d !important; /* Shadow on hover */
 }
-
+ 
 /*Menu button animation */
 .menu-button svg {
     width: 20px;
@@ -53,6 +53,20 @@ body, html {
     fill: currentColor;
     margin-right: 10px; /* Space between the icon and the text */
     transition: transform 0.5s ease-out; /* Smooth transition for transformation */
+}
+/* Animation keyframes for fading effect */
+@keyframes wipeEffect {
+    from {
+        transform: translateX(100%); /* Start from fully right */
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0); /* End at normal position */
+        opacity: 1;
+    }
+}
+.menu-button:hover svg {
+    animation: wipeEffect 1.5s forwards infinite; /* Loop animation while hovered*/
 }
 
 /* Logout button styling */
