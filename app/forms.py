@@ -67,8 +67,12 @@ class RegistrationForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
-    username = StringField('User Name', validators=[DataRequired()])
+    username = StringField('User Name', validators=[
+        DataRequired(),
+        Regexp(r'^[A-Za-z0-9]+$', message="Please enter only alphabetic characters and numbers.")
+    ])
     submit = SubmitField('Sign Up')   
+
 
 
 """ Change Email Form"""
