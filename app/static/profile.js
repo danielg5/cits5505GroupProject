@@ -101,40 +101,29 @@ const setupSuperWordleAnimation = () => {
 };
 
 // Fetch and update email functionality
-const setupEmailForm = () => {
-    const emailForm = document.getElementById('changeEmailForm');
+function setupEmailForm() {
+    const currentEmailInput = document.getElementById('currentEmail');
     const newEmailInput = document.getElementById('newEmail');
+    const submitButton = document.getElementById('submitEmailChange');
 
-    $('#emailModal').on('show.bs.modal', () => {
-        fetch('/get-current-email')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('userEmail').value = data.email;
-            })
-            .catch(error => console.error('Error fetching email:', error));
-    });
+    function validateEmail(email) {
+        return email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);  // Simple email regex
+    }
 
-    emailForm.addEventListener('submit', event => {
-        event.preventDefault();
-        if (!newEmailInput.checkValidity()) {
-            newEmailInput.classList.add('is-invalid', 'invalid-shake');
-            setTimeout(() => newEmailInput.classList.remove('invalid-shake'), 500);
-            return;
+    newEmailInput.addEventListener('input', function() {
+        const isValid = validateEmail(newEmailInput.value);
+        const isDifferent = newEmailInput.value !== currentEmailInput.value;
+
+        if (!isValid || !isDifferent) {
+            submitButton.disabled = true;
+            newEmailInput.classList.add('is-invalid');
+        } else {
+            submitButton.disabled = false;
+            newEmailInput.classList.remove('is-invalid');
         }
-        newEmailInput.classList.remove('is-invalid');
-        fetch('/update-email', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({email: newEmailInput.value})
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert(data.message);
-            $('#emailModal').modal('hide');
-        })
-        .catch(error => console.error('Error updating email:', error));
     });
-};
+}
+
 
 // Setup password change functionality
 const setupPasswordForm = () => {
@@ -233,7 +222,7 @@ function populateWordsList(words) {
 document.addEventListener("DOMContentLoaded", function() {
     initTooltips();
     setupSuperWordleAnimation();
-    //setupEmailForm(); TO DO
+    setupEmailForm();
     //setupPasswordForm(); TO DO
     fetchUsername(); // get username
     fetchEmail(); // get email

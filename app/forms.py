@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, RadioField, SubmitField, PasswordField
-from wtforms.validators import DataRequired, Regexp, Email, EqualTo
+from wtforms.validators import DataRequired, Regexp, Email, EqualTo, ValidationError
+import re
 
 class ThemeForm(FlaskForm):
     theme_name = StringField('Theme Name', validators=[
@@ -67,14 +68,28 @@ class RegistrationForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
-    username = StringField('User Name', validators=[DataRequired()])
+    username = StringField('User Name', validators=[
+        DataRequired(),
+        Regexp(r'^[A-Za-z0-9]+$', message="Please enter only alphabetic characters and numbers.")
+    ])
     submit = SubmitField('Sign Up')   
+
 
 
 """ Change Email Form"""
 class ChangeEmailForm(FlaskForm):
+    current_email = StringField('Current Email')
     new_email = StringField('New Email', validators=[
         DataRequired(message="New email is required."),
-        Email(message="Invalid email address.")
+        Email(message="Please provide a valid email.")
     ])
     submit = SubmitField('Update Email')
+
+def validate_new_email(self, new_email):
+    # Check if the email is the current email
+    if new_email.data == self.current_email.data:
+        raise ValidationError("That is your current email, please provide a new one.")
+
+    # Additional check to see if the email format is valid
+    if not re.match(r'^[^\s@]+@[^\s@]+\.[^\s@]+$', new_email.data):  # Using Python's re module for regex
+        raise ValidationError("Please provide a valid email.")
