@@ -88,4 +88,5 @@ http://127.0.0.1:5000
 
 
 ***5. Instructions for Running Tests on Application***
-TODO To complete
+1. Run the following script using the following command in root directory:
+python -m unittest discover -s tests/test_route
