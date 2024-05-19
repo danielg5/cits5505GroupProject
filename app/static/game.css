@@ -78,29 +78,17 @@ body {
 
 /* Game Styling */
 
-.header-content {
+h1 {
   text-align: center;
-  flex-grow: 1; /* Takes available space, pushes logout button to end */
-  font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; /* Font for header */
-  color: #24c0a1; /* Color for header*/
-  font-weight: bold;
-}
-
-.header-body, h3, h4, label, caption {
-  text-align: center;
-  flex-grow: 1; /* Takes available space, pushes logout button to end */
-  font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; /* Font for header */
-  color: #000000; /* Color for header/*/
-}
-
-/* New header style for mac compatibility*/
-.headerstyle {
   font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
   color: #24c0a1;
   font-weight: bold;
-  font-size: 40px;
-  display: flex;
-  list-style: none;
+}
+
+h3, h4, label, caption {
+  text-align: center;
+  font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+  color: #000000;
 }
 
 #themeWord, #currentUserTitle, label {
