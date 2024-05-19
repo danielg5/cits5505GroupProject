@@ -231,7 +231,7 @@ nav {
 
 /* Styling for diceIcon, trophy-icon icons */
 .changeEmail-icon, .wordsCompleted-icon, .myThemes-icon, .changePassword-icon {
-    vertical-align: auto;
+    vertical-align: middle;
     margin-left: 0px; /* Space between icon and text */
     width: 2em; /* Width of menu icons */
     height: 2em; /* Height of menu icons */
