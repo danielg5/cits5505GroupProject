@@ -106,8 +106,9 @@
             </div>
 
 
-        <!-- Change Email Modal -->
-        <div class="modal fade" id="emailModal" tabindex="-1" aria-labelledby="emailModalLabel" aria-hidden="true">
+       <!-- Change Email Modal -->
+       {% if form %}
+       <div class="modal fade" id="emailModal" tabindex="-1" aria-labelledby="emailModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -115,24 +116,25 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="changeEmailForm">
+                        <form id="changeEmailForm" action="{{ url_for('change_email') }}" method="post">
+                            {{ form.hidden_tag() }}
                             <div class="mb-3">
-                                <label for="userEmail" class="form-label">Current Email</label>
-                                <input type="email" class="form-control" id="userEmail" disabled>
-                            </div>
-                            <div class="mb-3" id="newEmailGroup">
                                 <label for="newEmail" class="form-label">New Email</label>
-                                <input type="email" class="form-control" id="newEmail" required pattern="[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+">
-                                <div class="invalid-feedback">
-                                    Please provide a valid email address.
-                                </div>
+                                {{ form.new_email(class_='form-control', id='newEmail', required=True) }}
+                                {% for error in form.new_email.errors %}
+                                    <div class="invalid-feedback" style="display: block;">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
                             </div>
-                            <button type="submit" class="btn btn-primary">Update Email</button>
+                            <button type="submit" class="btn btn-primary">{{ form.submit.label }}</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+        {% endif %}
+
 
 
 

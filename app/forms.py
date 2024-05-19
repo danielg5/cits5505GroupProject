@@ -69,3 +69,12 @@ class RegistrationForm(FlaskForm):
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     username = StringField('User Name', validators=[DataRequired()])
     submit = SubmitField('Sign Up')   
+
+
+""" Change Email Form"""
+class ChangeEmailForm(FlaskForm):
+    new_email = StringField('New Email', validators=[
+        DataRequired(message="New email is required."),
+        Email(message="Invalid email address.")
+    ])
+    submit = SubmitField('Update Email')

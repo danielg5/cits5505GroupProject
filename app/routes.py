@@ -5,7 +5,7 @@ from app.controllers import *
 from app.gameplay import get_filename
 from typing import List
 from app.model import Person, Theme
-from app.forms import ThemeForm, SearchForm, LoginForm, RegistrationForm
+from app.forms import ThemeForm, SearchForm, LoginForm, RegistrationForm, ChangeEmailForm
 import json, os
 
 
@@ -116,11 +116,13 @@ def menu():
 def leaderboard():
     return render_template('leaderboard.html')
 
+""" Profile and Change Email Form instance"""
 @flaskApp.route('/profile')
 @login_required
 def profile():
-    return render_template('profile.html')
-#    return render_template('profile.html')
+    form = ChangeEmailForm()  # Create an instance of form
+    return render_template('profile.html', form=form)  # Pass form
+
 
 
 @flaskApp.route('/search', methods=['GET', 'POST'])
@@ -246,3 +248,19 @@ def leaderboard_data():
         } for idx, player in enumerate(leaderboard)
     ]
     return jsonify(data)
+
+""" Change Email"""
+@flaskApp.route('/change_email', methods=['GET', 'POST'])
+@login_required
+def change_email():
+    form = ChangeEmailForm()
+    if form.validate_on_submit():
+        current_user.email = form.new_email.data
+        db.session.commit()
+        flash('Your email has been updated successfully!', 'success')
+        return redirect(url_for('profile'))  # Redirect to profile page
+    else:
+        for fieldName, errorMessages in form.errors.items():
+            for err in errorMessages:
+                flash(f'Error in {fieldName}: {err}', 'error')
+    return redirect(url_for('profile'))  # Redirect or re-render the form page
