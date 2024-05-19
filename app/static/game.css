@@ -93,6 +93,15 @@ body {
   color: #000000; /* Color for header/*/
 }
 
+/* New header style for mac compatibility*/
+.headerstyle {
+  font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+  color: #24c0a1;
+  font-weight: bold;
+  font-size: 40px;
+  display: flex;
+  list-style: none;
+}
 
 #themeWord, #currentUserTitle, label {
   color: slateblue;

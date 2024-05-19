@@ -26,8 +26,9 @@ def index():
         user = Person.get_user_by_email(email)
         if user and user.check_password(password, user.salt):
             login_user(user)
-            creator, theme = get_random_theme()
-            return redirect(url_for('game', creator=creator, theme=theme))
+            #creator, theme = get_random_theme()
+            #return redirect(url_for('game', creator=creator, theme=theme))
+            return redirect(url_for('menu'))
         else:
             flash('Invalid email or password')
     return render_template('index.html', form=form)
@@ -54,8 +55,9 @@ def signup():
         user = Person.get_user_by_email(email)
         if user and user.check_password(password, user.salt):
             login_user(user)
-            creator, theme = get_random_theme()
-            return redirect(url_for('game', creator=creator, theme=theme))
+            #creator, theme = get_random_theme()
+            #return redirect(url_for('game', creator=creator, theme=theme))
+            return redirect(url_for('menu'))
         else:
             flash('Invalid email or password')
     return render_template('signup.html', form=form)
