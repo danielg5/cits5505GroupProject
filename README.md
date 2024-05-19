@@ -31,7 +31,6 @@ Users can create a list of ten words with a specific theme, e.g. beach theme [sh
 
 
 ***3. Summary of Application Architecture***
-TODO To complete
 The application consists of:
 1. Index page, to login with previously registered account.
 2. Signup page, to register a new account.
@@ -50,7 +49,6 @@ User data is stored in an SQLite database. Temporary gameplay data for each user
 
 
 ***4. Instructions to Launch Application***
-TODO To complete
 1. After completing a git pull of repository. 
 
 2. Create a Python environment in Ubuntu 22.04: 
@@ -89,3 +87,4 @@ http://127.0.0.1:5000
 
 ***5. Instructions for Running Tests on Application***
 TODO To complete
+Test are available test directory
